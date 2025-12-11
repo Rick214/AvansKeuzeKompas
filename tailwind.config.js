@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "var(--primary-color)",
+        primary: "#6AE75D",
         secondary: "var(--secondary-color)",
         bg: "var(--color-bg)",
         surface: "var(--color-surface)",
