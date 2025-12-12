@@ -1,0 +1,47 @@
+@import "https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap";
+
+:root {
+    // Fonts
+
+    // Primair font
+    --font-primary: 'Roboto', sans-serif;
+
+    // Secundair font (bijv. voor headings)
+    --font-heading: 'Raleway', sans-serif;
+
+    // ========== Light Mode ==========
+
+    // Basiskleuren
+    --primary-color: #001011;
+    --secondary-color: #ffffff;
+
+    // Thema kleuren
+    --color-bg: #EAFFFB;
+    --color-surface: #CAEDEE;
+    --color-surface-alt: #A4CED0;
+    --color-accent: #F8C537;
+    --color-text: #808782;
+
+    --color-active: #6AE75D;
+    --color-inactive: #FF4B4B;
+    --color-hyperlink: #5E96FF;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    // ========== Dark Mode ==========
+
+    // Basiskleuren
+    --primary-color: #ffffff;
+    --secondary-color: #001011;
+    
+    // Thema kleuren
+    --color-bg: #001011;
+    --color-surface: #0D2324;
+    --color-surface-alt: #2D5152;
+    --color-accent: #F8C537;
+    --color-text: #808782;
+  }
+}
+
+/*# sourceMappingURL=globals.css.map */
