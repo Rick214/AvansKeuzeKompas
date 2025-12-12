@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: "class", 
-  content: [
-    "./src/**/*.{html,js,svelte,ts}",
-  ],
+  content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
     extend: {
       colors: {
@@ -14,11 +11,11 @@ export default {
         surfaceAlt: "var(--color-surface-alt)",
         accent: "var(--color-accent)",
         text: "var(--color-text)",
-        active: "[#6AE75D]",
+        active: "var(--color-active)",
         inactive: "var(--color-inactive)",
         hyperlink: "var(--color-hyperlink)",
-      }
-    }
+      },
+    },
   },
-  plugins: []
-}
+  plugins: [],
+};
