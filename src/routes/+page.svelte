@@ -1,2 +1,5 @@
-<h1 class="text-[var(--color-active)] dark:text-[var(--color-active)]">Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script>
+	import { translations } from "$lib/i18n";
+</script>
+<h1 class="text-[var(--color-active)] dark:text-[var(--color-active)]">{$translations.welcome_title}</h1>
+<p>{$translations.welcome_message}</p>
