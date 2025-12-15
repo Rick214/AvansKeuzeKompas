@@ -1,4 +1,7 @@
 {
-  "welcome_title": "Welkom op onze website!",
-  "welcome_message": "Vind je het leuk?"
+	"welcome_title": "Welkom op onze website!",
+	"welcome_message": "Vind je het leuk?",
+	"registered_title": "Ingeschreven",
+	"recommended_title": "Aangeraden",
+	"favorites_title": "Favorieten"
 }

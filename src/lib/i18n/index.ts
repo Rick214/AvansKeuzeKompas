@@ -3,26 +3,32 @@ import nl_NL from './nl_NL.json';
 import en_US from './en_US.json';
 
 export type TranslationKeys = {
-  welcome_title: string;
-  welcome_message: string;
+	welcome_title: string;
+	welcome_message: string;
+	registered_title: string;
+	recommended_title: string;
+	favorites_title: string;
 };
 
 export const translations = writable<TranslationKeys>({
-  welcome_title: '',
-  welcome_message: '',
+	welcome_title: '',
+	welcome_message: '',
+	registered_title: '',
+	recommended_title: '',
+	favorites_title: ''
 });
 
 export const language = writable<'nl_NL' | 'en_US'>('nl_NL');
 
 const translationMap = {
-  nl_NL,
-  en_US
+	nl_NL,
+	en_US
 };
 
 export function loadTranslations(lang: 'nl_NL' | 'en_US') {
-  translations.set(translationMap[lang]);
+	translations.set(translationMap[lang]);
 }
 
 language.subscribe(async (lang) => {
-  loadTranslations(lang);
+	loadTranslations(lang);
 });

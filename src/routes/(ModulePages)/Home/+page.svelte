@@ -1,17 +1,18 @@
 <script lang="ts">
+	import { translations } from '$lib/i18n';
 	type Section = {
 		title: string;
 		count: number;
 	};
 
 	//themes and amount of modules
-	const sections: Section[] = [
-		{ title: 'Ingeschreven', count: 3 },
-		{ title: 'Favorieten', count: 20 },
-		{ title: 'Aanbevolen', count: 5 },
-		{ title: 'Aanbevolen', count: 5 }
+	// Reactive subscription to translations
+	$: sections = [
+		{ title: $translations.registered_title, count: 3 },
+		{ title: $translations.favorites_title, count: 20 },
+		{ title: $translations.recommended_title, count: 5 },
+		{ title: 'Module tags', count: 5 }
 	];
-
 	let rows: HTMLDivElement[] = [];
 	let hasOverflow: boolean[] = [];
 
@@ -61,7 +62,7 @@
 
 <div class="bg-[var(--color-bg)] min-h-screen p-4 space-y-4">
 	<div class="mx-3">
-		<h1 class="mt-15 text-xl text-[var(--primary-color)]">Home</h1>
+		<h1 class="mt-10 text-xl text-[var(--primary-color)]">Home</h1>
 
 		{#each sections as section, index}
 			<div class="my-3">
