@@ -32,5 +32,3 @@
       <p class="text-black text-lg">Loading...</p>
   </div>
 {/if}
-
-
