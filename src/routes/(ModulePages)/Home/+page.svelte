@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { translations } from '$lib/i18n';
+	import { translations } from "$lib/stores/userPreferences";
 	type Section = {
 		title: string;
 		count: number;
@@ -93,8 +93,8 @@
 					<!-- SCROLL CONTAINER -->
 					<div use:observeRow={index} class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar snap-x snap-mandatory">
 						{#each Array(section.count) as _}
-							<div class="bg-white/10 w-50 h-25 rounded-lg p-2 flex flex-col flex-shrink-0">
-								<p class="mt-auto text-xs text-gray-300">Module Title</p>
+							<div class="bg-[var(--color-surface-alt)] w-50 h-25 rounded-lg p-2 flex flex-col flex-shrink-0">
+								<p class="mt-auto text-xs text-[var(--primary-color)]">Module Title</p>
 							</div>
 						{/each}
 					</div>
