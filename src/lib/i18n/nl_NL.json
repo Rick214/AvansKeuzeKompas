@@ -3,5 +3,11 @@
 	"welcome_message": "Vind je het leuk?",
 	"registered_title": "Ingeschreven",
 	"recommended_title": "Aangeraden",
-	"favorites_title": "Favorieten"
+	"favorites_title": "Favorieten",
+  "system_preferences": "Systeemvoorkeuren",
+  "light_mode": "Licht modus",
+  "dark_mode": "Donkere modus",
+  "loading": "Laden...",
+  "dutch": "Nederlands",
+  "english": "Engels"
 }
