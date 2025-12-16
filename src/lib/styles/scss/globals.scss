@@ -45,4 +45,8 @@
 }
 /* Hide scrollbar but keep scrolling */
 
+html {
+  font-size: calc(16px * var(--font-scale, 1));
+}
+
 /*# sourceMappingURL=globals.css.map */
