@@ -45,7 +45,7 @@
         class="h-2 flex-1 rounded-full"
         style="background-color: {i <= step ? '#FFD700' : '#374151'}"
       ></div>
-    {/each}
+    {/each} 
   </div>
 
   <!-- Content -->
