@@ -1,4 +1,10 @@
 {
   "welcome_title": "Welcome to our website",
-  "welcome_message": "Do you like it?"
+  "welcome_message": "Do you like it?",
+  "system_preferences": "System Preferences",
+  "light_mode": "Light Mode",
+  "dark_mode": "Dark Mode",
+  "loading": "Loading...",
+  "dutch": "Dutch",
+  "english": "English"
 }
