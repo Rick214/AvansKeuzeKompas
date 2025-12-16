@@ -15,7 +15,7 @@
 
 <Header />
 
-<main>
+<main class="pb-16">
   <slot /> <!-- all child pages -->
 </main>
 
