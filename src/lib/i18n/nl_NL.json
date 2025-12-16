@@ -1,4 +1,10 @@
 {
   "welcome_title": "Welkom op onze website!",
-  "welcome_message": "Vind je het leuk?"
+  "welcome_message": "Vind je het leuk?",
+  "system_preferences": "Systeemvoorkeuren",
+  "light_mode": "Licht modus",
+  "dark_mode": "Donkere modus",
+  "loading": "Laden...",
+  "dutch": "Nederlands",
+  "english": "Engels"
 }
