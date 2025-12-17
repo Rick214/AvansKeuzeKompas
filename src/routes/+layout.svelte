@@ -15,7 +15,7 @@
 {#if $ready}
   <Header />
 
-  <main class="pb-16">
+  <main>
     <slot /> <!-- all child pages -->
   </main>
   <MobileNav />
