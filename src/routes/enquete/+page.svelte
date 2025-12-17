@@ -17,7 +17,7 @@
   }
 
   async function handleSubmit() {
-    isLoading = true; // start spinner
+    isLoading = true;
     try {
       const response = await fetch('/api/enquete', {
         method: 'POST',
@@ -31,79 +31,93 @@
       console.error(err);
       alert('Er ging iets mis bij het versturen.');
     } finally {
-      isLoading = false; // stop spinner
+      isLoading = false;
     }
   }
 </script>
 
-<div class="max-w-md mx-auto p-6 bg-gray-800 rounded-lg text-white">
+<!-- Centered container -->
+<div class="min-h-screen flex items-center justify-center p-4">
+  <div class="w-full sm:w-4/5 md:w-3/5 lg:w-3/6 xl:w-3/6 2xl:w-2/6 p-12 bg-(--color-surface) rounded-xl shadow-lg">
+    <h1 class="text-xl font-bold text-(--primary-color) text-center mb-6">Vragenlijst</h1>
 
-  <!-- Progress bar -->
-  <div class="flex mb-6 space-x-2">
-    {#each Array(questions.length + 2) as _, i}
-      <div
-        class="h-2 flex-1 rounded-full"
-        style="background-color: {i <= step ? '#FFD700' : '#374151'}"
-      ></div>
-    {/each} 
-  </div>
-
-  <!-- Content -->
-  {#if step === 0}
-    <div class="mb-4">
-      <h2 class="text-lg font-bold mb-2">Welkom bij de enquête</h2>
-      <p>Bedankt dat je de tijd neemt om deze korte vragenlijst in te vullen. Klik op 'Volgende' om te starten.</p>
+    <!-- Progress bar -->
+    <div class="flex mb-8 space-x-2">
+      {#each Array(questions.length + 2) as _, i}
+        <div
+          class="h-2 flex-1 rounded-full transition-colors duration-300"
+          style="background-color: {i <= step ? 'var(--color-accent)' : 'var(--color-surface-alt)'}"
+        ></div>
+      {/each} 
     </div>
-  {:else if step <= questions.length}
-    <h2 class="text-lg font-bold mb-2">{questions[step - 1].label}</h2>
-    <RadioForm
-      items={questions[step - 1].options.map(o => ({ label: o, value: o }))}
-      bind:selected={answers[step - 1]}
-    />
-    {#if errorMessage}
-      <p class="text-red-400 mt-2">{errorMessage}</p>
+
+    <!-- Content -->
+    {#if step === 0}
+      <div class="mb-6">
+        <h2 class="text-md font-medium mb-2 text-start">Welkom bij de enquête</h2>
+        <p class="text-md text-(--primary-color) text-start">Bedankt dat je de tijd neemt om deze korte vragenlijst in te vullen. Klik op 'Volgende' om te starten.</p>
+      </div>
+    {:else if step <= questions.length}
+      <h2 class="text-md font-bold mb-6">{questions[step - 1].label}</h2>
+      <RadioForm
+        items={questions[step - 1].options.map(o => ({ label: o, value: o }))}
+        bind:selected={answers[step - 1]}
+      />
+      {#if errorMessage}
+        <p class="text-sm font-normal text-(--color-inactive) mt-2">{errorMessage}</p>
+      {/if}
+    {:else}
+      <div class="mb-4">
+        <h2 class="text-md font-medium mb-2 text-start">Bedankt!</h2>
+        <p class="text-md text-(--primary-color) text-start">Je hebt de enquête volledig ingevuld. Klik op 'Afronden' om je antwoorden te versturen.</p>
+      </div>
     {/if}
-  {:else}
-    <div class="mb-4">
-      <h2 class="text-lg font-bold mb-2">Bedankt!</h2>
-      <p>Je hebt de enquête volledig ingevuld. Klik op 'Afronden' om je antwoorden te versturen.</p>
-    </div>
-  {/if}
 
-  <!-- Navigatie -->
-  <div class="flex justify-between mt-4">
-    <button
-      type="button"
-      class="px-4 py-2 rounded bg-gray-700 hover:bg-gray-600"
-      on:click={() => step = Math.max(0, step - 1)}
-      disabled={step === 0}
-    >
-      Vorige
-    </button>
-
-    {#if step <= questions.length}
+    <!-- Navigatie -->
+    <div class="flex justify-between mt-6">
       <button
         type="button"
-        class="px-4 py-2 rounded bg-yellow-500 hover:bg-yellow-400 text-black"
-        on:click={handleNext}
+        class="px-4 py-2 rounded bg-(--color-accent) text-black opacity-75 hover:opacity-100 transition-opacity"
+        on:click={() => step = Math.max(0, step - 1)}
+        disabled={step === 0}
       >
-        Volgende
+        Vorige
       </button>
-    {:else}
-     <button
-        type="button"
-        class="px-4 py-2 rounded bg-yellow-500 hover:bg-yellow-400 text-black flex items-center justify-center gap-2"
-        on:click={handleSubmit}
-        disabled={isLoading}
-      >
-        {#if isLoading}
-          <svg class="w-5 h-5 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-          </svg>
-        {/if}
-        Afronden
-      </button>
-    {/if}
+
+      {#if step <= questions.length}
+        <button
+          type="button"
+          class="px-4 py-2 rounded bg-(--color-accent) text-black opacity-90 hover:opacity-100 transition-opacity"
+          on:click={handleNext}
+        >
+          Volgende
+        </button>
+      {:else}
+        <button
+          type="button"
+        class="px-4 py-2 rounded bg-(--color-accent) text-black opacity-75 hover:opacity-100 transition-opacity"
+          on:click={handleSubmit}
+          disabled={isLoading}
+        >
+          {#if isLoading}
+            <svg class="w-5 h-5 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <!-- buitenste cirkel -->
+              <circle 
+                class="opacity-25 stroke-(--color-surface)" 
+                cx="12" cy="12" r="10"
+                stroke-width="4">
+              </circle>
+
+              <!-- draaiend pad -->
+              <path 
+                class="opacity-75 fill-(--color-surface-alt)" 
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z">
+              </path>
+            </svg>
+          {/if}
+          Afronden
+        </button>
+      {/if}
+    </div>
   </div>
 </div>
