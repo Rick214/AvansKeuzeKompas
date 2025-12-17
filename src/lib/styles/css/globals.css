@@ -2,29 +2,47 @@
 :root {
   --font-primary: 'Roboto', sans-serif;
   --font-heading: 'Raleway', sans-serif;
-  --primary-color: #001011;
-  --secondary-color: #ffffff;
-  --color-bg: #EAFFFB;
-  --color-surface: #CAEDEE;
-  --color-surface-alt: #A4CED0;
+  --font-scale: 1;
+  --color-bg: #001011;
+  --color-surface: #0D2324;
+  --color-surface-alt: #2D5152;
   --color-accent: #F8C537;
   --color-text: #808782;
   --color-active: #6AE75D;
   --color-inactive: #FF4B4B;
   --color-hyperlink: #5E96FF;
+  --primary-color: #ffffff;
+  --secondary-color: #001011;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary-color: #ffffff;
-    --secondary-color: #001011;
-    --color-bg: #001011;
-    --color-surface: #0D2324;
-    --color-surface-alt: #2D5152;
-    --color-accent: #F8C537;
-    --color-text: #808782;
-  }
+html.light {
+  --color-bg: #EAFFFB;
+  --color-surface: #CAEDEE;
+  --color-surface-alt: #A4CED0;
+  --color-accent: #F8C537;
+  --color-text: #808782;
+  --primary-color: #001011;
+  --secondary-color: #ffffff;
 }
 
+html {
+  font-size: calc(16px * var(--font-scale, 1));
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--color-bg);
+  color: var(--primary-color);
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--color-hyperlink);
+  text-decoration: underline;
+}
+a:hover {
+  color: var(--color-accent);
+}
 
 /*# sourceMappingURL=globals.css.map */
