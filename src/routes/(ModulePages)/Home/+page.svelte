@@ -1,18 +1,49 @@
 <script lang="ts">
-	import { translations } from "$lib/stores/userPreferences";
+	//module dummy data
+	import { dummyModules } from '$lib/data/dummyModules';
+	import { dummyUser } from '$lib/data/dummyUsers';
+	import type { Module } from '$lib/data/dummyModules';
+	import { translations } from '$lib/stores/userPreferences';
+
 	type Section = {
 		title: string;
-		count: number;
+		modules: Module[];
 	};
 
-	//themes and amount of modules
-	// Reactive subscription to translations
+	const modules = dummyModules;
+	const user = dummyUser;
+
+	function byIds(ids: number[]) {
+		return modules.filter((m) => ids.includes(m.id));
+	}
+
 	$: sections = [
-		{ title: $translations.registered_title, count: 3 },
-		{ title: $translations.favorites_title, count: 20 },
-		{ title: $translations.recommended_title, count: 5 },
-		{ title: 'Module tags', count: 5 }
-	];
+		{
+			title: $translations.registered_title,
+			modules: byIds(user.registered_modules)
+		},
+		{
+			title: $translations.favorites_title,
+			modules: byIds(user.favorite_modules)
+		},
+		{
+			title: $translations.recommended_title,
+			modules: byIds(user.recommended_modules)
+		},
+		...Object.entries(
+			modules.reduce<Record<string, Module[]>>((acc, module) => {
+				module.theme_tags.forEach((tag) => {
+					acc[tag] ??= [];
+					acc[tag].push(module);
+				});
+				return acc;
+			}, {})
+		).map(([tag, modules]) => ({
+			title: tag,
+			modules
+		}))
+	].filter((section) => section.modules.length > 0);
+
 	let rows: HTMLDivElement[] = [];
 	let hasOverflow: boolean[] = [];
 
@@ -70,10 +101,8 @@
 					{section.title}
 				</h2>
 
-				<!-- ROW -->
 				<div class="relative group">
 					{#if hasOverflow[index]}
-						<!-- LEFT ARROW -->
 						<button
 							class="absolute left-1 top-1/2 -translate-y-1/2 z-10 hidden md:group-hover:flex items-center justify-center w-8 h-8 rounded-full bg-black/50 text-white"
 							on:click={() => scrollRow(index, -1)}
@@ -81,7 +110,6 @@
 							<span class="text-3xl leading-none relative -top-1">‹</span>
 						</button>
 
-						<!-- RIGHT ARROW -->
 						<button
 							class="absolute right-1 top-1/2 -translate-y-1/2 z-10 hidden md:group-hover:flex items-center justify-center w-8 h-8 rounded-full bg-black/50 text-white"
 							on:click={() => scrollRow(index, 1)}
@@ -90,12 +118,13 @@
 						</button>
 					{/if}
 
-					<!-- SCROLL CONTAINER -->
 					<div use:observeRow={index} class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar snap-x snap-mandatory">
-						{#each Array(section.count) as _}
-							<div class="bg-[var(--color-surface-alt)] w-50 h-25 rounded-lg p-2 flex flex-col flex-shrink-0">
-								<p class="mt-auto text-xs text-[var(--primary-color)]">Module Title</p>
-							</div>
+						{#each section.modules as module}
+							<a href={`/Home/${module.id}`} class="bg-[var(--color-surface-alt)] w-50 h-25 rounded-lg p-3 flex flex-col flex-shrink-0 snap-start hover:scale-[1.02] transition">
+								<p class="mt-auto text-sm font-medium text-[var(--primary-color)]">
+									{module.name}
+								</p>
+							</a>
 						{/each}
 					</div>
 				</div>
