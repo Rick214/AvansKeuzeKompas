@@ -79,7 +79,7 @@
 				<div class="flex-1 text-center md:text-left">
 					<h2 class="text-white text-lg md:text-xl font-semibold mb-2">Heb je nog vragen over deze module?</h2>
 
-					<p class="text-white/80 text-sm md:text-base mb-6">Je kan nu via Teams in contact komen met de docent die deze module geeft</p>
+					<p class="text-white/80 text-sm md:text-base mb-6">Je kan nu via Teams in contact komen met de docent die deze module geeft.</p>
 
 					<!-- Actions -->
 					<div class="flex justify-center md:justify-start items-center gap-3">
@@ -93,11 +93,7 @@
 
 				<!-- Avatar + Name (always stacked) -->
 				<div class="flex flex-col items-center flex-shrink-0">
-					<div
-						class="w-24 h-24 md:w-28 md:h-28
-             rounded-full bg-white
-             flex items-center justify-center"
-					>
+					<div class="w-24 h-24 md:w-28 md:h-28 rounded-full bg-white flex items-center justify-center">
 						<img src="" alt="" class="w-20 h-20 md:w-24 md:h-24 object-contain" />
 					</div>
 
