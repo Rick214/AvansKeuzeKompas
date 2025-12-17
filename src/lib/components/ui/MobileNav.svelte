@@ -36,7 +36,7 @@
     <button
       type="button"
       class="flex flex-col items-center justify-center flex-1 cursor-pointer transition-colors duration-200 relative
-             {index === activeIndex ? 'text-[var(--color-accent)]' : 'text-gray-500'} hover:text-blue-400"
+             {index === activeIndex ? 'text-(--color-accent)' : 'text-gray-500'} hover:text-blue-400"
       on:click={() => navigate(index, item.href)}
       aria-current={index === activeIndex ? 'page' : undefined}
       aria-label={item.label}
