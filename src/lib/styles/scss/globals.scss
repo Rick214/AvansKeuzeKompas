@@ -1,4 +1,4 @@
-@import "https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap";
+@import 'https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap';
 
 // Root variables
 :root {
@@ -37,6 +37,7 @@ html.light {
   --primary-color: #001011;
   --secondary-color: #ffffff;
 }
+/* Hide scrollbar but keep scrolling */
 
 // Font size scaling
 html {
