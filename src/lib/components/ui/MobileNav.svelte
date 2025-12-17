@@ -5,15 +5,15 @@
 
   type NavItem = {
     label: string;
-    iconActive: string; // path to image file
-    iconInactive: string; // path to image file
+    iconActive: string;
+    iconInactive: string;
     href: string;
   };
 
   export let items: NavItem[] = [
-    { label: 'Home', iconActive: '/icons/DMHomeActive.svg', iconInactive: '/icons/DMHomeInactive.svg', href: '/' },
-    { label: 'Zoeken', iconActive: '/icons/DMSearchActive.svg', iconInactive: '/icons/DMSearchInactive.svg', href: '/search' },
-    { label: 'Profiel', iconActive: '/icons/DMProfileActive.svg', iconInactive: '/icons/DMProfileInactive.svg', href: '/profile' }
+    { label: 'Home', iconActive: 'house', iconInactive: 'house', href: '/' },
+    { label: 'Zoeken', iconActive: 'magnifying-glass', iconInactive: 'magnifying-glass', href: '/search' },
+    { label: 'Profiel', iconActive: 'user', iconInactive: 'user', href: '/profile' }
   ];
 
   let activeIndex: number = 0;
@@ -31,18 +31,24 @@
 
 </script>
 <Footer />
-<div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow flex justify-around h-16 z-50" role="navigation" aria-label="Mobile navigation">
+<div class="fixed bottom-0 left-0 right-0 bg-(--color-surface) shadow flex justify-around h-16 z-50" role="navigation" aria-label="Mobile navigation">
   {#each items as item, index}
     <button
       type="button"
-      class="flex flex-col items-center justify-center flex-1 text-gray-500 cursor-pointer transition-colors duration-200 hover:text-blue-400
-             <!-- {index === activeIndex ? 'text-blue-500 border-t-2 border-blue-500' : ''} -->
-             {index < items.length - 1 ? 'border-r border-gray-300' : ''}"
+      class="flex flex-col items-center justify-center flex-1 cursor-pointer transition-colors duration-200 relative
+             {index === activeIndex ? 'text-[var(--color-accent)]' : 'text-gray-500'} hover:text-blue-400"
       on:click={() => navigate(index, item.href)}
       aria-current={index === activeIndex ? 'page' : undefined}
       aria-label={item.label}
     >
-      <img src={index === activeIndex ? item.iconActive : item.iconInactive} alt={item.label} class="w-6 h-6 object-contain" />
+      {#if index < items.length - 1}
+        <div class="absolute right-0 top-1/2 transform -translate-y-1/2 h-6 w-1 bg-(--color-surface-alt)"></div>
+      {/if}
+      {#if (index === activeIndex ? item.iconActive : item.iconInactive) && ((index === activeIndex ? item.iconActive : item.iconInactive).startsWith('/') || (index === activeIndex ? item.iconActive : item.iconInactive).endsWith('.svg'))}
+        <img src={index === activeIndex ? item.iconActive : item.iconInactive} alt={item.label} class="w-6 h-6 object-contain" />
+      {:else}
+        <i class="fa-solid fa-{index === activeIndex ? item.iconActive : item.iconInactive} text-[20px]"></i>
+      {/if}
     </button>
   {/each}
 </div>

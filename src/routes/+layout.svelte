@@ -18,7 +18,6 @@
     <slot /> <!-- all child pages -->
   </main>
   
-  <Footer />
 
   {:else}
   <div class="h-screen w-screen flex flex-col justify-center items-center gap-4">
