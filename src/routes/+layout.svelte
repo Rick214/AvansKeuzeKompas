@@ -31,5 +31,3 @@
       <p class="text-(--primary-color) text-lg">{$translations.loading}</p>
   </div>
 {/if}
-
-

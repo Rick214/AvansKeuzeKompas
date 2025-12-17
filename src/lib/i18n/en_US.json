@@ -1,6 +1,9 @@
 {
-  "welcome_title": "Welcome to our website",
-  "welcome_message": "Do you like it?",
+	"welcome_title": "Welcome to our website",
+	"welcome_message": "Do you like it?",
+	"registered_title": "registered",
+	"recommended_title": "Recommended",
+	"favorites_title": "Favorites",
   "system_preferences": "System Preferences",
   "light_mode": "Light Mode",
   "dark_mode": "Dark Mode",
