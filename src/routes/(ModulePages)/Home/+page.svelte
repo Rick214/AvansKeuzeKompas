@@ -120,7 +120,7 @@
 
 					<div use:observeRow={index} class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar snap-x snap-mandatory">
 						{#each section.modules as module}
-							<a href={`/Home/${module.id}`} class="bg-[var(--color-surface-alt)] w-50 h-25 rounded-lg p-3 flex flex-col flex-shrink-0 snap-start hover:scale-[1.02] transition">
+							<a href={`/home/${module.id}`} class="bg-[var(--color-surface-alt)] w-50 h-25 rounded-lg p-3 flex flex-col flex-shrink-0 snap-start hover:scale-[1.02] transition">
 								<p class="mt-auto text-sm font-medium text-[var(--primary-color)]">
 									{module.name}
 								</p>
