@@ -1,4 +1,4 @@
-@import "https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap";
+@import 'https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap';
 :root {
   --font-primary: 'Roboto', sans-serif;
   --font-heading: 'Raleway', sans-serif;
@@ -25,6 +25,7 @@ html.light {
   --secondary-color: #ffffff;
 }
 
+/* Hide scrollbar but keep scrolling */
 html {
   font-size: calc(16px * var(--font-scale, 1));
 }

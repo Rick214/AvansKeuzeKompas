@@ -5,6 +5,7 @@
   import favicon from '$lib/assets/favicon.svg';
 	import Header from '$lib/components/layout/Header.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
+	import MobileNav from '$lib/components/ui/MobileNav.svelte';
 </script>
 
 <svelte:head>
@@ -17,7 +18,7 @@
   <main class="pb-16">
     <slot /> <!-- all child pages -->
   </main>
-  
+  <MobileNav />
 
   {:else}
   <div class="h-screen w-screen flex flex-col justify-center items-center gap-4">

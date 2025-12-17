@@ -11,7 +11,7 @@
   };
 
   export let items: NavItem[] = [
-    { label: 'Home', iconActive: 'house', iconInactive: 'house', href: '/' },
+    { label: 'Home', iconActive: 'house', iconInactive: 'house', href: '/Home' },
     { label: 'Zoeken', iconActive: 'magnifying-glass', iconInactive: 'magnifying-glass', href: '/search' },
     { label: 'Profiel', iconActive: 'user', iconInactive: 'user', href: '/profile' }
   ];
@@ -31,7 +31,7 @@
 
 </script>
 <Footer />
-<div class="fixed bottom-0 left-0 right-0 bg-(--color-surface) shadow flex justify-around h-16 z-50" role="navigation" aria-label="Mobile navigation">
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-(--color-surface) shadow flex justify-around h-16 z-50" role="navigation" aria-label="Mobile navigation">
   {#each items as item, index}
     <button
       type="button"
