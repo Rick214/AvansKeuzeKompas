@@ -13,6 +13,7 @@
   --color-hyperlink: #5E96FF;
   --primary-color: #ffffff;
   --secondary-color: #001011;
+  --color-avans-logo: #e38094ff;
 }
 
 html.light {
@@ -23,6 +24,7 @@ html.light {
   --color-text: #808782;
   --primary-color: #001011;
   --secondary-color: #ffffff;
+  --color-avans-logo: #c6002aff;
 }
 
 /* Hide scrollbar but keep scrolling */
