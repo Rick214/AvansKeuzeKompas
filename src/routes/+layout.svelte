@@ -17,6 +17,7 @@
   <main>
     <slot /> <!-- all child pages -->
   </main>
+
   <MobileNav />
 
   {:else}

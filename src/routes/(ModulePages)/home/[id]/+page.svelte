@@ -1,67 +1,48 @@
 <script lang="ts">
-  import { translations } from '$lib/stores/userPreferences.js';
+	import { goto } from '$app/navigation';
+	import { translations } from '$lib/stores/userPreferences';
+
+	import ModuleHeader from '$lib/components/ui/ModuleHeader.svelte';
+	import ModuleMeta from '$lib/components/ui/ModuleMeta.svelte';
+	import ModuleDescription from '$lib/components/ui/ModuleDescription.svelte';
+	import ContactLecturer from '$lib/components/ui/ContactLecturer.svelte';
+
 	export let data;
 	const { module } = data;
-	import { goto } from '$app/navigation';
 </script>
 
 <div class="min-h-screen bg-(--color-bg) text-(--primary-color) font-(--font-primary) flex flex-col">
-	<!-- Top bar -->
-	<div class="w-full bg-(--color-surface-alt) px-6 md:px-10 py-5 pt-15 md:pt-25 flex items-end justify-between">
-		<h1 class="font-(--font-heading) text-lg md:text-2xl font-bold">{module.name}</h1>
+	<!-- Header -->
+	<ModuleHeader {module} />
 
-		<div class="flex items-center gap-3">
-			<span class="hidden lg:inline text-sm font-bold">{$translations.rating}</span>
-			<span class="w-6 h-6 rounded-full bg-(--color-accent)"></span>
-			<span class="w-6 h-6 rounded-full bg-(--color-accent)"></span>
-			<span class="w-6 h-6 rounded-full bg-(--color-accent)"></span>
-			<span class="w-6 h-6 rounded-full bg-(--color-accent)"></span>
-			<span class="w-6 h-6 rounded-full bg-(--color-surface)"></span>
-		</div>
-	</div>
-
-	<!-- Content -->
+	<!-- Meta + Back -->
 	<div class="flex flex-col md:flex-row md:items-center pt-10 px-4 md:px-10 gap-4 md:gap-0">
-		<button class="relative z-10 flex items-center text-sm font-medium md:mr-6" on:click={() => goto('/home')}>
+		<button
+			class="relative z-10 flex items-center text-sm font-medium md:mr-6"
+			on:click={() => goto('/home')}
+		>
 			<span class="material-symbols-outlined">arrow_circle_left</span>
 			{$translations.back}
 		</button>
 
-		<div class="flex flex-wrap justify-center gap-2 md:gap-6 flex-1 md:-ml-20">
-			<span class="px-3 py-2 md:px-6 md:py-3 text-sm md:text-md rounded-full bg-(--color-surface-alt) font-bold">{module.location}</span>
-			<span class="px-3 py-2 md:px-6 md:py-3 text-sm md:text-md rounded-full bg-(--color-surface-alt) font-bold">{module.module_tags.join(', ')}</span>
-			<span class="px-3 py-2 md:px-6 md:py-3 text-sm md:text-md rounded-full bg-(--color-surface-alt) font-bold">{module.studycredit} ECTS</span>
-			<span class="px-3 py-2 md:px-6 md:py-3 text-sm md:text-md rounded-full bg-(--color-surface-alt) font-bold">{module.level}</span>
-			<span class="px-3 py-2 md:px-6 md:py-3 text-sm md:text-md rounded-full bg-(--color-surface-alt) font-bold">NLQF {module.estimated_difficulty}</span>
-		</div>
+		<ModuleMeta {module} />
 	</div>
 
+	<!-- Content -->
 	<div class="flex-1 flex justify-center px-4 md:px-10 py-8">
 		<div class="w-full max-w-3xl flex flex-col gap-8">
 			<!-- Description -->
-			<div>
-				<h2 class="font-(--font-heading) text-lg font-bold mb-3">{$translations.description_title}</h2>
-
-				{#if module.learningoutcomes}
-					<ul class="space-y-1 mt-2 leading-relaxed">
-						{#each module.learningoutcomes.split('.') as outcome}
-							{#if outcome.trim()}
-								<li>• {outcome}</li>
-							{/if}
-						{/each}
-					</ul>
-				{/if}
-
-				<p class="leading-relaxed">
-					{module.description || module.shortdescription}
-				</p>
-			</div>
+			<ModuleDescription {module} />
 
 			<!-- Actions -->
 			<div class="flex flex-wrap justify-left gap-4">
-				<button class="px-5 py-2 rounded-full bg-(--color-accent) text-black font-bold"> {$translations.register_text} </button>
+				<button class="px-5 py-2 rounded-full bg-(--color-accent) text-black font-bold">
+					{$translations.register_text}
+				</button>
 
-				<button class="px-5 py-2 rounded-full bg-(--color-accent) text-black font-bold"> {$translations.favorite_text} ⭐ </button>
+				<button class="px-5 py-2 rounded-full bg-(--color-accent) text-black font-bold">
+					{$translations.favorite_text} ⭐
+				</button>
 			</div>
 
 			<!-- Tags -->
@@ -69,38 +50,17 @@
 				<h3 class="text-sm font-bold mb-3">Tags</h3>
 				<div class="flex flex-wrap gap-3">
 					{#each [...module.theme_tags, ...module.module_tags] as tag}
-						<span class="px-4 py-2 rounded-full text-sm bg-(--color-surface-alt) font-bold">
+						<span
+							class="px-4 py-2 rounded-full text-sm bg-(--color-surface-alt) font-bold"
+						>
 							{tag}
 						</span>
 					{/each}
 				</div>
 			</div>
-			<div class="w-full max-w-4xl mx-auto bg-[#0f2a2d] rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center md:items-center gap-6 md:gap-10">
-				<!-- Text Content -->
-				<div class="flex-1 text-center md:text-left">
-					<h2 class="text-white text-lg md:text-xl font-semibold mb-2">{$translations.questions_title}</h2>
 
-					<p class="text-white/80 text-sm md:text-base mb-6">{$translations.contact_text}</p>
-
-					<!-- Actions -->
-					<div class="flex justify-center md:justify-start items-center gap-3">
-						<button class="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-full transition"> Teams </button>
-
-						<span class="text-white/70 text-sm">{$translations.or}</span>
-
-						<button class="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-full transition"> E-mail </button>
-					</div>
-				</div>
-
-				<!-- Avatar + Name (always stacked) -->
-				<div class="flex flex-col items-center flex-shrink-0">
-					<div class="w-24 h-24 md:w-28 md:h-28 rounded-full bg-white flex items-center justify-center">
-						<img src="" alt="" class="w-20 h-20 md:w-24 md:h-24 object-contain" />
-					</div>
-
-					<span class="mt-3 text-white font-medium"> John Doe </span>
-				</div>
-			</div>
+			<!-- Contact -->
+			<ContactLecturer />
 		</div>
 	</div>
 </div>
