@@ -14,7 +14,7 @@
   --color-surface: #0D2324;
   --color-surface-alt: #2D5152;
   --color-accent: #F8C537;
-  --color-text: #808782;
+  --color-border: #808782;
 
   // Status colors
   --color-active: #6AE75D;
@@ -24,6 +24,9 @@
   // Primary / secondary
   --primary-color: #ffffff;
   --secondary-color: #001011;
+
+  // Extra
+  --color-avans-logo: #e38094ff;
 }
 
 // Dark-mode
@@ -32,10 +35,13 @@ html.light {
   --color-surface: #CAEDEE;
   --color-surface-alt: #A4CED0;
   --color-accent: #F8C537;
-  --color-text: #808782;
+  --color-border: #808782;
 
   --primary-color: #001011;
-  --secondary-color: #ffffff;
+  --secondary-color: #ffffff; 
+
+    // Extra
+  --color-avans-logo: #c6002aff;
 }
 /* Hide scrollbar but keep scrolling */
 
