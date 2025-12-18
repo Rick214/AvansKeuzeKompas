@@ -1,6 +1,7 @@
 [
   {
     "label": "Wat vind je belangrijk in je studie of werk?",
+    "explanation": "Deze vraag gaat over wat jij het allerbelangrijkst vindt. Bijvoorbeeld: werk je liever zelfstandig of juist samen met anderen? Het AI-model gebruikt dit om beter te begrijpen wat voor soort opdrachten en modules bij jou passen.",
     "options": [
       "Creatief bezig zijn",
       "Anderen helpen",
@@ -12,6 +13,7 @@
   },
   {
     "label": "Welke doelen wil je bereiken tijdens je studie?",
+    "explanation": "Hier geef je aan wat je wilt bereiken. Bijvoorbeeld: wil je vooral goede cijfers halen of iets leren dat je later kunt gebruiken? Het AI-model gebruikt dit om suggesties te geven die aansluiten bij jouw doelen.",
     "options": [
       "Een eigen project ontwikkelen",
       "Een nieuwe vaardigheid leren",
@@ -23,6 +25,7 @@
   },
   {
     "label": "Welke onderwerpen vind je interessant?",
+    "explanation": "Deze vraag gaat over waar jij nieuwsgierig naar bent. Bijvoorbeeld: houd je meer van technologie of van creatief bezig zijn? Het AI-model gebruikt dit om modules te kiezen met onderwerpen die jij leuk vindt.",
     "options": [
       "Technologie en computers",
       "Kunst en design",
@@ -34,6 +37,7 @@
   },
   {
     "label": "Hoe werk je het liefst aan opdrachten?",
+    "explanation": "Hier geef je aan hoe jij het fijnst werkt. Bijvoorbeeld: alleen in je eigen tempo of samen met anderen? Het AI-model gebruikt dit om leeractiviteiten te kiezen die bij jouw manier van werken passen.",
     "options": [
       "Alleen",
       "In een klein team",
@@ -45,6 +49,7 @@
   },
   {
     "label": "Welke manier van leren past het beste bij jou?",
+    "explanation": "Deze vraag gaat over hoe jij het makkelijkst leert. Bijvoorbeeld: door te oefenen of door uitleg te lezen? Het AI-model gebruikt dit om leervormen aan te raden die voor jou het beste werken.",
     "options": [
       "Door te doen en te oefenen",
       "Door te lezen en theorie te begrijpen",
@@ -54,8 +59,9 @@
     ],
     "name": "learning_style"
   },
-    {
+  {
     "label": "Welke vaardigheden wil je vooral ontwikkelen?",
+    "explanation": "Hier kies je wat je beter wilt leren. Bijvoorbeeld: beter communiceren of juist technisch sterker worden? Het AI-model gebruikt dit om modules te vinden die jou helpen deze vaardigheden te ontwikkelen.",
     "options": [
       "Probleemoplossend denken",
       "Communiceren met anderen",
@@ -67,6 +73,7 @@
   },
   {
     "label": "Wat motiveert jou het meest in een studie of project?",
+    "explanation": "Deze vraag gaat over wat jou energie geeft. Bijvoorbeeld: leer je graag nieuwe dingen of werk je liever aan echte problemen? Het AI-model gebruikt dit om aanbevelingen te doen die jou gemotiveerd houden.",
     "options": [
       "Zelfstandig nieuwe dingen ontdekken",
       "Samen met anderen iets groots neerzetten",
@@ -78,6 +85,7 @@
   },
   {
     "label": "Welke omgeving werkt het beste voor jou?",
+    "explanation": "Hier geef je aan waar jij het beste kunt werken. Bijvoorbeeld: in een rustige ruimte of juist in een groep? Het AI-model gebruikt dit om leeromgevingen te kiezen waarin jij goed kunt presteren.",
     "options": [
       "Rustige omgeving zonder afleiding",
       "Creatieve, flexibele werkruimte",
@@ -89,6 +97,7 @@
   },
   {
     "label": "Welke technologieën of tools spreken je het meest aan?",
+    "explanation": "Deze vraag gaat over waar jij graag mee werkt. Bijvoorbeeld: programmeren, ontwerpen of werken met data? Het AI-model gebruikt dit om modules te kiezen die aansluiten bij jouw technische interesses.",
     "options": [
       "Programmeren en softwareontwikkeling",
       "Data-analyse en AI",
@@ -100,6 +109,7 @@
   },
   {
     "label": "Hoe leer je het liefst nieuwe dingen?",
+    "explanation": "Hier kies je hoe jij het liefst leert. Bijvoorbeeld: door zelf iets te maken of door eerst theorie te bestuderen? Het AI-model gebruikt dit om leeractiviteiten aan te raden die bij jouw leerstijl passen.",
     "options": [
       "Door zelf projecten te bouwen",
       "Door tutorials en handleidingen te volgen",

@@ -1,28 +1,31 @@
 [
   {
     "label": "What do you find important in your studies or work?",
+    "explanation": "This question is about what matters most to you. For example: do you prefer working independently or with others? The AI model uses this to better understand which assignments and modules fit you.",
     "options": [
       "Being creative",
       "Helping others",
       "Working independently",
-      "Working in a team",
+      "Collaborating in a team",
       "Learning new things"
     ],
     "name": "values"
   },
   {
     "label": "What goals do you want to achieve during your studies?",
+    "explanation": "Here you indicate what you want to accomplish. For example: do you mainly want to get good grades or learn something useful for the future? The AI model uses this to give suggestions that match your goals.",
     "options": [
       "Develop my own project",
       "Learn a new skill",
       "Gain internship or work experience",
-      "Get good grades",
+      "Get a good grade",
       "Study in a field that matches my interests"
     ],
     "name": "goals"
   },
   {
-    "label": "Which subjects do you find interesting?",
+    "label": "Which subjects are you interested in?",
+    "explanation": "This question is about what sparks your curiosity. For example: do you prefer technology or creative activities? The AI model uses this to pick modules with topics you enjoy.",
     "options": [
       "Technology and computers",
       "Art and design",
@@ -34,28 +37,31 @@
   },
   {
     "label": "How do you prefer to work on assignments?",
+    "explanation": "Here you indicate your preferred way of working. For example: alone at your own pace or with others? The AI model uses this to select learning activities that fit your work style.",
     "options": [
       "Alone",
       "In a small team",
-      "With a lot of guidance",
+      "With lots of guidance",
       "Creatively and freely",
       "Following clear rules"
     ],
     "name": "working_style"
   },
   {
-    "label": "Which way of learning suits you best?",
+    "label": "Which learning style suits you best?",
+    "explanation": "This question is about how you learn most effectively. For example: by practicing or by reading explanations? The AI model uses this to recommend learning methods that work best for you.",
     "options": [
       "By doing and practicing",
       "By reading and understanding theory",
-      "By listening and receiving explanations",
+      "By listening to explanations",
       "By experimenting",
       "By learning together with others"
     ],
     "name": "learning_style"
   },
   {
-    "label": "Which skills do you want to develop the most?",
+    "label": "Which skills do you mainly want to develop?",
+    "explanation": "Here you choose what you want to improve. For example: communicating better or becoming more technically skilled? The AI model uses this to find modules that help develop these skills.",
     "options": [
       "Problem-solving",
       "Communicating with others",
@@ -67,9 +73,10 @@
   },
   {
     "label": "What motivates you most in a study or project?",
+    "explanation": "This question is about what gives you energy. For example: do you like learning new things or working on real-world problems? The AI model uses this to recommend suggestions that keep you motivated.",
     "options": [
       "Discovering new things independently",
-      "Creating something big with others",
+      "Building something big with others",
       "Seeing practical results",
       "Solving challenges and puzzles",
       "Learning new knowledge and theory"
@@ -78,10 +85,11 @@
   },
   {
     "label": "Which environment works best for you?",
+    "explanation": "Here you indicate where you perform best. For example: in a quiet space or in a group? The AI model uses this to choose learning environments where you can thrive.",
     "options": [
       "Quiet environment without distractions",
       "Creative, flexible workspace",
-      "Team environment with a lot of collaboration",
+      "Team environment with lots of collaboration",
       "Structured environment with clear rules",
       "Online and digital learning"
     ],
@@ -89,6 +97,7 @@
   },
   {
     "label": "Which technologies or tools appeal to you most?",
+    "explanation": "This question is about what you enjoy working with. For example: programming, design, or data? The AI model uses this to pick modules that match your technical interests.",
     "options": [
       "Programming and software development",
       "Data analysis and AI",
@@ -100,11 +109,12 @@
   },
   {
     "label": "How do you prefer to learn new things?",
+    "explanation": "Here you choose how you like to learn. For example: by making something yourself or by studying theory first? The AI model uses this to recommend learning activities that fit your learning style.",
     "options": [
-      "By building projects myself",
+      "By building my own projects",
       "By following tutorials and guides",
-      "By collaborating with others",
-      "By experimenting and prototyping",
+      "By brainstorming with others",
+      "By experimenting and making prototypes",
       "By studying theory and making summaries"
     ],
     "name": "learning_method"

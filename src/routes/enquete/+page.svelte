@@ -100,11 +100,43 @@
     {#if step === 0}
       <div class="mb-6">
         <h2 class="text-md font-medium mb-2 text-start">{$translations.enquete_introduction_title}</h2>
-        <p class="text-md text-(--primary-color) text-start">{@html $translations.enquete_introduction_message}</p>
+        <p class="text-md text-(--primary-color) text-start">{@html $translations.enquete_introduction_message_html}</p>
       </div>
     {:else if step <= questions.length}
-      <h2 class="text-md font-bold mb-4">{questions[step - 1].label}</h2>
-      
+      <h2 class="relative inline-flex items-center gap-2 text-md font-medium mb-2 text-start">
+        {step + ". " + questions[step - 1].label}
+
+        <!-- Info icon -->
+        <span class="group relative cursor-pointer">
+          <i class="fa-solid fa-circle-info text-(--color-accent)"></i>
+
+          <!-- Tooltip -->
+          <div
+            class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-3 w-100 
+                  -translate-x-1/4 rounded-xl bg-(--color-surface) border border-(--color-border)
+                  p-4 text-sm text-(--primary-color) shadow-lg
+                  opacity-0 transition-opacity duration-200
+                  group-hover:opacity-100"
+          >
+            <div class="relative z-10 p-2 text-sm text-(--primary-color)">
+              <p class="font-medium text-lg mb-2">{$translations.enquete_popup_title}</p>
+              <p class="mb-4 text-sm">
+                {@html questions[step - 1].explanation}
+              </p>
+            </div>
+
+            <!-- pijltje onderaan -->
+            <div
+              class="absolute -bottom-2 left-1/4 h-4 w-4
+                    -translate-x-1/2 rotate-45
+                    bg-(--color-surface)
+                    border-r border-b border-(--color-border)
+                    z-0">
+            </div>
+          </div>
+        </span>
+      </h2>
+
      <RadioForm
         items={questions[step - 1].options.map(o => ({ label: o, value: o, name: questions[step - 1].name }))}
         bind:selected={responses[step - 1].answer}
