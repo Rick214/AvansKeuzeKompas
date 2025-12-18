@@ -22,5 +22,11 @@
   "password_reset": "Wachtwoord vergeten? klik",
   "password_reset_link": "hier",
   "password_reset_complete": "om je wachtwoord opnieuw in te stellen.",
-  "login_title": "Inloggen"
+  "login_title": "Inloggen",
+  "results": "resultaten",
+  "vieuw_text": "Bekijk keuzemodule",
+  "search": "Zoek op naam",
+  "location": "locatie",
+  "popular": "populair",
+  "alphabetical": "alfabetisch"
 }

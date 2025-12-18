@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ModuleSection from '$lib/components/ui/ModuleSection.svelte';
+	import ModuleSection from '$lib/components/ui/HomePage/ModuleSection.svelte';
 
 	import { dummyModules } from '$lib/data/dummyModules';
 	import { dummyUser } from '$lib/data/dummyUsers';
@@ -46,9 +46,9 @@
 	].filter((section) => section.modules.length > 0);
 </script>
 
-<div class="bg-[var(--color-bg)] min-h-screen p-4 space-y-4">
+<div class="bg-(--color-bg)] min-h-screen p-4 space-y-4">
 	<div class="mx-3">
-		<h1 class="mt-10 text-xl text-[var(--primary-color)]">Home</h1>
+		<h1 class="mt-10 text-xl text-(--primary-color)]">Home</h1>
 
 		{#each sections as section}
 			<ModuleSection {section} />

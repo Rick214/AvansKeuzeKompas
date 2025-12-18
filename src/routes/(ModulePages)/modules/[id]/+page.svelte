@@ -2,10 +2,10 @@
 	import { goto } from '$app/navigation';
 	import { translations } from '$lib/stores/userPreferences';
 
-	import ModuleHeader from '$lib/components/ui/ModuleHeader.svelte';
-	import ModuleMeta from '$lib/components/ui/ModuleMeta.svelte';
-	import ModuleDescription from '$lib/components/ui/ModuleDescription.svelte';
-	import ContactLecturer from '$lib/components/ui/ContactLecturer.svelte';
+	import ModuleHeader from '$lib/components/ui/DetailPage/ModuleHeader.svelte';
+	import ModuleMeta from '$lib/components/ui/DetailPage/ModuleMeta.svelte';
+	import ModuleDescription from '$lib/components/ui/DetailPage/ModuleDescription.svelte';
+	import ContactLecturer from '$lib/components/ui/DetailPage/ContactLecturer.svelte';
 
 	export let data;
 	const { module } = data;

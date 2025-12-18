@@ -22,5 +22,11 @@
   "password_reset": "Forgot your password? click",
   "password_reset_link": "here",
   "password_reset_complete": "to reset your password.",
-  "login_title": "Login"
+  "login_title": "Login",
+  "results": "results",
+  "vieuw_text": "vieuw module",
+  "search": "Search by name",
+  "location": "location",
+  "popular": "popular",
+  "alphabetical": "alphabetical"
 }
