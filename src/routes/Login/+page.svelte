@@ -1,4 +1,5 @@
 <script>
+import { translations } from '$lib/stores/userPreferences';
 let email = '';
 let password = '';
 
@@ -50,7 +51,7 @@ console.log('Login poging:', { email, password });
 <div class="min-h-screen flex items-center justify-center bg-(--color-bg) px-4">
 <div class="w-full max-w-md rounded-2xl bg-(--color-surface) p-8 shadow-xl">
 <h1 class="mb-6 text-center font-(--font-heading) text-3xl text-(--primary-color)">
-Inloggen
+{$translations.login_title}
 </h1>
 
 
@@ -76,7 +77,7 @@ class="w-full rounded-lg bg-(--color-surface-alt) px-4 py-2 text-(--primary-colo
 <!-- Password -->
 <div>
 <label for="password" class="mb-1 block text-sm text-(--primary-color)">
-Wachtwoord
+{$translations.password}
 </label>
 <input
 id="password"
@@ -92,7 +93,7 @@ class="w-full rounded-lg bg-(--color-surface-alt) px-4 py-2 text-(--primary-colo
 
 
 <!-- Forgot password -->
-<p class=" text-sm text-(--primary-color)">Wachtwoord vergeten? klik <a href="#" class="hover:text-(--color-accent)">hier</a> om je wachtwoord te resetten.</p>
+<p class=" text-sm text-(--primary-color)">{$translations.password_reset} <a href="#" class="hover:text-(--color-accent)">{$translations.password_reset_link}</a> {$translations.password_reset_complete}</p>
 
 
 <!-- Submit button -->

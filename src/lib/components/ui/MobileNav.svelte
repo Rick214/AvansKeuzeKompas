@@ -11,7 +11,7 @@
   };
 
   export let items: NavItem[] = [
-    { label: 'Home', iconActive: 'house', iconInactive: 'house', href: '/Home' },
+    { label: 'Home', iconActive: 'house', iconInactive: 'house', href: '/home' },
     { label: 'Zoeken', iconActive: 'magnifying-glass', iconInactive: 'magnifying-glass', href: '/search' },
     { label: 'Profiel', iconActive: 'user', iconInactive: 'user', href: '/profile' }
   ];
