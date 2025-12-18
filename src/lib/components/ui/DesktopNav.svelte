@@ -9,7 +9,7 @@
 
   const items: NavItem[] = [
     { label: "Home", href: "/home" },
-    { label: "Zoeken", href: "/search" },
+    { label: "Zoeken", href: "/modules" },
     { label: "Mijn Profiel", href: "/profile" }
   ];
 

@@ -60,7 +60,7 @@
     <select
       value={ectsFilter}
       on:change={(e) => handleSelectChange('ects', e)}
-      class="px-4 py-2 rounded-full bg-(--color-surface)] text-md font-bold"
+      class="px-4 py-2 rounded-full bg-(--color-surface) text-md font-bold"
     >
       <option value="all">ECTS</option>
       <option value="15">15</option>
@@ -71,7 +71,7 @@
     <select
       value={sort}
       on:change={(e) => handleSelectChange('sort', e)}
-      class="px-4 py-2 rounded-full bg-(--color-surface)] text-md font-bold"
+      class="px-4 py-2 rounded-full bg-(--color-surface) text-md font-bold"
     >
       <option value="popular">{$translations.popular}</option>
       <option value="az">{$translations.alphabetical} (A–Z)</option>
