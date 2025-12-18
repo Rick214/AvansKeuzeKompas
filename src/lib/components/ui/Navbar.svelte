@@ -3,7 +3,7 @@
 </script>
 
 <!-- Language dropdown -->
-<select bind:value={$preferences.language} class="px-2 py-1 rounded border bg-(--color-surface) border-(--color-surface-alt)">
+<select bind:value={$preferences.language} class="mt-16 px-2 py-1 rounded border bg-(--color-surface) border-(--color-surface-alt)">
   <option value="nl_NL">{$translations.dutch}</option>
   <option value="en_US">{$translations.english}</option>
 </select>

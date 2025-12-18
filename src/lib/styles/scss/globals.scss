@@ -1,4 +1,4 @@
-@import "https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap";
+@import 'https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap';
 
 // Root variables
 :root {
@@ -24,6 +24,9 @@
   // Primary / secondary
   --primary-color: #ffffff;
   --secondary-color: #001011;
+
+  // Extra
+  --color-avans-logo: #e38094ff;
 }
 
 // Dark-mode
@@ -35,8 +38,12 @@ html.light {
   --color-text: #808782;
 
   --primary-color: #001011;
-  --secondary-color: #ffffff;
+  --secondary-color: #ffffff; 
+
+    // Extra
+  --color-avans-logo: #c6002aff;
 }
+/* Hide scrollbar but keep scrolling */
 
 // Font size scaling
 html {
