@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { translations } from '$lib/stores/userPreferences.js';
 	export let data;
 	const { module } = data;
 	import { goto } from '$app/navigation';
@@ -10,7 +11,7 @@
 		<h1 class="font-(--font-heading) text-lg md:text-2xl font-bold">{module.name}</h1>
 
 		<div class="flex items-center gap-3">
-			<span class="hidden lg:inline text-sm font-bold">Studentenwaardering</span>
+			<span class="hidden lg:inline text-sm font-bold">{$translations.rating}</span>
 			<span class="w-6 h-6 rounded-full bg-(--color-accent)"></span>
 			<span class="w-6 h-6 rounded-full bg-(--color-accent)"></span>
 			<span class="w-6 h-6 rounded-full bg-(--color-accent)"></span>
@@ -23,7 +24,7 @@
 	<div class="flex flex-col md:flex-row md:items-center pt-10 px-4 md:px-10 gap-4 md:gap-0">
 		<button class="relative z-10 flex items-center text-sm font-medium md:mr-6" on:click={() => goto('/home')}>
 			<span class="material-symbols-outlined">arrow_circle_left</span>
-			Terug
+			{$translations.back}
 		</button>
 
 		<div class="flex flex-wrap justify-center gap-2 md:gap-6 flex-1 md:-ml-20">
@@ -39,7 +40,7 @@
 		<div class="w-full max-w-3xl flex flex-col gap-8">
 			<!-- Description -->
 			<div>
-				<h2 class="font-(--font-heading) text-lg font-bold mb-3">Wat leer je in de keuzemodule?</h2>
+				<h2 class="font-(--font-heading) text-lg font-bold mb-3">{$translations.description_title}</h2>
 
 				{#if module.learningoutcomes}
 					<ul class="space-y-1 mt-2 leading-relaxed">
@@ -58,9 +59,9 @@
 
 			<!-- Actions -->
 			<div class="flex flex-wrap justify-left gap-4">
-				<button class="px-5 py-2 rounded-full bg-(--color-accent) text-black font-bold"> Aanmelden via Osiris </button>
+				<button class="px-5 py-2 rounded-full bg-(--color-accent) text-black font-bold"> {$translations.register_text} </button>
 
-				<button class="px-5 py-2 rounded-full bg-(--color-accent) text-black font-bold"> Markeer als favoriet ⭐ </button>
+				<button class="px-5 py-2 rounded-full bg-(--color-accent) text-black font-bold"> {$translations.favorite_text} ⭐ </button>
 			</div>
 
 			<!-- Tags -->
@@ -77,15 +78,15 @@
 			<div class="w-full max-w-4xl mx-auto bg-[#0f2a2d] rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center md:items-center gap-6 md:gap-10">
 				<!-- Text Content -->
 				<div class="flex-1 text-center md:text-left">
-					<h2 class="text-white text-lg md:text-xl font-semibold mb-2">Heb je nog vragen over deze module?</h2>
+					<h2 class="text-white text-lg md:text-xl font-semibold mb-2">{$translations.questions_title}</h2>
 
-					<p class="text-white/80 text-sm md:text-base mb-6">Je kan nu via Teams in contact komen met de docent die deze module geeft.</p>
+					<p class="text-white/80 text-sm md:text-base mb-6">{$translations.contact_text}</p>
 
 					<!-- Actions -->
 					<div class="flex justify-center md:justify-start items-center gap-3">
 						<button class="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-full transition"> Teams </button>
 
-						<span class="text-white/70 text-sm">of</span>
+						<span class="text-white/70 text-sm">{$translations.or}</span>
 
 						<button class="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-full transition"> E-mail </button>
 					</div>
