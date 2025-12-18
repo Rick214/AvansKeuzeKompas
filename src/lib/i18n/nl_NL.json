@@ -9,5 +9,13 @@
   "dark_mode": "Donkere modus",
   "loading": "Laden...",
   "dutch": "Nederlands",
-  "english": "Engels"
+  "english": "Engels",
+  "rating": "Studentenwaardering",
+  "back": "Terug",
+  "description_title": "Wat leer je in de keuzemodule?",
+  "register_text": "Aanmelden via Osiris",
+  "favorite_text": "Markeer als favoriet",
+  "questions_title": "Heb je nog vragen over deze module?",
+  "contact_text": "Je kan nu via Teams in contact komen met de docent die deze module geeft.",
+  "or": "of"
 }
