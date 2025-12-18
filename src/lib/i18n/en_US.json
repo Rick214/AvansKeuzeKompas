@@ -9,5 +9,10 @@
   "dark_mode": "Dark Mode",
   "loading": "Loading...",
   "dutch": "Dutch",
-  "english": "English"
+  "english": "English",
+  "password": "Password",
+  "password_reset": "Forgot your password? click",
+  "password_reset_link": "here",
+  "password_reset_complete": "to reset your password.",
+  "login_title": "Login"
 }

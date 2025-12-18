@@ -9,5 +9,10 @@
   "dark_mode": "Donkere modus",
   "loading": "Laden...",
   "dutch": "Nederlands",
-  "english": "Engels"
+  "english": "Engels",
+  "password": "Wachtwoord",
+  "password_reset": "Wachtwoord vergeten? klik",
+  "password_reset_link": "hier",
+  "password_reset_complete": "om je wachtwoord opnieuw in te stellen.",
+  "login_title": "Inloggen"
 }
