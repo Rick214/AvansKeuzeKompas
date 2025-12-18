@@ -33,5 +33,11 @@
   "enquete_submit": "Afronden",
   "enquete_error_missing_value": "Vul eerst een antwoord in voordat je verdergaat.",
   "enquete_error_submission_failed": "Er ging iets mis bij het versturen van je antwoorden. Probeer het later opnieuw.",
-  "enquete_thank_you_message": "Bedankt voor het invullen van de enquête!"
+  "enquete_thank_you_message": "Bedankt voor het invullen van de enquête!",
+  "results": "resultaten",
+  "vieuw_text": "Bekijk keuzemodule",
+  "search": "Zoek op naam",
+  "location": "locatie",
+  "popular": "populair",
+  "alphabetical": "alfabetisch"
 }

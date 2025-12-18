@@ -33,5 +33,11 @@
   "enquete_submit": "Finish",
   "enquete_error_missing_value": "Please answer the question before proceeding.",
   "enquete_error_submission_failed": "Something went wrong while submitting your answers. Please try again later.",
-  "enquete_thank_you_message": "Thank you for completing the survey!"
+  "enquete_thank_you_message": "Thank you for completing the survey!",
+  "results": "results",
+  "vieuw_text": "vieuw module",
+  "search": "Search by name",
+  "location": "location",
+  "popular": "popular",
+  "alphabetical": "alphabetical"
 }
