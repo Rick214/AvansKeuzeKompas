@@ -10,6 +10,8 @@
   let errorKey: TranslationKey | null = null;  let isLoading = false;
   let questions = questions_nl_NL; // default
 
+  let showTooltip = false;
+
   let responses: { answer: string | null; rating: number }[] = questions.map(() => ({ answer: null, rating: 0 }));
   let hoverRatings: number[] = questions.map(() => 0);
 
@@ -27,6 +29,10 @@
 
   function clearHover(index: number) {
     hoverRatings[index] = 0;
+  }
+
+  function toggleTooltip() {
+    showTooltip = !showTooltip;
   }
 
   // Subscribe to language preference for live updates
@@ -51,6 +57,8 @@
     errorKey = null;
     step < questions.length ? step += 1 : step += 1;
   }
+
+  // API
 
   // MUST BE CHANGED LATER TO ACTUAL API ENDPOINT
   async function handleSubmit() {
@@ -107,33 +115,43 @@
         {step + ". " + questions[step - 1].label}
 
         <!-- Info icon -->
-        <span class="group relative cursor-pointer">
+        <!-- svelte-ignore a11y_click_events_have_key_events -->
+        <!-- svelte-ignore a11y_no_static_element_interactions -->
+        <span
+          class="relative cursor-pointer"
+          on:mouseenter={() => showTooltip = true}
+          on:mouseleave={() => showTooltip = false}
+          on:click={toggleTooltip}
+        >
           <i class="fa-solid fa-circle-info text-(--color-accent)"></i>
 
           <!-- Tooltip -->
-          <div
-            class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-3 w-100 
-                  -translate-x-1/4 rounded-xl bg-(--color-surface) border border-(--color-border)
-                  p-4 text-sm text-(--primary-color) shadow-lg
-                  opacity-0 transition-opacity duration-200
-                  group-hover:opacity-100"
-          >
-            <div class="relative z-10 p-2 text-sm text-(--primary-color)">
-              <p class="font-medium text-lg mb-2">{$translations.enquete_popup_title}</p>
-              <p class="mb-4 text-sm">
-                {@html questions[step - 1].explanation}
-              </p>
-            </div>
-
-            <!-- pijltje onderaan -->
+          {#if showTooltip}
             <div
-              class="absolute -bottom-2 left-1/4 h-4 w-4
-                    -translate-x-1/2 rotate-45
-                    bg-(--color-surface)
-                    border-r border-b border-(--color-border)
-                    z-0">
+              class="pointer-events-none absolute left-1/2 bottom-full z-20 mb-3
+                    -translate-x-3/4 translate-y-[115%] rounded-xl bg-(--color-surface) border border-(--color-border)
+                    p-4 text-sm text-(--primary-color) shadow-lg
+                    transition-opacity duration-200
+                    w-96 max-w-48 
+                    md:max-w-96 md:-translate-x-1/4 md:translate-y-0"
+            >
+              <div class="relative z-10 p-2 text-sm text-(--primary-color)">
+                <p class="font-medium text-lg mb-2">{$translations.enquete_popup_title}</p>
+                <p class="mb-4 text-sm">
+                  {@html questions[step - 1].explanation}
+                </p>
+              </div>
+
+              <!-- Arrow -->
+              <div
+                class="absolute bg-(--color-surface)
+                      border-r border-b border-(--color-border)
+                      z-0 h-4 w-4
+                      -top-2 left-3/4 -translate-x-3/6 -rotate-135
+                      md:top-auto md:-bottom-2 md:left-1/4 md:h-4 md:w-4 md:-translate-x-1/2 md:rotate-45">
+              </div>
             </div>
-          </div>
+          {/if}
         </span>
       </h2>
 
