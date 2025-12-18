@@ -39,7 +39,7 @@
       <div
         class="absolute bg-(--color-surface)
                border-r border-b border-(--color-border)
-               z-0 h-4 w-4
+               z-0 h-4 w-4 transition-colors duration-200
                -top-2 left-3/4 -translate-x-3/6 -rotate-135
                md:top-auto md:-bottom-2 md:left-1/4 md:h-4 md:w-4 md:-translate-x-1/2 md:rotate-45"
       ></div>

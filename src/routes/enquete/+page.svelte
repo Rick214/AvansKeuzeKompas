@@ -87,13 +87,13 @@
 
 <div class="min-h-screen flex items-center justify-center p-4">
   <div class="w-full sm:w-4/5 md:w-3/5 lg:w-3/6 xl:w-3/6 2xl:w-2/6 p-12 bg-(--color-surface) rounded-3xl shadow-lg">
-    <h1 class="text-xl font-bold text-(--primary-color) text-center mb-6">{$translations.enquete_title}</h1>
+    <h1 class="text-xl font-bold text-(--primary-color) transition-colors duration-200 text-center mb-6">{$translations.enquete_title}</h1>
 
     <!-- Progress bar -->
     <div class="flex mb-8 space-x-2">
       {#each Array(questions.length + 2) as _, i}
         <div
-          class="h-2 flex-1 rounded-full transition-colors duration-300"
+          class="h-2 flex-1 rounded-full transition-colors duration-200"
           style="background-color: {i <= step ? 'var(--color-accent)' : 'var(--color-surface-alt)'}"
         ></div>
       {/each} 
@@ -149,7 +149,7 @@
       </div>
 
       {#if errorKey}
-        <p class="text-sm font-medium text-(--color-inactive) mt-4">
+        <p class="text-sm font-medium text-(--color-inactive) transition-colors duration-200 mt-4">
           {$translations[errorKey]}
         </p>
       {/if}
@@ -157,7 +157,7 @@
     {:else}
       <div class="mb-4">
         <h2 class="text-md font-medium mb-2 text-start">{$translations.enquete_completion_title}</h2>
-        <p class="text-md text-(--primary-color) text-start">{$translations.enquete_completion_message}</p>
+        <p class="text-md text-(--primary-color) transition-colors duration-200 text-start">{$translations.enquete_completion_message}</p>
       </div>
     {/if}
 
@@ -165,7 +165,7 @@
     <div class="flex {step === 0 ? 'justify-end' : 'justify-between'} mt-8">
       <button
         type="button"
-        class="{step === 0 ? 'hidden' : ''} w-24 sm:w-32 px-4 py-2 rounded-xl bg-(--color-accent) text-black opacity-75 hover:opacity-100 transition-opacity"
+        class="{step === 0 ? 'hidden' : ''} w-24 sm:w-32 px-4 py-2 rounded-xl bg-(--color-accent) text-black opacity-75 hover:opacity-100 transition duration-200"
         on:click={() => step = Math.max(0, step - 1)}
         disabled={step === 0}
       >
@@ -175,7 +175,7 @@
       {#if step <= questions.length}
         <button
           type="button"
-          class="w-24 sm:w-32 px-4 py-2 rounded-xl bg-(--color-accent) text-black opacity-90 hover:opacity-100 transition-opacity"
+          class="w-24 sm:w-32 px-4 py-2 rounded-xl bg-(--color-accent) text-black opacity-90 hover:opacity-100 transition duration-200"
           on:click={handleNext}
         >
         {step === 0 ? $translations.start_enquete : $translations.enquete_next}
@@ -183,7 +183,7 @@
       {:else}
         <button
           type="button"
-          class="{isLoading && "flex justify-between"} w-24 sm:w-32 px-4 py-2 rounded-xl bg-(--color-accent) text-black opacity-75 hover:opacity-100 transition-opacity"
+          class="{isLoading && "flex justify-between"} w-24 sm:w-32 px-4 py-2 rounded-xl bg-(--color-accent) text-black opacity-75 hover:opacity-100 transition-colors duration-200"
           on:click={handleSubmit}
           disabled={isLoading}
         >
