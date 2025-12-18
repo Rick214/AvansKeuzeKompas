@@ -7,7 +7,7 @@
   --color-surface: #0D2324;
   --color-surface-alt: #2D5152;
   --color-accent: #F8C537;
-  --color-text: #808782;
+  --color-border: #808782;
   --color-active: #6AE75D;
   --color-inactive: #FF4B4B;
   --color-hyperlink: #5E96FF;
@@ -21,7 +21,7 @@ html.light {
   --color-surface: #CAEDEE;
   --color-surface-alt: #A4CED0;
   --color-accent: #F8C537;
-  --color-text: #808782;
+  --color-border: #808782;
   --primary-color: #001011;
   --secondary-color: #ffffff;
   --color-avans-logo: #c6002aff;
