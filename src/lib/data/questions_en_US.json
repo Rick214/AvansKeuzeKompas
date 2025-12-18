@@ -1,0 +1,112 @@
+[
+  {
+    "label": "What do you find important in your studies or work?",
+    "options": [
+      "Being creative",
+      "Helping others",
+      "Working independently",
+      "Working in a team",
+      "Learning new things"
+    ],
+    "name": "values"
+  },
+  {
+    "label": "What goals do you want to achieve during your studies?",
+    "options": [
+      "Develop my own project",
+      "Learn a new skill",
+      "Gain internship or work experience",
+      "Get good grades",
+      "Study in a field that matches my interests"
+    ],
+    "name": "goals"
+  },
+  {
+    "label": "Which subjects do you find interesting?",
+    "options": [
+      "Technology and computers",
+      "Art and design",
+      "Science and research",
+      "Languages and communication",
+      "Business and economics"
+    ],
+    "name": "interests"
+  },
+  {
+    "label": "How do you prefer to work on assignments?",
+    "options": [
+      "Alone",
+      "In a small team",
+      "With a lot of guidance",
+      "Creatively and freely",
+      "Following clear rules"
+    ],
+    "name": "working_style"
+  },
+  {
+    "label": "Which way of learning suits you best?",
+    "options": [
+      "By doing and practicing",
+      "By reading and understanding theory",
+      "By listening and receiving explanations",
+      "By experimenting",
+      "By learning together with others"
+    ],
+    "name": "learning_style"
+  },
+  {
+    "label": "Which skills do you want to develop the most?",
+    "options": [
+      "Problem-solving",
+      "Communicating with others",
+      "Project management",
+      "Creative design",
+      "Technical expertise"
+    ],
+    "name": "skills"
+  },
+  {
+    "label": "What motivates you most in a study or project?",
+    "options": [
+      "Discovering new things independently",
+      "Creating something big with others",
+      "Seeing practical results",
+      "Solving challenges and puzzles",
+      "Learning new knowledge and theory"
+    ],
+    "name": "motivation"
+  },
+  {
+    "label": "Which environment works best for you?",
+    "options": [
+      "Quiet environment without distractions",
+      "Creative, flexible workspace",
+      "Team environment with a lot of collaboration",
+      "Structured environment with clear rules",
+      "Online and digital learning"
+    ],
+    "name": "environment"
+  },
+  {
+    "label": "Which technologies or tools appeal to you most?",
+    "options": [
+      "Programming and software development",
+      "Data analysis and AI",
+      "Graphic design and UX/UI",
+      "Scientific research tools",
+      "Business and management software"
+    ],
+    "name": "tech_tools"
+  },
+  {
+    "label": "How do you prefer to learn new things?",
+    "options": [
+      "By building projects myself",
+      "By following tutorials and guides",
+      "By collaborating with others",
+      "By experimenting and prototyping",
+      "By studying theory and making summaries"
+    ],
+    "name": "learning_method"
+  }
+]

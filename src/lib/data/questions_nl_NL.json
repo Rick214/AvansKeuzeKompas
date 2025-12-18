@@ -1,0 +1,112 @@
+[
+  {
+    "label": "Wat vind je belangrijk in je studie of werk?",
+    "options": [
+      "Creatief bezig zijn",
+      "Anderen helpen",
+      "Zelfstandig werken",
+      "Samenwerken in een team",
+      "Nieuwe dingen leren"
+    ],
+    "name": "values"
+  },
+  {
+    "label": "Welke doelen wil je bereiken tijdens je studie?",
+    "options": [
+      "Een eigen project ontwikkelen",
+      "Een nieuwe vaardigheid leren",
+      "Een stage of werkervaring opdoen",
+      "Een goed cijfer halen",
+      "Studeren in een richting die bij mijn interesses past"
+    ],
+    "name": "goals"
+  },
+  {
+    "label": "Welke onderwerpen vind je interessant?",
+    "options": [
+      "Technologie en computers",
+      "Kunst en design",
+      "Wetenschap en onderzoek",
+      "Talen en communicatie",
+      "Bedrijf en economie"
+    ],
+    "name": "interests"
+  },
+  {
+    "label": "Hoe werk je het liefst aan opdrachten?",
+    "options": [
+      "Alleen",
+      "In een klein team",
+      "Met veel begeleiding",
+      "Creatief en vrij",
+      "Volgens duidelijke regels"
+    ],
+    "name": "working_style"
+  },
+  {
+    "label": "Welke manier van leren past het beste bij jou?",
+    "options": [
+      "Door te doen en te oefenen",
+      "Door te lezen en theorie te begrijpen",
+      "Door te luisteren en uitleg te krijgen",
+      "Door te experimenteren",
+      "Door samen te leren met anderen"
+    ],
+    "name": "learning_style"
+  },
+    {
+    "label": "Welke vaardigheden wil je vooral ontwikkelen?",
+    "options": [
+      "Probleemoplossend denken",
+      "Communiceren met anderen",
+      "Projectmanagement",
+      "Creatief ontwerpen",
+      "Technische expertise"
+    ],
+    "name": "skills"
+  },
+  {
+    "label": "Wat motiveert jou het meest in een studie of project?",
+    "options": [
+      "Zelfstandig nieuwe dingen ontdekken",
+      "Samen met anderen iets groots neerzetten",
+      "Praktische resultaten zien",
+      "Uitdagingen en puzzels oplossen",
+      "Nieuwe kennis en theorie leren"
+    ],
+    "name": "motivation"
+  },
+  {
+    "label": "Welke omgeving werkt het beste voor jou?",
+    "options": [
+      "Rustige omgeving zonder afleiding",
+      "Creatieve, flexibele werkruimte",
+      "Teamomgeving met veel overleg",
+      "Structuur en duidelijke regels",
+      "Online en digitaal leren"
+    ],
+    "name": "environment"
+  },
+  {
+    "label": "Welke technologieën of tools spreken je het meest aan?",
+    "options": [
+      "Programmeren en softwareontwikkeling",
+      "Data-analyse en AI",
+      "Grafisch ontwerp en UX/UI",
+      "Wetenschappelijk onderzoekstools",
+      "Bedrijf en managementsoftware"
+    ],
+    "name": "tech_tools"
+  },
+  {
+    "label": "Hoe leer je het liefst nieuwe dingen?",
+    "options": [
+      "Door zelf projecten te bouwen",
+      "Door tutorials en handleidingen te volgen",
+      "Door samen te sparren met anderen",
+      "Door experimenten en prototypes te maken",
+      "Door theorie te bestuderen en samenvattingen te maken"
+    ],
+    "name": "learning_method"
+  }
+]

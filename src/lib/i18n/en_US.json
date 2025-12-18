@@ -22,5 +22,16 @@
   "password_reset": "Forgot your password? click",
   "password_reset_link": "here",
   "password_reset_complete": "to reset your password.",
-  "login_title": "Login"
+  "login_title": "Login",
+  "enquete_title": "Questionnaire",
+  "enquete_introduction_title": "Welcome to the survey!",
+  "enquete_introduction_message": "We would like to get to know you better to help you find the right study or career path. <br><br> This short survey consists of several questions about your interests, preferences, and goals. It takes approximately 5 minutes to complete. Your answers are treated confidentially and used only to provide better advice. <br><br><b>How does our AI model work?</b><br> Our system uses only your survey answers to find modules that match your interests. It looks at which subjects align with your preferences and generates a list of suggestions. For each module, we also briefly explain why it suits you. <br><br> Good luck!",
+  "enquete_completion_title": "Thank you for completing!",
+  "enquete_completion_message": "You have completed the survey. Click 'Finish' to submit your answers.",
+  "enquete_next": "Next",
+  "enquete_previous": "Previous",
+  "enquete_submit": "Finish",
+  "enquete_error_missing_value": "Please answer the question before proceeding.",
+  "enquete_error_submission_failed": "Something went wrong while submitting your answers. Please try again later.",
+  "enquete_thank_you_message": "Thank you for completing the survey!"
 }
