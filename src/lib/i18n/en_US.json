@@ -9,5 +9,18 @@
   "dark_mode": "Dark Mode",
   "loading": "Loading...",
   "dutch": "Dutch",
-  "english": "English"
+  "english": "English",
+  "rating": "Student rating",
+  "back": "Back",
+  "description_title": "What will you learn in this elective module?",
+  "register_text": "Register via Osiris",
+  "favorite_text": "Mark as favorite",
+  "questions_title": "Do you have any questions about this module?",
+  "contact_text": "You can now contact the lecturer who teaches this module via Teams.",
+  "or": "or",
+  "password": "Password",
+  "password_reset": "Forgot your password? click",
+  "password_reset_link": "here",
+  "password_reset_complete": "to reset your password.",
+  "login_title": "Login"
 }
