@@ -10,7 +10,7 @@
 
 <!-- Font scale dropdown -->
 <select bind:value={$preferences.fontScale} class="px-2 py-1 rounded border bg-(--color-surface) border-(--color-surface-alt)">
-  <option value={100}>100%</option>
+  <option value={100}>100% (default)</option>
   <option value={125}>125%</option>
   <option value={150}>150%</option>
   <option value={175}>175%</option>
