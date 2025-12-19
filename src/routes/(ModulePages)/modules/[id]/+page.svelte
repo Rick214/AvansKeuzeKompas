@@ -29,10 +29,7 @@
 
 	<!-- Meta + Back -->
 	<div class="flex flex-col md:flex-row md:items-center pt-10 px-4 md:px-10 gap-4 md:gap-0">
-		<button
-			class="relative z-10 flex items-center text-sm font-medium md:mr-6"
-			on:click={() => goto('/home')}
-		>
+		<button class="relative z-10 flex items-center text-sm font-medium md:mr-6" on:click={() => goto('/home')}>
 			<span class="material-symbols-outlined">arrow_circle_left</span>
 			{$translations.back}
 		</button>
@@ -69,9 +66,7 @@
 				<h3 class="text-sm font-bold mb-3">Tags</h3>
 				<div class="flex flex-wrap gap-3">
 					{#each [...module.theme_tags, ...module.module_tags] as tag}
-						<span
-							class="px-4 py-2 rounded-full text-sm bg-(--color-surface-alt) font-bold"
-						>
+						<span class="px-4 py-2 rounded-full text-sm bg-(--color-surface) font-bold">
 							{tag}
 						</span>
 					{/each}
