@@ -46,5 +46,8 @@
 	"search": "Zoek op naam",
 	"location": "locatie",
 	"popular": "populair",
-	"alphabetical": "alfabetisch"
+	"alphabetical": "alfabetisch",
+	"page_does_not_exist": "Oeps… deze pagina bestaat niet 🧭",
+	"back_to_previous_page": "Ga terug",
+	"back_to_home": "Terug naar home"
 }

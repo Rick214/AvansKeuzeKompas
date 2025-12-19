@@ -46,5 +46,8 @@
 	"search": "Search by name",
 	"location": "location",
 	"popular": "popular",
-	"alphabetical": "alphabetical"
+	"alphabetical": "alphabetical",
+	"page_does_not_exist": "Oops… this page doesn’t exist 🧭",
+	"back_to_previous_page": "Go back",
+	"back_to_home": "Back to home"
 }
