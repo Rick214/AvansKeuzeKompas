@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Module } from '$lib/data/dummyModules';
 
-
 	let favorites = new Set<number>();
 
 	function toggleFavorite(id: number) {
@@ -31,11 +30,7 @@
 		const style = getComputedStyle(firstCard);
 		const gap = parseFloat(getComputedStyle(row).columnGap || '0');
 
-		const cardWidth =
-			firstCard.offsetWidth +
-			parseFloat(style.marginLeft) +
-			parseFloat(style.marginRight) +
-			gap;
+		const cardWidth = firstCard.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight) + gap;
 
 		const cardsPerPage = Math.floor(row.clientWidth / cardWidth);
 		const scrollAmount = Math.max(cardsPerPage, 1) * cardWidth;
@@ -70,45 +65,26 @@
 
 	<div class="relative group">
 		{#if hasOverflow}
-			<button
-				class="absolute left-1 top-1/2 -translate-y-1/2 z-10 hidden md:group-hover:flex items-center justify-center w-8 h-8 rounded-full bg-black/50 text-white"
-				on:click={() => scrollRow(-1)}
-			>
-				<span class="text-3xl leading-none relative -top-1">‹</span>
+			<button class="absolute left-1 top-1/2 -translate-y-1/2 z-10 hidden md:group-hover:flex items-center justify-center w-8 h-8 rounded-full bg-black/50 text-white" on:click={() => scrollRow(-1)}>
+				<span class="material-symbols-outlined"> chevron_backward </span>
 			</button>
 
-			<button
-				class="absolute right-1 top-1/2 -translate-y-1/2 z-10 hidden md:group-hover:flex items-center justify-center w-8 h-8 rounded-full bg-black/50 text-white"
-				on:click={() => scrollRow(1)}
-			>
-				<span class="text-3xl leading-none relative -top-1">›</span>
+			<button class="absolute right-1 top-1/2 -translate-y-1/2 z-10 hidden md:group-hover:flex items-center justify-center w-8 h-8 rounded-full bg-black/50 text-white" on:click={() => scrollRow(1)}>
+				<span class="material-symbols-outlined"> chevron_forward </span>
 			</button>
 		{/if}
 
 		<div use:observe class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar snap-x snap-mandatory">
 			{#each section.modules as module}
 				<div class="relative">
-					<a
-						href={`/modules/${module.id}`}
-						class="bg-[var(--color-surface-alt)] w-50 h-25 rounded-lg p-3 flex flex-col flex-shrink-0 snap-start hover:scale-[1.02] transition"
-					>
+					<a href={`/modules/${module.id}`} class="bg-[var(--color-surface-alt)] w-50 h-25 rounded-lg p-3 flex flex-col flex-shrink-0 snap-start hover:scale-[1.02] transition">
 						<p class="mt-auto text-sm font-medium text-[var(--primary-color)]">
 							{module.name}
 						</p>
 					</a>
 
-					<button
-						class="absolute top-2 right-2 z-10 p-1"
-						on:click|stopPropagation={() => toggleFavorite(module.id)}
-						aria-label="Toggle favoriet"
-					>
-						<svg
-							viewBox="0 0 24 24"
-							class="w-5 h-5 transition"
-							fill={favorites.has(module.id) ? 'currentColor' : 'none'}
-							stroke="currentColor"
-							stroke-width="2"
-						>
+					<button class="absolute top-2 right-2 z-10 p-1" on:click|stopPropagation={() => toggleFavorite(module.id)} aria-label="Toggle favoriet">
+						<svg viewBox="0 0 24 24" class="w-5 h-5 transition" fill={favorites.has(module.id) ? 'currentColor' : 'none'} stroke="currentColor" stroke-width="2">
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
