@@ -44,8 +44,7 @@
       }
 
       if (!current.rating) {
-        errorKey = 'enquete_error_missing_rating';
-        return;
+        current.rating = 3
       }
     }
 
@@ -86,7 +85,7 @@
 </script>
 
 <div class="min-h-screen flex items-center justify-center p-4">
-  <div class="w-full sm:w-4/5 md:w-3/5 lg:w-3/6 xl:w-3/6 2xl:w-2/6 p-12 bg-(--color-surface) rounded-3xl shadow-lg">
+  <div class="w-full sm:max-w-4/6 lg:max-w-4/6 xl:max-w-3/6 2xl:max-w-3/6 p-12 bg-(--color-surface) rounded-3xl shadow-lg">
     <h1 class="text-xl font-bold text-(--primary-color) transition-colors duration-200 text-center mb-6">{$translations.enquete_title}</h1>
 
     <!-- Progress bar -->
@@ -162,7 +161,7 @@
     {/if}
 
     <!-- Navigation -->
-    <div class="flex {step === 0 ? 'justify-end' : 'justify-between'} mt-8">
+    <div class="flex flex-wrap {step === 0 ? 'justify-end' : 'justify-between'} mt-8">
       <button
         type="button"
         class="{step === 0 ? 'hidden' : ''} w-24 sm:w-32 px-4 py-2 rounded-xl bg-(--color-accent) text-black opacity-75 hover:opacity-100 transition duration-200"
