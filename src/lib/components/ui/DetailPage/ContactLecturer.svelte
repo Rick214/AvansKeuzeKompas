@@ -7,23 +7,23 @@
 	};
 </script>
 
-<div class="w-full max-w-4xl mx-auto bg-(--color-bg) rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 md:gap-10">
+<div class="w-full max-w-4xl mx-auto bg-(--color-surface) rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 md:gap-10">
 	<!-- Text -->
 	<div class="flex-1 text-center md:text-left">
-		<h2 class="text-white text-lg md:text-xl font-semibold mb-2">
+		<h2 class="text-(--primary-color) text-lg md:text-xl font-semibold mb-2">
 			{$translations.questions_title}
 		</h2>
 
-		<p class="text-white/80 text-sm md:text-base mb-6">
+		<p class="text-(--primary-color) text-sm md:text-base mb-6">
 			{$translations.contact_text}
 		</p>
 
 		<div class="flex justify-center md:justify-start items-center gap-3">
-			<button class="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-full transition"> Teams </button>
+			<button class="bg-(--color-accent) text-black font-semibold px-6 py-2 rounded-full transition"> Teams </button>
 
-			<span class="text-white/70 text-sm">{$translations.or}</span>
+			<span class="text-(--primary-color) text-sm">{$translations.or}</span>
 
-			<button class="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-full transition"> E-mail </button>
+			<button class="bg-(--color-accent) text-black font-semibold px-6 py-2 rounded-full transition"> E-mail </button>
 		</div>
 	</div>
 
@@ -35,7 +35,7 @@
 			{/if}
 		</div>
 
-		<span class="mt-3 text-white font-medium">
+		<span class="mt-3 text-(--primary-color) font-medium">
 			{lecturer.name}
 		</span>
 	</div>
