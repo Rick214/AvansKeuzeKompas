@@ -1,17 +1,19 @@
 <script lang="ts">
 	import ModuleSection from '$lib/components/ui/HomePage/ModuleSection.svelte';
-
-	import { dummyModules } from '$lib/data/dummyModules';
+  	import { getModules } from '$lib/api/client/vkms';
+  	import type { Module } from '$lib/types/vkm';
 	import { dummyUser } from '$lib/data/dummyUsers';
-	import type { Module } from '$lib/data/dummyModules';
 	import { translations } from '$lib/stores/userPreferences';
+	import type { PageData } from './$types';
+
+	export let data: PageData;
 
 	type Section = {
 		title: string;
 		modules: Module[];
 	};
 
-	const modules = dummyModules;
+	let modules: Module[] = data.modules;
 	const user = dummyUser;
 
 	function byIds(ids: number[]) {
@@ -33,7 +35,7 @@
 		},
 		...Object.entries(
 			modules.reduce<Record<string, Module[]>>((acc, module) => {
-				module.theme_tags.forEach((tag) => {
+				module.themes.forEach((tag) => {
 					acc[tag] ??= [];
 					acc[tag].push(module);
 				});
