@@ -1,6 +1,6 @@
 <script lang="ts">
   import { translations } from '$lib/stores/userPreferences';
-  import type { Module } from '$lib/data/dummyModules';
+  import type { Module } from '$lib/types/vkm';
   import ModuleCard from './ModuleCard.svelte';
   export let modules: Module[];
 </script>
