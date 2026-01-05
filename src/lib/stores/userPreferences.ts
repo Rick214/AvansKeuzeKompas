@@ -6,11 +6,13 @@ import en_US from '../i18n/en_US.json';
 export type FontScale = 100 | 125 | 150 | 175 | 200; // Supported font scales
 export type Language = 'nl_NL' | 'en_US'; // Supported languages
 export type Theme = 'light' | 'dark' | 'system'; // Supported themes
+export type NotificationPreference = 'enabled' | 'disabled'; // Notification preferences
 
 export type Preferences = {
   language: Language;
   fontScale: FontScale;
   theme: Theme;
+  notificationPreference: NotificationPreference;
 };
 
 // Indicates that preferences have been loaded and applied
@@ -23,7 +25,8 @@ export const translations = writable(nl_NL);
 export const preferences = writable<Preferences>({
   language: 'nl_NL',
   fontScale: 100,
-  theme: 'system'
+  theme: 'system',
+  notificationPreference: 'disabled'
 });
 
 // Map of translations for easy lookup
@@ -37,12 +40,14 @@ if (browser) {
   const savedLang = sessionStorage.getItem('language') as Language;
   const savedScale = sessionStorage.getItem('fontScale') as string;
   const savedTheme = sessionStorage.getItem('theme') as Theme;
+  const savedNotificationPreference = sessionStorage.getItem('notificationPreference') as NotificationPreference;
 
   // Apply saved preferences
   preferences.update(p => ({
     language: savedLang || p.language,
     fontScale: savedScale ? Number(savedScale) as FontScale : p.fontScale,
-    theme: savedTheme || p.theme
+    theme: savedTheme || p.theme,
+    notificationPreference: savedNotificationPreference || p.notificationPreference
   }));
 
   let systemListener: { mq: MediaQueryList; handler: (e: MediaQueryListEvent) => void } | null = null;
