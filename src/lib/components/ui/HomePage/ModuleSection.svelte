@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Module } from '$lib/data/dummyModules';
+	import type { Module } from '$lib/types/vkm';
 
 	let favorites = new Set<number>();
 
@@ -77,7 +77,7 @@
 		<div use:observe class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar snap-x snap-mandatory">
 			{#each section.modules as module}
 				<div class="relative">
-					<a href={`/modules/${module.id}`} class="bg-[var(--color-surface-alt)] w-50 h-25 rounded-lg p-3 flex flex-col flex-shrink-0 snap-start hover:scale-[1.02] transition">
+					<a href={`/modules/${module.id}?from=/home`} class="bg-[var(--color-surface-alt)] w-50 h-25 rounded-lg p-3 flex flex-col flex-shrink-0 snap-start hover:scale-[1.02] transition">
 						<p class="mt-auto text-sm font-medium text-[var(--primary-color)]">
 							{module.name}
 						</p>
