@@ -33,7 +33,7 @@
 	<!-- Content -->
 	<div class="flex flex-col justify-between flex-1">
 		<div>
-			<h3 class="font-bold">{module.name}</h3>
+			<h3 class="font-bold ">{module.name}</h3>
 			<p class="text-sm text-(--color-text)">
 				{module.themes}
 			</p>
