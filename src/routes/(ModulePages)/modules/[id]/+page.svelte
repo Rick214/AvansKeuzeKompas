@@ -6,13 +6,11 @@
   import ModuleMeta from '$lib/components/ui/DetailPage/ModuleMeta.svelte';
   import ModuleDescription from '$lib/components/ui/DetailPage/ModuleDescription.svelte';
   import ContactLecturer from '$lib/components/ui/DetailPage/ContactLecturer.svelte';
-
   import type { PageData } from './$types';
-  import type { Module } from '$lib/types/vkm';
 
   export let data: PageData;
 
-  const module: Module = data.module;
+  const { module } = data
 
   let favorites = new Set<number>();
 
