@@ -1,6 +1,6 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
-    import type { UserDTO } from '$lib/dto/user.dto';
+	import type { UserDTO } from '$lib/api/dto/user.dto';
     import { translations, preferences } from '$lib/stores/userPreferences';
 
     // DUMMY DATA - MUST BE REPLACED WITH API CALLS
