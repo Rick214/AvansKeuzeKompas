@@ -56,5 +56,11 @@
 	"settings_language": "Language",
 	"personal_settings": "Display settings",
 	"elective_module": "Elective module",
-	"select_module_placeholder": "Select module"
+	"registered_elective_modules": "Registered elective modules",
+	"select_module_placeholder": "Select module",
+	"settings_title": "Personal Settings",
+	"age": "Age",
+	"years_old": "years old",
+	"study": "Study",
+	"study_counselor": "Study counselor"
 }

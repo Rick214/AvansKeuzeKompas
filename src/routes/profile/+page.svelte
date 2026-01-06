@@ -1,7 +1,6 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
     import type { UserDTO } from '$lib/dto/user.dto';
-    import type { VKMDTO } from '$lib/dto/vkm.dto';
     import { translations, preferences } from '$lib/stores/userPreferences';
 
     // DUMMY DATA - MUST BE REPLACED WITH API CALLS
@@ -79,14 +78,14 @@
 </script>
 
 <div class="flex justify-center items-center min-h-screen">
-    <div class="w-full max-w-7xl xl:max-w-[1600px] px-4">
+    <div class="w-full max-w-7xl xl:max-w-[1600px] px-4 mb-6 xl:mb-none">
         <!-- Header -->
-        <div class="flex items-center gap-4 mb-10">
-            <button class="absolute flex items-center text-lg font-medium md:mr-6 hover:opacity-75 duration-200" on:click={() => goto('/home')}>
+        <div class="flex items-center xl:mb-6 gap-4">
+            <button class="absolute flex items-center text-md xl:text-lg font-medium md:mr-6 hover:opacity-75 duration-200" on:click={() => goto('/home')}>
                 <span class="material-symbols-outlined mr-1">arrow_circle_left</span>
                 {$translations.back}
             </button>
-            <h1 class="text-3xl font-semibold mx-auto">Persoonlijke Instellingen</h1>
+            <h1 class="text-2xl xl:text-3xl font-semibold mx-auto mt-26 mb-6 xl:mt-auto xl:mb-auto">{$translations.settings_title}</h1>
         </div>
 
         <!-- Tiles -->
@@ -101,19 +100,19 @@
                 </div>
                 <ul class="text-lg flex flex-col gap-2">
                     <li>
-                        <strong>Leeftijd</strong>: {age} jaar
+                        <strong>{$translations.age}</strong>: {age} {$translations.years_old}
                     </li>
                     <li>
-                        <strong>Studie</strong>: {user.course}
+                        <strong>{$translations.study}</strong>: {user.course}
                     </li>
                     <li>
-                        <strong>Studieloopbaan begeleider</strong>: {user.SLBer}
+                        <strong>{$translations.study_counselor}</strong>: {user.SLBer}
                     </li>
                 </ul>
             </div>
             <!-- Elective Module -->
             <div class="flex flex-col col-span-3 col-start-3 h-full w-full max-w-[500px] min-w-auto xl:min-w-[300px] xl:max-w-[650px] bg-(--color-surface) p-12 rounded-2xl shadow-md">
-                <h2 class="text-xl font-semibold mb-4">{$translations.personal_settings}</h2>
+                <h2 class="text-xl font-semibold mb-4">{$translations.registered_elective_modules}</h2>
                 <form>
                     {#each indexes as index}
                         <div class="flex flex-row items-center justify-between w-full my-6 flex-wrap gap-2">
@@ -122,7 +121,7 @@
                             </label>
                             <select
                                 id="electiveModule{index + 1}"
-                                class="block w-54 px-3 py-2.5 bg-(--color-surface-alt) border text-md rounded-lg focus:border-(--primary-color)"
+                                class="block w-54 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) border-(--color-surface-alt)"
                                 value={user.chosen_modules.find(m => m.priority === index + 1)?.id ?? ""}
                             >
                                 <!-- Placeholder -->

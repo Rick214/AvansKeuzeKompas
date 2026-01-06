@@ -55,6 +55,12 @@
 	"settings_font_size": "Lettergrootte",
 	"settings_language": "Taal",
 	"personal_settings": "Weergave instellingen",
+	"registered_elective_modules": "Ingeschreven keuzemodules",
 	"elective_module": "Keuzemodule",
-	"select_module_placeholder": "Selecteer module"
+	"select_module_placeholder": "Selecteer module",
+	"settings_title": "Persoonlijke Instellingen",
+	"age": "Leeftijd",
+	"years_old": "jaar",
+	"study": "Studie",
+	"study_counselor": "Studieloopbaan begeleider"
 }
