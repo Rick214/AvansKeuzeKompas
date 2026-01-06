@@ -50,5 +50,11 @@
 	"page_does_not_exist": "Oops… this page doesn’t exist 🧭",
 	"back_to_previous_page": "Go back",
 	"back_to_home": "Back to home",
-	"notifications": "Notifications"
+	"settings_notifications": "Notifications",
+	"settings_theme": "Theme",
+	"settings_font_size": "Font size",
+	"settings_language": "Language",
+	"personal_settings": "Display settings",
+	"elective_module": "Elective module",
+	"select_module_placeholder": "Select module"
 }

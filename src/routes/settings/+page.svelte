@@ -1,10 +1,15 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
     import type { UserDTO } from '$lib/dto/user.dto';
+    import type { VKMDTO } from '$lib/dto/vkm.dto';
     import { translations, preferences } from '$lib/stores/userPreferences';
 
+    // DUMMY DATA - MUST BE REPLACED WITH API CALLS
+
+    // User Data
+
     const user: UserDTO = {
-        id: 1,
+        id: "123e4567-e89b-12d3-a456-426614174000",
         first_name: "John",
         last_name: "Doe",
         prefix: null,
@@ -16,13 +21,34 @@
         notifications_enabled: true,
         text_size: 16,
         is_docent: false,
-        favorite_modules: [101, 102, 103],
-        chosen_modules: [201, 202],
-        recommended_modules: [301, 302, 303]
+        favorite_modules: [1, 4, 5],
+        chosen_modules: [
+            { priority: 1, id: 4 },
+            { priority: 2, id: 5 },
+            { priority: 3, id: 1 }
+        ],
+        recommended_modules: [4, 5]
     };
 
     const initials = `${user.first_name[0]}${user.last_name[0]}`.toUpperCase();
     const age = calculateAge(user.dob);
+
+    // Elective Modules Data
+    interface VKMDTO_DUMMY {
+        id: number;
+        name: string;
+    }
+
+    const indexes = [0, 1, 2];
+    const electiveModules: Array<VKMDTO_DUMMY> = [
+        { id: 1, name: "Web Development" },
+        { id: 2, name: "Data Science" },
+        { id: 3, name: "Mobile App Development" },
+        { id: 4, name: "Cybersecurity" },
+        { id: 5, name: "Cloud Computing" }
+    ];
+    
+    // Functions 
 
     function calculateAge(dob: string): number {
         const birthDate = new Date(dob);
@@ -52,8 +78,8 @@
     }
 </script>
 
-<div class="min-h-screen flex justify-center items-center">
-    <div class="max-w-7xl w-full px-4">
+<div class="flex justify-center items-center min-h-screen">
+    <div class="w-full max-w-7xl xl:max-w-[1600px] px-4">
         <!-- Header -->
         <div class="flex items-center gap-4 mb-10">
             <button class="absolute flex items-center text-lg font-medium md:mr-6 hover:opacity-75 duration-200" on:click={() => goto('/home')}>
@@ -64,9 +90,9 @@
         </div>
 
         <!-- Tiles -->
-        <div class="grid grid-cols-3 gap-6 items-stretch">
+        <div class="flex flex-col items-center flex-wrap xl:grid xl:grid-cols-7 gap-6">
             <!-- Profile -->
-            <div class="flex flex-col bg-(--color-surface) p-12 rounded-2xl shadow-md text-(--primary-color)">
+            <div class="flex flex-col items-center col-span-2 col-start-1 h-full w-full min-w-auto max-w-[500px] xl:min-w-[280px] xl:max-w-[450px] bg-(--color-surface) p-12 rounded-2xl shadow-md text-(--primary-color)">
                 <div class="flex items-center flex-col gap-2 mb-6">
                     <div class="relative inline-flex items-center justify-center w-24 h-24 overflow-hidden bg-(--color-surface-alt) rounded-full">
                         <p class="text-3xl font-small text-body">{initials}</p>
@@ -85,38 +111,73 @@
                     </li>
                 </ul>
             </div>
-            <!-- Keuzemodules -->
-            <div class="flex flex-col bg-(--color-surface) p-6 rounded-2xl shadow-md">
-                
+            <!-- Elective Module -->
+            <div class="flex flex-col col-span-3 col-start-3 h-full w-full max-w-[500px] min-w-auto xl:min-w-[300px] xl:max-w-[650px] bg-(--color-surface) p-12 rounded-2xl shadow-md">
+                <h2 class="text-xl font-semibold mb-4">{$translations.personal_settings}</h2>
+                <form>
+                    {#each indexes as index}
+                        <div class="flex flex-row items-center justify-between w-full my-6 flex-wrap gap-2">
+                            <label for="electiveModule{index + 1}" class="block text-lg font-semibold">
+                                {$translations.elective_module} {index + 1}
+                            </label>
+                            <select
+                                id="electiveModule{index + 1}"
+                                class="block w-54 px-3 py-2.5 bg-(--color-surface-alt) border text-md rounded-lg focus:border-(--primary-color)"
+                                value={user.chosen_modules.find(m => m.priority === index + 1)?.id ?? ""}
+                            >
+                                <!-- Placeholder -->
+                                <option value="" disabled selected>
+                                    {$translations.select_module_placeholder}
+                                </option>
+
+                                {#each electiveModules as module (module.id)}
+                                    <option value={module.id}>
+                                    {module.name}
+                                    </option>
+                                {/each}
+                            </select>
+                        </div>
+                    {/each}
+                </form>
             </div>
             <!-- Settings -->
-            <div class="flex flex-col bg-(--color-surface) p-6 rounded-2xl shadow-md">
+            <div class="flex flex-col col-span-2 col-start-6 flex-1 h-full w-full max-w-[500px] min-w-auto xl:min-w-[280px] xl:max-w-[450px] bg-(--color-surface) p-12 rounded-2xl shadow-md">
+                <h2 class="text-xl font-semibold mb-4">{$translations.personal_settings}</h2>
                 <!-- Language dropdown -->
-                <select bind:value={$preferences.language} class="mt-16 px-2 py-1 rounded border bg-(--color-surface) border-(--color-surface-alt)">
-                    <option value="nl_NL">{$translations.dutch}</option>
-                    <option value="en_US">{$translations.english}</option>
-                </select>
+                <form class="flex flex-row items-center justify-between w-full my-2 flex-wrap gap-2">
+                    <label for="language" class="block text-md font-semibold">{$translations.settings_language}</label>
+                    <select bind:value={$preferences.language} id="language" class="block w-48 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) placeholder:text-body border-(--color-surface-alt)">
+                        <option value="nl_NL">{$translations.dutch}</option>
+                        <option value="en_US">{$translations.english}</option>
+                    </select>
+                </form>
 
                 <!-- Font scale dropdown -->
-                <select bind:value={$preferences.fontScale} class="px-2 py-1 rounded border bg-(--color-surface) border-(--color-surface-alt)">
-                    <option value={100}>100% (default)</option>
-                    <option value={125}>125%</option>
-                    <option value={150}>150%</option>
-                    <option value={175}>175%</option>
-                    <option value={200}>200%</option>
-                </select>
+                <form class="flex flex-row items-center justify-between w-full my-2 flex-wrap gap-2">
+                    <label for="fontSize" class="block text-md font-semibold">{$translations.settings_font_size}</label>
+                    <select bind:value={$preferences.fontScale} id="fontSize" class="block w-48 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) placeholder:text-body border-(--color-surface-alt)">
+                        <option value={100}>100% (default)</option>
+                        <option value={125}>125%</option>
+                        <option value={150}>150%</option>
+                        <option value={175}>175%</option>
+                        <option value={200}>200%</option>
+                    </select>
+                </form>
 
                 <!-- Theme dropdown -->
-                <select bind:value={$preferences.theme} class="px-2 py-1 rounded border bg-(--color-surface) border-(--color-surface-alt)">
-                <option value="system">{$translations.system_preferences}</option>
-                    <option value="light">{$translations.light_mode}</option>
-                    <option value="dark">{$translations.dark_mode}</option>
-                </select>
+                <form class="flex flex-row items-center justify-between w-full my-2 flex-wrap gap-2">
+                    <label for="theme" class="block text-md font-semibold">{$translations.settings_theme}</label>
+                    <select bind:value={$preferences.theme} id="theme" class="block w-48 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) placeholder:text-body border-(--color-surface-alt)">
+                        <option value="system">{$translations.system_preferences}</option>
+                        <option value="light">{$translations.light_mode}</option>
+                        <option value="dark">{$translations.dark_mode}</option>
+                    </select>
+                </form>
 
                 <!-- Notifications -->
-                <label class="inline-flex items-center cursor-pointer">
-                    <span class="select-none ms-3 text-sm font-medium text-heading">
-                        {$translations.notifications}
+                <label class="flex flex-row items-center justify-between w-full my-4 cursor-pointer flex-wrap gap-2">
+                    <span class="select-none text-md font-semibold">
+                        {$translations.settings_notifications}
                     </span>
                     <input 
                         type="checkbox" 
@@ -124,7 +185,7 @@
                         checked={notificationPreference === 'enabled'}
                         on:change={toggleNotifications}
                     >
-                    <div class="relative w-13 h-7 bg-(--color-surface-alt) rounded-full peer-checked:bg-(--color-accent) after:content-[''] after:absolute after:top-0.5 after:start-0.5 after:bg-black after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full"></div>
+                    <div class="relative w-13 h-7 bg-(--color-surface-alt) rounded-full peer-checked:bg-(--color-hyperlink) after:content-[''] after:absolute after:top-0.5 after:start-0.5 after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full"></div>
                 </label>
             </div>
         </div>

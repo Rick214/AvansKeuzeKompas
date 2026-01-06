@@ -1,5 +1,7 @@
+import type { ChosenModule } from "$lib/models/chosenModule.model";
+
 export interface UserDTO {
-  id: number;
+  id: string; // UUID
   first_name: string;
   last_name: string;
   prefix: string | null;
@@ -12,6 +14,6 @@ export interface UserDTO {
   text_size: number;
   is_docent: boolean;
   favorite_modules: Array<number>;
-  chosen_modules: Array<number>;
+  chosen_modules: ChosenModule[];
   recommended_modules: Array<number>;
 }

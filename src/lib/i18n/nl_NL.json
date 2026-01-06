@@ -50,5 +50,11 @@
 	"page_does_not_exist": "Oeps… deze pagina bestaat niet 🧭",
 	"back_to_previous_page": "Ga terug",
 	"back_to_home": "Terug naar home",
-	"notifications": "Notificaties"
+	"settings_notifications": "Notificaties",
+	"settings_theme": "Thema",
+	"settings_font_size": "Lettergrootte",
+	"settings_language": "Taal",
+	"personal_settings": "Weergave instellingen",
+	"elective_module": "Keuzemodule",
+	"select_module_placeholder": "Selecteer module"
 }
