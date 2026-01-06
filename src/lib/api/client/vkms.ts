@@ -12,3 +12,12 @@ export async function getModules(): Promise<Module[]> {
   const data: ModuleDto[] = await res.json();
   return data.map(mapModuleDto);
 }
+
+export async function getModulesById(id: string): Promise<Module> {
+  const res = await fetch(`${API_URL}/vkm/GetById/${id}`);
+  if (!res.ok) {
+    throw new Error('Failed to fetch modules');
+  }
+  const data: ModuleDto = await res.json();
+  return mapModuleDto(data);
+}
