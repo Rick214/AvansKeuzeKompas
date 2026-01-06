@@ -1,16 +1,14 @@
-import { dummyModules } from '$lib/data/dummyModules';
 import type { PageLoad } from './$types';
+import { getModulesById } from '$lib/api/client/vkms';
+import { error } from '@sveltejs/kit';
 
-export const load: PageLoad = ({ params }) => {
-	const id = Number(params.id);
+export const load: PageLoad = async ({ params }) => {
+  console.log('DETAIL LOAD RUNNING', params.id);
 
-	const module = dummyModules.find((m) => m.id === id);
+  const module = await getModulesById(params.id);
+  if (!module) {
+    throw error(404, 'Module not found');
+  }
 
-	if (!module) {
-		throw new Error('Module not found');
-	}
-
-	return {
-		module
-	};
+  return { module };
 };

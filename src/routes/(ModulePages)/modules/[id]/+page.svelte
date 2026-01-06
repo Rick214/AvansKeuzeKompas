@@ -1,26 +1,36 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { translations } from '$lib/stores/userPreferences';
+  import { goto } from '$app/navigation';
+  import { translations } from '$lib/stores/userPreferences';
+  import { page } from '$app/stores';
+  import ModuleHeader from '$lib/components/ui/DetailPage/ModuleHeader.svelte';
+  import ModuleMeta from '$lib/components/ui/DetailPage/ModuleMeta.svelte';
+  import ModuleDescription from '$lib/components/ui/DetailPage/ModuleDescription.svelte';
+  import ContactLecturer from '$lib/components/ui/DetailPage/ContactLecturer.svelte';
+  import type { PageData } from './$types';
 
-	import ModuleHeader from '$lib/components/ui/DetailPage/ModuleHeader.svelte';
-	import ModuleMeta from '$lib/components/ui/DetailPage/ModuleMeta.svelte';
-	import ModuleDescription from '$lib/components/ui/DetailPage/ModuleDescription.svelte';
-	import ContactLecturer from '$lib/components/ui/DetailPage/ContactLecturer.svelte';
+  export let data: PageData;
 
-	export let data;
-	const { module } = data;
+  const { module } = data
 
-	let favorites = new Set<number>();
+  let favorites = new Set<number>();
 
-	function toggleFavorite(id: number) {
-		if (favorites.has(id)) {
-			favorites.delete(id);
-		} else {
-			favorites.add(id);
-		}
+  function toggleFavorite(id: number) {
+    favorites.has(id)
+      ? favorites.delete(id)
+      : favorites.add(id);
 
-		favorites = new Set(favorites);
-	}
+    favorites = new Set(favorites);
+  }
+
+  function goBack() {
+    const from = $page.url.searchParams.get('from');
+
+    if (from) {
+      goto(from);
+    } else {
+      goto('/'); // safe fallback
+    }
+  }
 </script>
 
 <div class="min-h-screen bg-(--color-bg) text-(--primary-color) font-(--font-primary) flex flex-col">
@@ -29,7 +39,7 @@
 
 	<!-- Meta + Back -->
 	<div class="flex flex-col md:flex-row md:items-center pt-10 px-4 md:px-10 gap-4 md:gap-0">
-		<button class="relative z-10 flex items-center text-sm font-medium md:mr-6" on:click={() => goto('/home')}>
+		<button class="relative z-10 flex items-center text-sm font-medium md:mr-6" on:click={goBack}>
 			<span class="material-symbols-outlined">arrow_circle_left</span>
 			{$translations.back}
 		</button>
@@ -65,7 +75,7 @@
 			<div>
 				<h3 class="text-sm font-bold mb-3">Tags</h3>
 				<div class="flex flex-wrap gap-3">
-					{#each [...module.theme_tags, ...module.module_tags] as tag}
+					{#each [...module.themes, ...module.tags] as tag}
 						<span class="px-4 py-2 rounded-full text-sm bg-(--color-surface) font-bold">
 							{tag}
 						</span>

@@ -62,5 +62,14 @@
 	"age": "Age",
 	"years_old": "years old",
 	"study": "Study",
-	"study_counselor": "Study counselor"
+	"study_counselor": "Study counselor",
+	"learningoutcomes_title": "Learningoutcomes",
+	"errors": {
+		"email_required": "Email is required",
+		"email_invalid": "Invalid email address",
+		"password_required": "Password is required",
+		"password_min_length": "Minimum 6 characters",
+		"invalid_credentials": "Invalid login credentials",
+		"unknown": "An unknown error occurred"
+	}
 }
