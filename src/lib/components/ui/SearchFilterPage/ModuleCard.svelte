@@ -33,7 +33,7 @@
 	<!-- Content -->
 	<div class="flex flex-col justify-between flex-1 min-w-0">
 		<div>
-			<h3 class="font-bold line-clamp-2 break-words [overflow-wrap:anywhere] hyphens-auto">{module.name}</h3>
+			<h3 class="font-bold line-clamp-2 break-words [overflow-wrap:anywhere]">{module.name}</h3>
 			<p class="text-sm line-clamp-2 break-words [overflow-wrap:anywhere] text-(--color-text)">
 				{module.themes}
 			</p>
