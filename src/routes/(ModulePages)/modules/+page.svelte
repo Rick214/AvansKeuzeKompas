@@ -84,7 +84,7 @@
 
 <div class="min-h-screen bg-(--color-bg) text-(--primary-color) font-(--font-primary)">
   <!-- Sticky filters -->
-  <div class="sticky top-15 z-20 bg-(--color-bg)">
+  <div class="sticky top-15 z-20 bg-(--color-bg) overflow-x-hidden">
     <SearchAndFilters
       {search}
       {locationFilter}
@@ -97,7 +97,7 @@
   </div>
 
   <!-- Content -->
-  <div class="max-w-6xl mx-auto px-4 py-6">
+  <div class="max-w-6xl mx-auto px-4 py-6 overflow-x-hidden">
     <p class="mb-4 font-bold">{filtered.length} {$translations.results}</p>
     <ModuleGrid modules={filtered} />
   </div>
