@@ -1,16 +1,17 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/stores";
+	import { translations } from "$lib/stores/userPreferences";
 
   type NavItem = {
     label: string;
     href: string;
   };
 
-  const items: NavItem[] = [
-    { label: "Home", href: "/home" },
-    { label: "Zoeken", href: "/modules" },
-    { label: "Mijn Profiel", href: "/profile" }
+  $: items = [
+    { label: $translations.navigation.home, href: "/home" },
+    { label: $translations.navigation.search, href: "/modules" },
+    { label: $translations.navigation.my_profile, href: "/profile" }
   ];
 
   const navigate = (href: string) => {
@@ -41,7 +42,7 @@
       </button>
     {/each}
     <button class="bg-(--color-accent) text-black px-4 py-2 rounded-md text-sm font-medium opacity-90 hover:opacity-100 transition-opacity">
-        Uitloggen
+        {$translations.navigation.logout}
     </button>
   </div>
 </nav>

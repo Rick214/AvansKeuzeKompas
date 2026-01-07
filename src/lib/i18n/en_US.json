@@ -64,6 +64,14 @@
 	"study": "Study",
 	"study_counselor": "Study counselor",
 	"learningoutcomes_title": "Learningoutcomes",
+	"logout_description": "You can log out of your account using the button below.",
+	"navigation": {
+		"home": "Home",
+		"search": "Search",
+		"my_profile": "My Profile",
+		"login": "Login",
+		"logout": "Logout"
+	},
 	"errors": {
 		"email_required": "Email is required",
 		"email_invalid": "Invalid email address",

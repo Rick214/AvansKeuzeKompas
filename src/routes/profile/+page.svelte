@@ -144,7 +144,7 @@
                 <h2 class="text-xl font-semibold mb-4">{$translations.personal_settings}</h2>
                 <!-- Language dropdown -->
                 <form class="flex flex-row items-center justify-between w-full my-2 flex-wrap gap-2">
-                    <label for="language" class="block text-md font-semibold">{$translations.settings_language}</label>
+                    <label for="language" class="block text-md font-semibold w-full min-[430px]:w-auto min-[1280px]:w-full min-[1460px]:w-auto">{$translations.settings_language}</label>
                     <select bind:value={$preferences.language} id="language" class="block w-48 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) placeholder:text-body border-(--color-surface-alt)">
                         <option value="nl_NL">{$translations.dutch}</option>
                         <option value="en_US">{$translations.english}</option>
@@ -152,20 +152,18 @@
                 </form>
 
                 <!-- Font scale dropdown -->
-                <form class="flex flex-row items-center justify-between w-full my-2 flex-wrap gap-2">
-                    <label for="fontSize" class="block text-md font-semibold">{$translations.settings_font_size}</label>
+                <form class="hidden xl:flex flex-row items-center justify-between w-full my-2 flex-wrap gap-2">
+                    <label for="fontSize" class="block text-md font-semibold w-full min-[430px]:w-auto min-[1280px]:w-full min-[1460px]:w-auto">{$translations.settings_font_size}</label>
                     <select bind:value={$preferences.fontScale} id="fontSize" class="block w-48 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) placeholder:text-body border-(--color-surface-alt)">
                         <option value={100}>100% (default)</option>
                         <option value={125}>125%</option>
                         <option value={150}>150%</option>
-                        <option value={175}>175%</option>
-                        <option value={200}>200%</option>
                     </select>
                 </form>
 
                 <!-- Theme dropdown -->
                 <form class="flex flex-row items-center justify-between w-full my-2 flex-wrap gap-2">
-                    <label for="theme" class="block text-md font-semibold">{$translations.settings_theme}</label>
+                    <label for="theme" class="block text-md font-semibold w-full min-[430px]:w-auto min-[1280px]:w-full min-[1460px]:w-auto">{$translations.settings_theme}</label>
                     <select bind:value={$preferences.theme} id="theme" class="block w-48 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) placeholder:text-body border-(--color-surface-alt)">
                         <option value="system">{$translations.system_preferences}</option>
                         <option value="light">{$translations.light_mode}</option>
@@ -186,6 +184,12 @@
                     >
                     <div class="relative w-13 h-7 bg-(--color-surface-alt) rounded-full peer-checked:bg-(--color-hyperlink) after:content-[''] after:absolute after:top-0.5 after:start-0.5 after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full"></div>
                 </label>
+            </div>
+            <div class="flex xl:hidden flex-col items-center col-span-2 col-start-1 h-full w-full min-w-auto max-w-[500px] xl:min-w-[280px] xl:max-w-[450px] bg-(--color-surface) p-12 rounded-2xl shadow-md text-(--primary-color)">
+                <h2 class="text-md text-center mb-4 text-(--color-border)">{$translations.logout_description}</h2>
+                <button class="bg-(--color-accent) text-black px-4 py-2 rounded-md text-sm font-medium opacity-90 hover:opacity-100 transition-opacity">
+                    {$translations.navigation.logout}
+                </button>
             </div>
         </div>
     </div>

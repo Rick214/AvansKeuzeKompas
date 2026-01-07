@@ -16,15 +16,15 @@
   <div class="flex gap-4">
     <button
       on:click={goBack}
-      class="px-6 py-3 rounded bg-(--color-accent) text-black font-medium
+      class="px-6 py-3 rounded bg-(--color-accent) text-black font-medium cursor-pointer
              hover:opacity-90 transition"
     >
       {$translations.back_to_previous_page}
     </button>
 
     <a
-      href="/"
-      style="text-decoration: none; color: var(--color-accent)"
+      href="/home"
+      style="text-decoration: none; color: var(--primary-color);"
       class="px-6 py-3 rounded border border-(--color-border) color no-underline 
              hover:border-(--color-surface-alt) hover:bg-(--color-surface-alt) hover:text-(--primary-color) transition duration-200"
     >
