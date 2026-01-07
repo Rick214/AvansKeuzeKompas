@@ -7,6 +7,7 @@
 
   import type { PageData } from './$types';
   import type { Module } from '$lib/types/vkm';
+	import { translations } from '$lib/stores/userPreferences';
 
   export let data: PageData;
 
@@ -97,7 +98,7 @@
 
   <!-- Content -->
   <div class="max-w-6xl mx-auto px-4 py-6 overflow-x-hidden">
-    <p class="mb-4 font-bold">{filtered.length} resultaten</p>
+    <p class="mb-4 font-bold">{filtered.length} {$translations.results}</p>
     <ModuleGrid modules={filtered} />
   </div>
 </div>

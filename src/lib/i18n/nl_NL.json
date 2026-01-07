@@ -64,6 +64,14 @@
 	"study": "Studie",
 	"study_counselor": "Studieloopbaan begeleider",
 	"learningoutcomes_title": "Leeruitkomsten",
+	"logout_description": "Via onderstaande knop kun je uitloggen uit je account.",
+	"navigation": {
+		"home": "Home",
+		"search": "Zoeken",
+		"my_profile": "Mijn Profiel",
+		"login": "Inloggen",
+		"logout": "Uitloggen"
+	},
 	"errors": {
 		"email_required": "E-mail is verplicht",
 		"email_invalid": "Ongeldig e-mailadres",

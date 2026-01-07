@@ -1,6 +1,7 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/stores";
+	import { translations } from "$lib/stores/userPreferences";
 	import Footer from "../layout/Footer.svelte";
 
   type NavItem = {
@@ -10,10 +11,10 @@
     href: string;
   };
 
-  export let items: NavItem[] = [
-    { label: 'Home', iconActive: 'house', iconInactive: 'house', href: '/home' },
-    { label: 'Zoeken', iconActive: 'magnifying-glass', iconInactive: 'magnifying-glass', href: '/modules' },
-    { label: 'Profiel', iconActive: 'user', iconInactive: 'user', href: '/profile' }
+  $: items = [
+    { label: $translations.navigation.home, iconActive: 'house', iconInactive: 'house', href: '/home' },
+    { label: $translations.navigation.search, iconActive: 'magnifying-glass', iconInactive: 'magnifying-glass', href: '/modules' },
+    { label: $translations.navigation.my_profile, iconActive: 'user', iconInactive: 'user', href: '/profile' }
   ];
 
   let activeIndex: number = 0;
