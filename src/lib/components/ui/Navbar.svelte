@@ -1,3 +1,4 @@
+<!-- We keep this component for development purposes, but it is no longer used in the main layout. -->
 <script lang="ts">
   import { translations, preferences } from '$lib/stores/userPreferences';
 </script>
