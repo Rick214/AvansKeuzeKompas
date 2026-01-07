@@ -65,6 +65,27 @@
 	"study_counselor": "Studieloopbaan begeleider",
 	"learningoutcomes_title": "Leeruitkomsten",
 	"logout_description": "Via onderstaande knop kun je uitloggen uit je account.",
+	"faq": {
+		"title": "Veelgestelde vragen",
+		"questions": {
+			"how_to_register": {
+				"question": "Hoe schrijf ik mij in voor een keuzemodule?",
+				"answer": "Je kunt je inschrijven voor keuzemodules via Osiris. Log in op je Osiris-account, zoek de gewenste keuzemodule op en volg de inschrijvingsinstructies."
+			},
+			"change_personal_settings": {
+				"question": "Hoe kan ik mijn persoonlijke instellingen wijzigen?",
+				"answer": "Ga naar de instellingenpagina door op je profiel te klikken en selecteer 'Instellingen'. Hier kun je je voorkeuren aanpassen, zoals taal, thema en notificaties."
+			},
+			"forgot_password": {
+				"question": "Wat moet ik doen als ik mijn wachtwoord ben vergeten?",
+				"answer": "Klik op de 'Wachtwoord vergeten?' link op de inlogpagina. Volg de instructies om je wachtwoord opnieuw in te stellen via je geregistreerde e-mailadres."
+			},
+			"contact_instructor": {
+				"question": "Hoe kan ik contact opnemen met de docent van een keuzemodule?",
+				"answer": "Je kunt contact opnemen met de docent via Teams. Ga naar de modulepagina en klik op de contactlink om een bericht te sturen."
+			}
+		}
+	},
 	"navigation": {
 		"home": "Home",
 		"search": "Zoeken",

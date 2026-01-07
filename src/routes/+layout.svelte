@@ -1,11 +1,31 @@
 <script lang="ts">
   import './layout.css';
   import '$lib/styles/css/globals.css';	
-  import { translations, ready } from '$lib/stores/userPreferences';
+  import { translations, preferences, ready } from '$lib/stores/userPreferences';
   import favicon from '$lib/assets/favicon.svg';
 	import Header from '$lib/components/layout/Header.svelte';
 	import MobileNav from '$lib/components/ui/MobileNav.svelte';
 	import { SyncLoader } from 'svelte-loading-spinners';
+  import { onMount } from 'svelte';
+
+  // Responsive font scaling, disable on smaller screens
+	let isXL = true;
+
+	const checkScreen = () => {
+		isXL = window.innerWidth >= 1280; // 1280px is the breakpoint for 'xl' in Tailwind CSS
+		if (!isXL) {
+			preferences.update(p => ({ ...p, fontScale: 100 }));
+		}
+	};
+
+	onMount(() => {
+		checkScreen();
+		window.addEventListener('resize', checkScreen);
+
+		return () => {
+			window.removeEventListener('resize', checkScreen);
+		};
+	});
 </script>
 
 <svelte:head>
@@ -19,7 +39,7 @@
     <slot /> <!-- all child pages -->
   </main>
 
-  <MobileNav />
+  <MobileNav /> <!-- Footer component is included in this component-->
 
   {:else}
   <div class="h-screen w-screen flex flex-col justify-center items-center">

@@ -3,11 +3,6 @@
   import { page } from "$app/stores";
 	import { translations } from "$lib/stores/userPreferences";
 
-  type NavItem = {
-    label: string;
-    href: string;
-  };
-
   $: items = [
     { label: $translations.navigation.home, href: "/home" },
     { label: $translations.navigation.search, href: "/modules" },
