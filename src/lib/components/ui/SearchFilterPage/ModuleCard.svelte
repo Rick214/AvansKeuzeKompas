@@ -22,7 +22,7 @@
   		goto(`/modules/${module.id}?from=${encodeURIComponent(currentUrl)}`);
 }
 </script>
-<div class="bg-(--color-surface-alt) rounded-xl p-4 flex gap-4 items-stretch">
+<div class="bg-(--color-surface-alt) rounded-xl p-4 flex gap-4 items-stretch shadow-lg">
 	<!-- Image -->
 	<div class="w-[120px] h-[120px] flex-none rounded-lg bg-black">
 		<button on:click|stopPropagation={() => toggleFavorite(module.id)} aria-label="Toggle favoriet">
