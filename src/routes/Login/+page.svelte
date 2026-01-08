@@ -1,35 +1,18 @@
 <script lang="ts">
 	import { translations } from '$lib/stores/userPreferences';
+	import { Login } from '$lib/api/client/users';
+	import type { User } from '$lib/types/user';
+	import { user, isAuthenticated, authToken } from '$lib/stores/auth';
 
-    type ErrorKey = keyof typeof $translations.errors;
+
+	type ErrorKey = keyof typeof $translations.errors;
+
 	let email = '';
 	let password = '';
-
 	let emailError = '';
 	let passwordError = '';
 	let generalError = '';
 	let isSubmitting = false;
-
-	type User = {
-		email: string;
-		password: string;
-	};
-    /// Dummy users for testing purposes, verwijderen zodra echte backend is gekoppeld
-	const DUMMY_USERS: User[] = [
-		{ email: 'test@example.com', password: 'password123' },
-		{ email: 'admin@example.com', password: 'admin123' }
-	];
-    function sanitizeInput(value: string): string {
-        return value
-            .trim()
-            .replace(/\s+/g, ' ') // dubbele spaties
-            .replace(/[\u0000-\u001F\u007F]/g, ''); // control chars
-    }
-    function sanitizeEmail(value: string): string {
-        return sanitizeInput(value)
-            .toLowerCase()
-            .replace(/[^a-z0-9@._+-]/g, '');
-    }
 
 	function validate(): boolean {
 		emailError = '';
@@ -59,53 +42,35 @@
 		return true;
 	}
 
-	function loginWithDummyData(
-		email: string,
-		password: string
-	): Promise<{ email: string }> {
-		return new Promise((resolve, reject) => {
-			setTimeout(() => {
-				const user = DUMMY_USERS.find(
-					(u) => u.email === email && u.password === password
-				);
-
-				if (user) {
-					resolve({ email: user.email });
-				} else {
-					reject(new Error('invalid_credentials'));
-				}
-			}, 500);
-		});
-	}
-
 	async function handleSubmit(): Promise<void> {
 		if (isSubmitting) return;
 		if (!validate()) return;
 
 		isSubmitting = true;
 
-        email = sanitizeEmail(email);
-
 		try {
-			await loginWithDummyData(email, password);
+			// Login via API
+			const response = await Login(email, password); 
+			
+			// API geeft { Token, ...userData } terug
+			const { Token, ...userData }: { Token: string; } & User = response as any;
+
+			// Sla token en user op in-memory
+			authToken.set(Token);
+			user.set(userData);
+			isAuthenticated.set(true);
+
+			// Redirect na login
+			window.location.href = '/home';
 		} catch (err) {
 			if (err instanceof Error) {
-        if (err instanceof Error) {
-            const key = err.message as ErrorKey;
-
-            generalError =
-                $translations.errors[key] ??
-                $translations.errors.unknown;
-        } else {
-            generalError = $translations.errors.unknown;
-        }
-                } else {
-                    generalError = $translations.errors.unknown;
-                }
+				const key = err.message as ErrorKey;
+				generalError = $translations.errors[key] ?? $translations.errors.unknown;
+			} else {
+				generalError = $translations.errors.unknown;
+			}
 		} finally {
-			setTimeout(() => {
-				isSubmitting = false;
-			}, 1000);
+			setTimeout(() => { isSubmitting = false; }, 500);
 		}
 	}
 </script>
