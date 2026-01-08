@@ -59,7 +59,7 @@
 </script>
 
 <div class="my-3">
-	<h2 class="text-lg text-[var(--primary-color)] mb-1">
+	<h2 class="text-lg text-(--primary-color) mb-1">
 		{section.title}
 	</h2>
 
@@ -76,7 +76,7 @@
 
 		<div use:observe class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar snap-x snap-mandatory">
 			{#each section.modules as module}
-				<div class="relative">
+				<div class="relative shadow-md">
 					<a href={`/modules/${module.id}?from=/home`} class="bg-(--color-surface-alt) w-50 h-26 md:w-60 md:h-32 rounded-lg p-3 flex flex-col flex-shrink-0 snap-start hover:scale-1.10 transition">
 						<p class="mt-auto text-xs font-medium line-clamp-2 text-(--primary-color)">
 							{module.name}
