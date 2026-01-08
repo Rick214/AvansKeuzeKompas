@@ -1,4 +1,4 @@
-export type UserDto = {
+export type User = {
 	fullName: string;
 	email: string;
 	studentnumber: string;
@@ -6,5 +6,4 @@ export type UserDto = {
 	favoriteVKMs: string[];
 	enrolledVKMs: string[];
 	aiReccomendedVKMs: string[];
-	Token: string;
 };
