@@ -38,7 +38,7 @@
       <select
       value={locationFilter}
       on:change={(e) => handleSelectChange('location', e)}
-      class="px-2 py-2"
+      class="px-2 py-2 rounded-full bg-(--color-surface) text-md font-bold"
       >
       <option value="all">{$translations.location}</option>
       <option value="Breda">Breda</option>
@@ -53,7 +53,7 @@
       <select
         value={levelFilter}
         on:change={(e) => handleSelectChange('level', e)}
-        class="px-2 py-2"
+        class="px-2 py-2 rounded-full bg-(--color-surface) text-md font-bold"
       >
         <option value="all">Niveau</option>
         <option value="NLQF5">NLQF 5</option>
@@ -65,7 +65,7 @@
       <select
         value={ectsFilter}
         on:change={(e) => handleSelectChange('ects', e)}
-        class="px-2 py-2"
+        class="px-2 py-2 rounded-full bg-(--color-surface) text-md font-bold"
       >
         <option value="all">ECTS</option>
         <option value="15">15</option>
@@ -77,7 +77,7 @@
       <select
         value={sort}
         on:change={(e) => handleSelectChange('sort', e)}
-        class="px-2 py-2"
+        class="px-2 py-2 rounded-full bg-(--color-surface) text-md font-bold"
       >
         <option value="popular">{$translations.popular}</option>
         <option value="az">{$translations.alphabetical} (A–Z)</option>
