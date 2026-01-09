@@ -61,7 +61,14 @@
 			isAuthenticated.set(true);
 
 			// Redirect na login
-			window.location.href = '/home';
+			if (userData.aiReccomendedVKMs && userData.aiReccomendedVKMs.length > 0) {
+				window.location.href = '/home';
+				return;
+			}
+			else {
+				window.location.href = '/enquete';
+			}
+			
 		} catch (err) {
 			if (err instanceof Error) {
 				const key = err.message as ErrorKey;
