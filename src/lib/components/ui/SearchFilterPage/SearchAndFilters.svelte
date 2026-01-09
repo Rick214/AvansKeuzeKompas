@@ -28,54 +28,61 @@
     placeholder="{$translations.search}"
     value={search}
     on:input={handleInput}
-    class="w-full md:w-2/4 mx-auto block rounded-full px-4 py-2 bg-(--color-surface) text-(--primary-color)"
+    class="w-full md:w-2/4 mx-auto block rounded-full px-4 py-2 bg-(--color-surface) text-(--primary-color) shadow-md"
   />
 
   <!-- Filters -->
   <div class="flex flex-wrap justify-center gap-3">
     <!-- Location -->
-    <select
+     <div class="px-2 rounded-full bg-(--color-surface) text-md font-bold shadow-md">
+      <select
       value={locationFilter}
       on:change={(e) => handleSelectChange('location', e)}
-      class="px-4 py-2 rounded-full bg-(--color-surface) text-md font-bold"
-    >
+      class="px-2 py-2"
+      >
       <option value="all">{$translations.location}</option>
       <option value="Breda">Breda</option>
       <option value="Tilburg">Tilburg</option>
       <option value="Den Bosch">Den Bosch</option>
-    </select>
+      </select>
+     </div>
 
+    
     <!-- Level -->
-    <select
-      value={levelFilter}
-      on:change={(e) => handleSelectChange('level', e)}
-      class="px-4 py-2 rounded-full bg-(--color-surface) text-md font-bold"
-    >
-      <option value="all">Niveau</option>
-      <option value="NLQF5">NLQF 5</option>
-      <option value="NLQF6">NLQF 6</option>
-    </select>
-
+    <div class="px-2 rounded-full bg-(--color-surface) text-md font-bold shadow-md">
+      <select
+        value={levelFilter}
+        on:change={(e) => handleSelectChange('level', e)}
+        class="px-2 py-2"
+      >
+        <option value="all">Niveau</option>
+        <option value="NLQF5">NLQF 5</option>
+        <option value="NLQF6">NLQF 6</option>
+      </select>
+    </div>
     <!-- ECTS -->
-    <select
-      value={ectsFilter}
-      on:change={(e) => handleSelectChange('ects', e)}
-      class="px-4 py-2 rounded-full bg-(--color-surface) text-md font-bold"
-    >
-      <option value="all">ECTS</option>
-      <option value="15">15</option>
-      <option value="30">30</option>
-    </select>
-
+    <div class="px-2 rounded-full bg-(--color-surface) text-md font-bold shadow-md">
+      <select
+        value={ectsFilter}
+        on:change={(e) => handleSelectChange('ects', e)}
+        class="px-2 py-2"
+      >
+        <option value="all">ECTS</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+      </select>
+    </div>
     <!-- Sort -->
-    <select
-      value={sort}
-      on:change={(e) => handleSelectChange('sort', e)}
-      class="px-4 py-2 rounded-full bg-(--color-surface) text-md font-bold"
-    >
-      <option value="popular">{$translations.popular}</option>
-      <option value="az">{$translations.alphabetical} (A–Z)</option>
-      <option value="za">{$translations.alphabetical} (Z–A)</option>
-    </select>
+    <div class="px-2 rounded-full bg-(--color-surface) text-md font-bold shadow-md">
+      <select
+        value={sort}
+        on:change={(e) => handleSelectChange('sort', e)}
+        class="px-2 py-2"
+      >
+        <option value="popular">{$translations.popular}</option>
+        <option value="az">{$translations.alphabetical} (A–Z)</option>
+        <option value="za">{$translations.alphabetical} (Z–A)</option>
+      </select>
+    </div>
   </div>
 </div>
