@@ -3,11 +3,17 @@
   import '$lib/styles/css/globals.css';	
   import { translations, preferences, ready } from '$lib/stores/userPreferences';
   import favicon from '$lib/assets/favicon.svg';
-	import Header from '$lib/components/layout/Header.svelte';
-	import MobileNav from '$lib/components/ui/MobileNav.svelte';
-	import { SyncLoader } from 'svelte-loading-spinners';
+  import Header from '$lib/components/layout/Header.svelte';
+  import MobileNav from '$lib/components/ui/MobileNav.svelte';
+  import { SyncLoader } from 'svelte-loading-spinners';
   import { onMount } from 'svelte';
+  import { user, isAuthenticated } from '$lib/stores/auth';
+  export let data;
 
+	$: {
+		user.set(data.user);
+		isAuthenticated.set(!!data.user);
+	}
   // Responsive font scaling, disable on smaller screens
 	let isXL = true;
 

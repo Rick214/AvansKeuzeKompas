@@ -23,6 +23,6 @@ export async function Login(email: string, password: string): Promise<UserDto> {
 	}
 
 	const data: UserDto = await res.json();
-
+	console.log(data)
 	return data;
 }
