@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { translations } from '$lib/stores/userPreferences';
-	import { Login } from '$lib/api/client/users';
+	import {goto} from '$app/navigation';
+	import { user, isAuthenticated } from '$lib/stores/auth';
 	import type { User } from '$lib/types/user';
-	import { user, isAuthenticated, authToken } from '$lib/stores/auth';
-
 
 	type ErrorKey = keyof typeof $translations.errors;
 
@@ -43,43 +42,50 @@
 	}
 
 	async function handleSubmit(): Promise<void> {
-		if (isSubmitting) return;
-		if (!validate()) return;
+	if (isSubmitting) return;
+	if (!validate()) return;
 
-		isSubmitting = true;
+	isSubmitting = true;
 
-		try {
-			// Login via API
-			const response = await Login(email, password); 
-			
-			// API geeft { Token, ...userData } terug
-			const { Token, ...userData }: { Token: string; } & User = response as any;
+	try {
+		const res = await fetch('/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ email, password })
+		});
 
-			// Sla token en user op in-memory
-			authToken.set(Token);
-			user.set(userData);
-			isAuthenticated.set(true);
-
-			// Redirect na login
-			if (userData.aiReccomendedVKMs && userData.aiReccomendedVKMs.length > 0) {
-				window.location.href = '/home';
-				return;
-			}
-			else {
-				window.location.href = '/enquete';
-			}
-			
-		} catch (err) {
-			if (err instanceof Error) {
-				const key = err.message as ErrorKey;
-				generalError = $translations.errors[key] ?? $translations.errors.unknown;
-			} else {
-				generalError = $translations.errors.unknown;
-			}
-		} finally {
-			setTimeout(() => { isSubmitting = false; }, 500);
+		if (!res.ok) {
+			const { error } = await res.json();
+			throw new Error(error ?? 'unknown');
 		}
+
+		const { user: userData }: { user: User } = await res.json();
+
+		user.set(userData);
+		isAuthenticated.set(true);
+
+		if (userData.aiReccomendedVKMs?.length > 0) {
+			await goto('/home');
+		} else {
+			await goto('/enquete');
+		}
+
+	} catch (err) {
+		if (err instanceof Error) {
+			const key = err.message as keyof typeof $translations.errors;
+			generalError = $translations.errors[key] ?? $translations.errors.unknown;
+		} else {
+			generalError = $translations.errors.unknown;
+		}
+	} finally {
+		setTimeout(() => {
+			isSubmitting = false;
+		}, 500);
 	}
+}
+
 </script>
 
 <div class="min-h-screen flex items-center justify-center bg-(--color-bg) px-4">

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import ModuleSection from '$lib/components/ui/HomePage/ModuleSection.svelte';
-  	import { getModules } from '$lib/api/client/vkms';
   	import type { Module } from '$lib/types/vkm';
 	import { user } from '$lib/stores/auth';
 	import { translations } from '$lib/stores/userPreferences';
@@ -14,7 +13,7 @@
 	};
 
 	let modules: Module[] = data.modules;
-
+	console.log($user)
 	function byIds(ids: string[]) {
 	return modules.filter((m) => ids.includes(String(m.id)));
 	}
@@ -25,11 +24,11 @@
 		},
 		{
 			title: $translations.favorites_title,
-			modules: byIds($user?.enrolledVKMs ?? [])
+			modules: byIds($user?.favoriteVKMs ?? [])
 		},
 		{
 			title: $translations.recommended_title,
-			modules: byIds($user?.enrolledVKMs ?? [])
+			modules: byIds($user?.aiReccomendedVKMs ?? [])
 		},
 		...Object.entries(
 			modules.reduce<Record<string, Module[]>>((acc, module) => {
