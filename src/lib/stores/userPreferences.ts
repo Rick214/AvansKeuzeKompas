@@ -2,11 +2,12 @@ import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 import nl_NL from '../i18n/nl_NL.json';
 import en_US from '../i18n/en_US.json';
+import { user } from './auth';
 
 export type FontScale = 100 | 125 | 150 | 175 | 200; // Supported font scales
 export type Language = 'nl_NL' | 'en_US'; // Supported languages
 export type Theme = 'light' | 'dark' | 'system'; // Supported themes
-export type NotificationPreference = 'enabled' | 'disabled'; // Notification preferences
+export type NotificationPreference = true | false; // Notification preferences
 
 export type Preferences = {
   language: Language;
@@ -26,9 +27,19 @@ export const preferences = writable<Preferences>({
   language: 'nl_NL',
   fontScale: 100,
   theme: 'system',
-  notificationPreference: 'disabled'
+  notificationPreference: false
 });
-
+user.subscribe((u) => {
+  if (u) {
+    preferences.update((p) => ({
+      ...p,
+      language: u.language as Language, // cast to proper type
+      fontScale: u.fontsize as FontScale, 
+      theme: u.darkmode ? 'dark' : 'light',
+      notificationPreference: u.notifications ? true : false
+    }));
+  }
+});
 // Map of translations for easy lookup
 const translationMap = { nl_NL, en_US };
 
@@ -40,7 +51,7 @@ if (browser) {
   const savedLang = sessionStorage.getItem('language') as Language;
   const savedScale = sessionStorage.getItem('fontScale') as string;
   const savedTheme = sessionStorage.getItem('theme') as Theme;
-  const savedNotificationPreference = sessionStorage.getItem('notificationPreference') as NotificationPreference;
+  const savedNotificationPreference = sessionStorage.getItem('notificationPreference') as unknown as NotificationPreference;
 
   // Apply saved preferences
   preferences.update(p => ({

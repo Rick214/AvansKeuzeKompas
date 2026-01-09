@@ -14,8 +14,8 @@
 
 	let modules: Module[] = data.modules;
 	console.log($user)
-	function byIds(ids: string[]) {
-	return modules.filter((m) => ids.includes(String(m.id)));
+	function byIds(ids: number[]) {
+	return modules.filter((m) => ids.includes(m.id));
 	}
 	$: sections = [
 		{

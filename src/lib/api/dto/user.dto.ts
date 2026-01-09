@@ -3,8 +3,12 @@ export type UserDto = {
 	email: string;
 	studentnumber: string;
 	isStudent: boolean;
-	favoriteVKMs: string[];
-	enrolledVKMs: string[];
-	aiReccomendedVKMs: string[];
+	favoriteVKMs: number[];
+	enrolledVKMs: number[];
+	aiReccomendedVKMs: number[];
 	Token: string;
+	fontsize: number;
+	darkmode: string;
+	language: string;
+	notifications: boolean;
 };
