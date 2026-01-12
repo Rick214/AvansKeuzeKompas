@@ -1,4 +1,5 @@
 import type { UserDto } from '../dto/user.dto';
+import { token } from '$lib/stores/auth';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
@@ -6,6 +7,7 @@ export async function Login(email: string, password: string): Promise<UserDto> {
 	const res = await fetch(`${API_URL}/user/login`, {
 		method: 'POST',
 		headers: {
+      		'Authorization': `Bearer ${token}`,
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({ email, password })

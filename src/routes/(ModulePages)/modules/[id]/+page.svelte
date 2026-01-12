@@ -9,8 +9,7 @@
   import type { PageData } from './$types';
 
   export let data: PageData;
-
-  const { module } = data
+  const { module } = data;
 
   let favorites = new Set<number>();
 

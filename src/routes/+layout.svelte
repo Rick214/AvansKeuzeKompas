@@ -7,12 +7,17 @@
   import MobileNav from '$lib/components/ui/MobileNav.svelte';
   import { SyncLoader } from 'svelte-loading-spinners';
   import { onMount } from 'svelte';
-  import { user, isAuthenticated } from '$lib/stores/auth';
+  import { user, isAuthenticated, token } from '$lib/stores/auth';
   export let data;
 
 	$: {
-		user.set(data.user);
-		isAuthenticated.set(!!data.user);
+	  if (data.user) {
+      user.set(data.user);
+      token.set(data.token);
+      isAuthenticated.set(true);
+    } else {
+      isAuthenticated.set(false);
+    }
 	}
   // Responsive font scaling, disable on smaller screens
 	let isXL = true;
