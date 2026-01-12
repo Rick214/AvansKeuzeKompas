@@ -27,8 +27,9 @@ export const preferences = writable<Preferences>({
   language: 'nl_NL',
   fontScale: 100,
   theme: 'system',
-  notificationPreference: false
+  notificationPreference: false,
 });
+
 user.subscribe((u) => {
   if (u) {
     preferences.update((p) => ({

@@ -5,42 +5,47 @@
 	import type { Module } from '$lib/types/vkm';
 	import type { PageData } from './$types';
 
-    // DUMMY DATA - MUST BE REPLACED WITH API CALLS
     export let data: PageData;
-    // User Data
-    let modules: Module[] = data.modules;
-    const initials = `${$user?.fullName[0]}`.toUpperCase();
-    const age = 20; // Replace with actual age calculation from DOB
-    function byIds(ids: number[]) {
-	return modules.filter((m) => ids.includes(m.id));
-	}
+
+    // VKM Data
     const indexes = [0, 1, 2];
-    // Elective Modules Data
+    let modules: Module[] = data.modules;
+
+    // User Data
+    const initials = $user.fullName
+        .split(" ")
+        .map(name => name[0])
+        .join("")
+        .toUpperCase();
+
+    const age = calculateAge($user.dob)
     
     // Functions 
+    function byIds(ids: number[]) {
+        return modules.filter((m) => ids.includes(m.id));
+    }
+    
+    function calculateAge(dob: Date): number {
+        // Nederlandse tijdzone
+        const today = new Date(new Date().toLocaleString("nl-NL", { timeZone: "Europe/Amsterdam" }));
+        
+        let age = today.getFullYear() - dob.getFullYear();
+        const monthDiff = today.getMonth() - dob.getMonth();
+        const dayDiff = today.getDate() - dob.getDate();
 
-    // function calculateAge(dob: string): number {
-    //     const birthDate = new Date(dob);
-    //     // Nederlandse tijdzone
-    //     const today = new Date(new Date().toLocaleString("nl-NL", { timeZone: "Europe/Amsterdam" }));
+        // Check of de verjaardag dit jaar al geweest is
+        if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+            age--;
+        }
 
-    //     let age = today.getFullYear() - birthDate.getFullYear();
-    //     const monthDiff = today.getMonth() - birthDate.getMonth();
-    //     const dayDiff = today.getDate() - birthDate.getDate();
-
-    //     // Check of de verjaardag dit jaar al geweest is
-    //     if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
-    //         age--;
-    //     }
-
-    //     return age;
-    // }
+        return age;
+    }
 
     $: notificationPreference = $preferences.notificationPreference;
 
     function toggleNotifications() {
         preferences.update(p => {
-            const newPreference = p.notificationPreference === $user?.notifications ? false : true;
+            const newPreference = p.notificationPreference === $user.notifications ? false : true;
             sessionStorage.setItem('notificationPreference', newPreference.toString());
             return { ...p, notificationPreference: newPreference };
         });
@@ -70,17 +75,17 @@
                     <div class="relative inline-flex items-center justify-center w-24 h-24 overflow-hidden bg-(--color-surface-alt) rounded-full">
                         <p class="text-3xl font-small text-body">{initials}</p>
                     </div>
-                    <h2 class="my-2 mx-auto text-2xl font-semibold">{$user?.fullName}</h2>
+                    <h2 class="my-2 mx-auto text-2xl font-semibold">{$user.fullName}</h2>
                 </div>
                 <ul class="text-lg flex flex-col gap-2">
                     <li>
-                        <strong>{$translations.age}</strong>: {age} {$translations.years_old}
+                        <strong>{$translations.age}:</strong> {age} {$translations.years_old}
                     </li>
                     <li>
-                        <strong>{$translations.study}</strong>: course
+                        <strong>{$translations.study}:</strong> {$user.course}
                     </li>
                     <li>
-                        <strong>{$translations.study_counselor}</strong>: SLB
+                        <strong>{$translations.study_counselor}:</strong> {$user.SLBer}
                     </li>
                 </ul>
             </div>
@@ -96,11 +101,11 @@
                             <select
                                 id="electiveModule{index + 1}"
                                 class="block w-54 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) border-(--color-surface-alt)"
-                                value={byIds($user?.enrolledVKMs ?? [])}
+                                value="{ byIds(($user.enrolledVKMs ?? []).map(m => m.id))}"
                             >
                                 <!-- Placeholder -->
-                                <option class="truncate" value={$user?.enrolledVKMs[index]} selected>
-                                    {truncate(byIds($user?.enrolledVKMs ?? [])[index]?.name ?? '', 28)}
+                                <option class="truncate" value="{$user.enrolledVKMs[index].id}" selected>
+                                    {truncate(byIds(($user.enrolledVKMs ?? []).map(m => m.id))[index]?.name ?? '', 28)}
                                 </option>
 
                                 {#each modules as module (module.id)}
