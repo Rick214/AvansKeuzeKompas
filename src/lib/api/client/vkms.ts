@@ -12,7 +12,7 @@ export async function getModules(): Promise<Module[]> {
     tokenValue = t;
   })(); // meteen unsubscribe
 
-  // if (!tokenValue) throw new Error("No auth token");
+  if (!tokenValue) throw new Error("No auth token");
 
   console.log(tokenValue);
 
