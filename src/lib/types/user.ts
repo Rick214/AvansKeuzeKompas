@@ -1,4 +1,4 @@
-import type { ChosenModule } from "$lib/models/chosenModule.model";
+import type { ChosenModule } from '$lib/models/chosenModule.model';
 
 export type User = {
 	fullName: string;
@@ -7,7 +7,7 @@ export type User = {
 	isStudent: boolean;
 	favoriteVKMs: number[];
 	enrolledVKMs: ChosenModule[];
-	aiRecomendedVKMs: number[];
+	aiRecommendedVKMs: number[];
 	dob: Date;
 	fontsize: number;
 	darkmode: string;

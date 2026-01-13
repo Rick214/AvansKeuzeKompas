@@ -1,22 +1,13 @@
 import { json } from '@sveltejs/kit';
-import { Login } from '$lib/api/client/users';
+import { login } from '$lib/api/client/users';
 
 export const POST = async ({ request, cookies }) => {
 	const { email, password } = await request.json();
 
-	const { token, ...user } = await Login(email, password);
+	const { token, ...user } = await login(email, password);
 
 	// Token stays HttpOnly
 	cookies.set('auth', token, {
-		httpOnly: true,
-		secure: true,
-		sameSite: 'strict',
-		path: '/',
-		maxAge: 60 * 60 * 24
-	});
-
-	// User data (readable by server only)
-	cookies.set('user', JSON.stringify(user), {
 		httpOnly: true,
 		secure: true,
 		sameSite: 'strict',

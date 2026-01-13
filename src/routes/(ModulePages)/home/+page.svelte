@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ModuleSection from '$lib/components/ui/HomePage/ModuleSection.svelte';
-  	import type { Module } from '$lib/types/vkm';
+	import type { Module } from '$lib/types/vkm';
 	import { user } from '$lib/stores/auth';
 	import { translations } from '$lib/stores/userPreferences';
 	import type { PageData } from './$types';
@@ -13,16 +13,15 @@
 	};
 
 	let modules: Module[] = data.modules;
-	console.log($user)
+	console.log($user);
 	function byIds(ids: number[]) {
-	return modules.filter((m) => ids.includes(m.id));
+		return modules.filter((m) => ids.includes(m.id));
 	}
 
 	$: sections = [
 		{
 			title: $translations.registered_title,
-			modules: byIds(($user.enrolledVKMs ?? [])
-						.map(m => m.id))
+			modules: byIds(($user.enrolledVKMs ?? []).map((m) => m.id))
 		},
 		{
 			title: $translations.favorites_title,
@@ -30,7 +29,7 @@
 		},
 		{
 			title: $translations.recommended_title,
-			modules: byIds($user.aiRecomendedVKMs ?? [])
+			modules: byIds($user.aiRecommendedVKMs ?? [])
 		},
 		...Object.entries(
 			modules.reduce<Record<string, Module[]>>((acc, module) => {

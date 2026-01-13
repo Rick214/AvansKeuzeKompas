@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { translations } from '$lib/stores/userPreferences';
-	import {goto} from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import { user, isAuthenticated } from '$lib/stores/auth';
 	import type { User } from '$lib/types/user';
 
@@ -42,50 +42,48 @@
 	}
 
 	async function handleSubmit(): Promise<void> {
-	if (isSubmitting) return;
-	if (!validate()) return;
+		if (isSubmitting) return;
+		if (!validate()) return;
 
-	isSubmitting = true;
+		isSubmitting = true;
 
-	try {
-		const res = await fetch('/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ email, password })
-		});
+		try {
+			const res = await fetch('/login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ email, password })
+			});
 
-		if (!res.ok) {
-			const { error } = await res.json();
-			throw new Error(error ?? 'unknown');
+			if (!res.ok) {
+				const { error } = await res.json();
+				throw new Error(error ?? 'unknown');
+			}
+
+			const { user: userData }: { user: User } = await res.json();
+
+			user.set(userData);
+			isAuthenticated.set(true);
+
+			if (userData.aiRecommendedVKMs.length > 0) {
+				await goto('/home');
+			} else {
+				await goto('/enquete');
+			}
+		} catch (err) {
+			if (err instanceof Error) {
+				const key = err.message as keyof typeof $translations.errors;
+				generalError = $translations.errors[key] ?? $translations.errors.unknown;
+			} else {
+				generalError = $translations.errors.unknown;
+			}
+		} finally {
+			setTimeout(() => {
+				isSubmitting = false;
+			}, 500);
 		}
-
-		const { user: userData }: { user: User } = await res.json();
-
-		user.set(userData);
-		isAuthenticated.set(true);
-
-		if (userData.aiRecomendedVKMs?.length > 0) {
-			await goto('/home');
-		} else {
-			await goto('/enquete');
-		}
-
-	} catch (err) {
-		if (err instanceof Error) {
-			const key = err.message as keyof typeof $translations.errors;
-			generalError = $translations.errors[key] ?? $translations.errors.unknown;
-		} else {
-			generalError = $translations.errors.unknown;
-		}
-	} finally {
-		setTimeout(() => {
-			isSubmitting = false;
-		}, 500);
 	}
-}
-
 </script>
 
 <div class="min-h-screen flex items-center justify-center bg-(--color-bg) px-4">
@@ -97,9 +95,7 @@
 		<form class="space-y-4" on:submit|preventDefault={handleSubmit}>
 			<!-- Email -->
 			<div>
-				<label for="email" class="mb-1 block text-sm text-(--primary-color)">
-					E-mail
-				</label>
+				<label for="email" class="mb-1 block text-sm text-(--primary-color)"> E-mail </label>
 				<input
 					id="email"
 					type="email"
