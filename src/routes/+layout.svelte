@@ -10,14 +10,14 @@
 	import { isAuthenticated, token } from '$lib/stores/auth';
 	export let data;
 
-	$: {
-		if (data.token) {
-			token.set(data.token);
-			isAuthenticated.set(true);
-		} else {
-			isAuthenticated.set(false);
-		}
-	}
+	// $: {
+	// 	if (data.token) {
+	// 		token.set(data.token);
+	// 		isAuthenticated.set(true);
+	// 	} else {
+	// 		isAuthenticated.set(false);
+	// 	}
+	// }
 	// Responsive font scaling, disable on smaller screens
 	let isXL = true;
 

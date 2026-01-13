@@ -10,7 +10,7 @@ export const POST = async ({ request, cookies }) => {
 	cookies.set('auth', token, {
 		httpOnly: true,
 		secure: true,
-		sameSite: 'strict',
+		sameSite: 'none',
 		path: '/',
 		maxAge: 60 * 60 * 24
 	});

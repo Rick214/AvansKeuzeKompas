@@ -5,9 +5,8 @@
 	import type { Module } from '$lib/types/vkm';
 	import { user } from '$lib/stores/auth';
 	import { translations } from '$lib/stores/userPreferences';
-
+	import { vkms } from '$lib/stores/vkm';
 	import { getUser } from '$lib/api/client/users';
-	import { getModules } from '$lib/api/client/vkms';
 
 	/* ----------------------------------
 	 * State
@@ -25,15 +24,7 @@
 	/* ----------------------------------
 	 * Data loading
 	 * ---------------------------------- */
-
-	onMount(async () => {
-		try {
-			modules = await getModules();
-			user.set(await getUser());
-		} catch (err) {
-			console.error('Failed to load home data', err);
-		}
-	});
+	$: modules = $vkms;
 
 	/* ----------------------------------
 	 * Helpers

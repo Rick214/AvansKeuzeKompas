@@ -3,6 +3,8 @@
 	import { goto } from '$app/navigation';
 	import { user, isAuthenticated } from '$lib/stores/auth';
 	import type { User } from '$lib/types/user';
+	import { vkms } from '$lib/stores/vkm';
+	import { getModules } from '$lib/api/client/vkms';
 
 	type ErrorKey = keyof typeof $translations.errors;
 
@@ -63,6 +65,7 @@
 
 			const { user: userData }: { user: User } = await res.json();
 
+			vkms.set(await getModules());
 			user.set(userData);
 			isAuthenticated.set(true);
 
