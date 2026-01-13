@@ -1,12 +1,10 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import ModuleSection from '$lib/components/ui/HomePage/ModuleSection.svelte';
 
 	import type { Module } from '$lib/types/vkm';
 	import { user } from '$lib/stores/auth';
 	import { translations } from '$lib/stores/userPreferences';
 	import { vkms } from '$lib/stores/vkm';
-	import { getUser } from '$lib/api/client/users';
 
 	/* ----------------------------------
 	 * State
