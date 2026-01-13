@@ -65,7 +65,7 @@
       }));
 
       // FOR DEBUGGING PURPOSES
-      console.log('Submitting answers:', answerList);
+      // console.log('Submitting answers:', answerList);
 
       const response = await fetch('/api/enquete', {
         method: 'POST',

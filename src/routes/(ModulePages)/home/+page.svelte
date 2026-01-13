@@ -13,7 +13,6 @@
 	};
 
 	let modules: Module[] = data.modules;
-	console.log($user)
 	function byIds(ids: number[]) {
 	return modules.filter((m) => ids.includes(m.id));
 	}
@@ -21,7 +20,7 @@
 	$: sections = [
 		{
 			title: $translations.registered_title,
-			modules: byIds(($user.enrolledVKMs ?? [])
+			modules: byIds(($user.chosenVKMs ?? [])
 						.map(m => m.id))
 		},
 		{

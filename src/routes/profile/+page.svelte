@@ -85,7 +85,7 @@
                         <strong>{$translations.study}:</strong> {$user.course}
                     </li>
                     <li>
-                        <strong>{$translations.study_counselor}:</strong> {$user.SLBer}
+                        <strong>{$translations.study_counselor}:</strong> {$user.slber}
                     </li>
                 </ul>
             </div>
@@ -101,11 +101,11 @@
                             <select
                                 id="electiveModule{index + 1}"
                                 class="block w-54 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) border-(--color-surface-alt)"
-                                value="{ byIds(($user.enrolledVKMs ?? []).map(m => m.id))}"
+                                value="{ byIds(($user.chosenVKMs ?? []).map(m => m.id))}"
                             >
                                 <!-- Placeholder -->
-                                <option class="truncate" value="{$user.enrolledVKMs[index].id}" selected>
-                                    {truncate(byIds(($user.enrolledVKMs ?? []).map(m => m.id))[index]?.name ?? '', 28)}
+                                <option class="truncate" value="{$user.chosenVKMs[index].id}" selected>
+                                    {truncate(byIds(($user.chosenVKMs ?? []).map(m => m.id))[index]?.name ?? '', 28)}
                                 </option>
 
                                 {#each modules as module (module.id)}
