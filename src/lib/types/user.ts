@@ -6,7 +6,7 @@ export type User = {
 	studentnumber: string;
 	isStudent: boolean;
 	favoriteVKMs: number[];
-	enrolledVKMs: ChosenModule[];
+	chosenVKMs: ChosenModule[];
 	aiRecommendedVKMs: number[];
 	dob: Date;
 	fontsize: number;
@@ -14,5 +14,5 @@ export type User = {
 	language: string;
 	notifications: boolean;
 	course: string;
-	SLBer: string;
+	slber: string;
 };

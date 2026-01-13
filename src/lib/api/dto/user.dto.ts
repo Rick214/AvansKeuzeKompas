@@ -6,7 +6,7 @@ export type UserDto = {
 	studentnumber: string;
 	isStudent: boolean;
 	favoriteVKMs: number[];
-	enrolledVKMs: ChosenModule[];
+	chosenVKMs: ChosenModule[];
 	aiRecommendedVKMs: number[];
 	token: string;
 	dob: Date;
@@ -15,5 +15,5 @@ export type UserDto = {
 	language: string;
 	notifications: boolean;
 	course: string;
-	SLBer: string;
+	slber: string;
 };
