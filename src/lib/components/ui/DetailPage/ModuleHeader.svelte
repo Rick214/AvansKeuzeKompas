@@ -25,7 +25,7 @@
         {i < filledDots
           ? 'bg-(--color-accent)'
           : 'bg-(--color-surface-alt)'}"
-/>
+      ></span>
     {/each}
   </div>
 </div>

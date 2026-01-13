@@ -7,28 +7,30 @@
 
 	export let data: PageData;
 
-	type Section = {
+	type Sections = {
 		title: string;
 		modules: Module[];
 	};
 
 	let modules: Module[] = data.modules;
 	console.log($user)
-	function byIds(ids: string[]) {
-	return modules.filter((m) => ids.includes(String(m.id)));
+	function byIds(ids: number[]) {
+	return modules.filter((m) => ids.includes(m.id));
 	}
+
 	$: sections = [
 		{
 			title: $translations.registered_title,
-			modules: byIds($user?.enrolledVKMs ?? [])
+			modules: byIds(($user.enrolledVKMs ?? [])
+						.map(m => m.id))
 		},
 		{
 			title: $translations.favorites_title,
-			modules: byIds($user?.favoriteVKMs ?? [])
+			modules: byIds($user.favoriteVKMs ?? [])
 		},
 		{
 			title: $translations.recommended_title,
-			modules: byIds($user?.aiReccomendedVKMs ?? [])
+			modules: byIds($user.aiRecomendedVKMs ?? [])
 		},
 		...Object.entries(
 			modules.reduce<Record<string, Module[]>>((acc, module) => {

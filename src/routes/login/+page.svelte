@@ -66,7 +66,7 @@
 		user.set(userData);
 		isAuthenticated.set(true);
 
-		if (userData.aiReccomendedVKMs?.length > 0) {
+		if (userData.aiRecomendedVKMs?.length > 0) {
 			await goto('/home');
 		} else {
 			await goto('/enquete');
@@ -138,7 +138,7 @@
 			<!-- Forgot password -->
 			<p class="text-sm text-(--primary-color)">
 				{$translations.password_reset}
-				<a href="#" class="hover:text-(--color-accent)">
+				<a href="/" class="hover:text-(--color-accent)">
 					{$translations.password_reset_link}
 				</a>
 				{$translations.password_reset_complete}

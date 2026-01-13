@@ -4,10 +4,10 @@ import { Login } from '$lib/api/client/users';
 export const POST = async ({ request, cookies }) => {
 	const { email, password } = await request.json();
 
-	const { Token, ...user } = await Login(email, password);
+	const { token, ...user } = await Login(email, password);
 
 	// Token stays HttpOnly
-	cookies.set('auth', Token, {
+	cookies.set('auth', token, {
 		httpOnly: true,
 		secure: true,
 		sameSite: 'strict',

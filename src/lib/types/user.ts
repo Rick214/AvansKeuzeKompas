@@ -1,9 +1,18 @@
+import type { ChosenModule } from "$lib/models/chosenModule.model";
+
 export type User = {
 	fullName: string;
 	email: string;
 	studentnumber: string;
 	isStudent: boolean;
-	favoriteVKMs: string[];
-	enrolledVKMs: string[];
-	aiReccomendedVKMs: string[];
+	favoriteVKMs: number[];
+	enrolledVKMs: ChosenModule[];
+	aiRecomendedVKMs: number[];
+	dob: Date;
+	fontsize: number;
+	darkmode: string;
+	language: string;
+	notifications: boolean;
+	course: string;
+	SLBer: string;
 };
