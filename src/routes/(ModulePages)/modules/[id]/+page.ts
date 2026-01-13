@@ -3,8 +3,6 @@ import { getModulesById } from '$lib/api/client/vkms';
 import { error } from '@sveltejs/kit';
 
 export const load: PageLoad = async ({ params }) => {
-  console.log('DETAIL LOAD RUNNING', params.id);
-
   const module = await getModulesById(params.id);
   if (!module) {
     throw error(404, 'Module not found');

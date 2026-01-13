@@ -1,4 +1,5 @@
 import { getToken } from "../services/token.service";
+import { isAuthorized } from "../services/auth.service";
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
@@ -10,13 +11,15 @@ type ApiOptions = {
 
 export async function apiClient<T>(
   url: string,
-  options: ApiOptions = {}
+  options: ApiOptions = {},
 ): Promise<T> {
   const res = await fetch(`${API_URL}${url}`, {
     method: options.method ?? "GET",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${getToken()}`,
+      ...(isAuthorized() && {
+        "Authorization": `Bearer ${getToken()}`
+      }),
       ...options.headers,
     },
     body: options.body ? JSON.stringify(options.body) : undefined,
