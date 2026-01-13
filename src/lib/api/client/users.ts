@@ -9,8 +9,6 @@ export async function login(email: string, password: string): Promise<UserDto> {
 }
 export async function getUser(): Promise<UserDto> {
 	return apiClient<UserDto>('/user/getUserInfo', {
-		method: 'GET',
-		retries: 2,
-		retryDelay: 300
+		method: 'GET'
 	});
 }

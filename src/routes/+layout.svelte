@@ -7,18 +7,8 @@
 	import MobileNav from '$lib/components/ui/MobileNav.svelte';
 	import { SyncLoader } from 'svelte-loading-spinners';
 	import { onMount } from 'svelte';
-	import { isAuthenticated, token } from '$lib/stores/auth';
 	export let data;
 
-	// $: {
-	// 	if (data.token) {
-	// 		token.set(data.token);
-	// 		isAuthenticated.set(true);
-	// 	} else {
-	// 		isAuthenticated.set(false);
-	// 	}
-	// }
-	// Responsive font scaling, disable on smaller screens
 	let isXL = true;
 
 	const checkScreen = () => {
