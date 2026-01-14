@@ -4,16 +4,37 @@
 	import type { Module } from '$lib/types/vkm';
 	export let module: Module;
  	import { page } from '$app/stores';
-	let favorites = new Set<number>();
+	import { user } from '$lib/stores/auth';
+	import { Favorites } from '$lib/api/client/favorites';
+	$: favoriteSet = new Set($user.favoriteVKMs);
 
-	function toggleFavorite(id: number) {
-		if (favorites.has(id)) {
-			favorites.delete(id);
-		} else {
-			favorites.add(id);
+	let toggling = new Set<number>();
+
+	async function toggleFavorite(id: number) {
+		if (toggling.has(id)) return;
+
+		toggling.add(id);
+		toggling = new Set(toggling);
+
+		const isFavorite = favoriteSet.has(id);
+
+		// Optimistic update
+		$user.favoriteVKMs = isFavorite
+			? $user.favoriteVKMs.filter(v => v !== id)
+			: [...$user.favoriteVKMs, id];
+
+		try {
+			await Favorites(id)
+		} catch (err) {
+			console.error('Failed to toggle favorite', err);
+
+			$user.favoriteVKMs = isFavorite
+				? [...$user.favoriteVKMs, id]
+				: $user.favoriteVKMs.filter(v => v !== id);
+		} finally {
+			toggling.delete(id);
+			toggling = new Set(toggling);
 		}
-
-		favorites = new Set(favorites);
 	}
 	function goToDetails() {
   		const currentUrl =
@@ -26,7 +47,7 @@
 	<!-- Image -->
 	<div class="w-[120px] h-[120px] flex-none rounded-lg bg-black">
 		<button on:click|stopPropagation={() => toggleFavorite(module.id)} aria-label="Toggle favoriet">
-			<i class="fa-{favorites.has(module.id) ? 'solid' : 'regular'} fa-star hover:scale-110 text-white p-2"></i>
+			<i class="fa-{favoriteSet.has(module.id) ? 'solid' : 'regular'} fa-star hover:scale-110 text-white p-2"></i>
 		</button>
 	</div>
 

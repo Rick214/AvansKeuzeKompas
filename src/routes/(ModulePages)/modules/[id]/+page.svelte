@@ -16,7 +16,6 @@
 	const { id } = data;
 	$: module = $vkms.find((m) => m.id === id);
 
-	let favorites = new Set<number>();
 
 	async function toggleFavorite(id: number) {
 		if (toggling.has(id)) return;
@@ -79,8 +78,8 @@
 					</button>
 
 					<button class="px-5 py-2 rounded-full bg-(--color-accent) text-black font-bold inline-flex items-center gap-1" on:click|stopPropagation={() => toggleFavorite(module.id)}>
-						<span>{$translations.favorite_text}</span>
-						<i class="fa-{favorites.has(module.id) ? 'solid' : 'regular'} fa-star"></i>
+						<span>{favoriteSet.has(module.id) ? $translations.favorite_text_active : $translations.favorite_text_inactive}</span>
+						<i class="fa-{favoriteSet.has(module.id) ? 'solid' : 'regular'} fa-star"></i>
 					</button>
 				</div>
 
