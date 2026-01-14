@@ -3,6 +3,7 @@
 
 	export let lecturer = {
 		name: 'John Doe',
+		initials: "JD",
 		avatar: ''
 	};
 </script>
@@ -29,10 +30,8 @@
 
 	<!-- Lecturer -->
 	<div class="flex flex-col items-center flex-shrink-0">
-		<div class="w-24 h-24 md:w-28 md:h-28 rounded-full bg-white flex items-center justify-center">
-			{#if lecturer.avatar}
-				<img src={lecturer.avatar} alt={lecturer.name} class="w-20 h-20 md:w-24 md:h-24 object-contain" />
-			{/if}
+		<div class="relative inline-flex items-center justify-center w-24 h-24 overflow-hidden bg-(--color-surface-alt) rounded-full">
+			<p class="text-3xl font-small text-body">{lecturer.initials}</p>
 		</div>
 
 		<span class="mt-3 text-(--primary-color) font-medium">
