@@ -2,5 +2,5 @@
 	import { goto } from '$app/navigation';
 
 	// Add login/session functionality later
-	goto('/home');
+	goto('/login');
 </script>
