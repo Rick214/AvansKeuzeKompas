@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { translations } from '$lib/stores/userPreferences';
 	import { goto } from '$app/navigation';
-	import { user, isAuthenticated } from '$lib/stores/auth';
+	import { user } from '$lib/stores/auth';
 	import type { User } from '$lib/types/user';
 	import { vkms } from '$lib/stores/vkm';
 	import { getModules } from '$lib/api/client/vkms';
@@ -67,7 +67,6 @@
 
 			vkms.set(await getModules());
 			user.set(userData);
-			isAuthenticated.set(true);
 
 			if (userData.aiRecommendedVKMs.length > 0) {
 				await goto('/home');

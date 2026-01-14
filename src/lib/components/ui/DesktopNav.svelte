@@ -10,7 +10,8 @@
   ];
 
   const logout = () => {
-    sessionStorage.removeItem('user'); // gebruik exact dezelfde key
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('vkm');
     goto('/login');
   };
   const navigate = (href: string) => {

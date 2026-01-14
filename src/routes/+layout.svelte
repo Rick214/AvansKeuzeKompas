@@ -7,7 +7,8 @@
 	import MobileNav from '$lib/components/ui/MobileNav.svelte';
 	import { SyncLoader } from 'svelte-loading-spinners';
 	import { onMount } from 'svelte';
-	export let data;
+	import { page } from "$app/stores";
+    const DeniedPaths = ['/login'];
 
 	let isXL = true;
 
@@ -33,7 +34,9 @@
 </svelte:head>
 
 {#if $ready}
+	{#if $page.url.pathname && !DeniedPaths.some(path => $page.url.pathname.startsWith(path))}
 	<Header />
+	{/if}
 	
 
 	<main>
