@@ -9,6 +9,11 @@
     { label: $translations.navigation.my_profile, href: "/profile" }
   ];
 
+  const logout = () => {
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('vkm');
+    goto('/login');
+  };
   const navigate = (href: string) => {
     goto(href);
   };
@@ -36,7 +41,7 @@
         {/if}
       </button>
     {/each}
-    <button class="bg-(--color-accent) text-black px-4 py-2 rounded-md text-sm font-medium opacity-90 hover:opacity-100 transition-opacity">
+    <button on:click={logout} class="bg-(--color-accent) text-black px-4 py-2 rounded-md text-sm font-medium opacity-90 hover:opacity-100 transition-opacity">
         {$translations.navigation.logout}
     </button>
   </div>

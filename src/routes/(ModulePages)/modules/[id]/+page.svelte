@@ -7,16 +7,42 @@
 	import ModuleDescription from '$lib/components/ui/DetailPage/ModuleDescription.svelte';
 	import ContactLecturer from '$lib/components/ui/DetailPage/ContactLecturer.svelte';
 	import { vkms } from '$lib/stores/vkm';
+	import { user } from '$lib/stores/auth';
+	import { Favorites } from '$lib/api/client/favorites';
+	$: favoriteSet = new Set($user.favoriteVKMs);
+
+	let toggling = new Set<number>();
 	export let data;
 	const { id } = data;
 	$: module = $vkms.find((m) => m.id === id);
 
 	let favorites = new Set<number>();
 
-	function toggleFavorite(id: number) {
-		favorites.has(id) ? favorites.delete(id) : favorites.add(id);
+	async function toggleFavorite(id: number) {
+		if (toggling.has(id)) return;
 
-		favorites = new Set(favorites);
+		toggling.add(id);
+		toggling = new Set(toggling);
+
+		const isFavorite = favoriteSet.has(id);
+
+		// Optimistic update
+		$user.favoriteVKMs = isFavorite
+			? $user.favoriteVKMs.filter(v => v !== id)
+			: [...$user.favoriteVKMs, id];
+
+		try {
+			await Favorites(id)
+		} catch (err) {
+			console.error('Failed to toggle favorite', err);
+
+			$user.favoriteVKMs = isFavorite
+				? [...$user.favoriteVKMs, id]
+				: $user.favoriteVKMs.filter(v => v !== id);
+		} finally {
+			toggling.delete(id);
+			toggling = new Set(toggling);
+		}
 	}
 
 	function goBack() {
@@ -25,7 +51,7 @@
 		if (from) {
 			goto(from);
 		} else {
-			goto('/'); // safe fallback
+			goto('/'); 
 		}
 	}
 </script>
