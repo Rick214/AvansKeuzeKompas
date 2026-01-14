@@ -34,6 +34,7 @@
 
 {#if $ready}
 	<Header />
+	
 
 	<main>
 		<slot />
