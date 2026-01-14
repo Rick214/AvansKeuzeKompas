@@ -16,7 +16,6 @@
 	const { id } = data;
 	$: module = $vkms.find((m) => m.id === id);
 
-
 	async function toggleFavorite(id: number) {
 		if (toggling.has(id)) return;
 
@@ -60,10 +59,10 @@
 		<ModuleHeader {module} />
 
 		<div class="flex flex-col md:flex-row md:items-center pt-10 px-4 md:px-10 gap-4 md:gap-0">
-			<button class="relative z-10 flex items-center text-sm font-medium md:mr-6" on:click={goBack}>
-				<span class="material-symbols-outlined">arrow_circle_left</span>
-				{$translations.back}
-			</button>
+			<button class="relative z-10 flex items-center text-md xl:text-lg font-medium md:mr-6 hover:opacity-75 duration-200" on:click={goBack}>
+                <span class="material-symbols-outlined mr-1">arrow_circle_left</span>
+                {$translations.back}
+            </button>
 
 			<ModuleMeta {module} />
 		</div>
