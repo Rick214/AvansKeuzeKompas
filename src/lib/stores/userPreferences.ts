@@ -3,6 +3,7 @@ import { browser } from '$app/environment';
 import nl_NL from '../i18n/nl_NL.json';
 import en_US from '../i18n/en_US.json';
 import { user } from './auth';
+import { updateSettings } from '$lib/api/client/users';
 
 export type FontScale = 100 | 125 | 150 | 175 | 200; // Supported font scales
 export type Language = 'nl_NL' | 'en_US'; // Supported languages
@@ -66,6 +67,13 @@ if (browser) {
 
   // Subscribe to live updates
   preferences.subscribe(p => {
+
+    // Saving user settings to backend 
+    updateSettings({
+      fontsize: p.fontScale,
+      darkmode: p.theme,
+      language: p.language
+    });
 
     // Language & translations
     translations.set(translationMap[p.language]);

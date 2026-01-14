@@ -4,13 +4,29 @@
 	import type { Module } from '$lib/types/vkm';
 	import { user } from '$lib/stores/auth';
     import { vkms } from '$lib/stores/vkm';
+	import { getUser, updateChosenModules, updateSettings } from '$lib/api/client/users';
+	import { UserSettingsDto } from '$lib/api/dto/userSettings.dto';
 
     // VKM Data
     const indexes = [0, 1, 2];
     let modules: Module[] = $vkms;
-    $: selectedModuleIds = ($user?.chosenVKMs ?? []).map(m => Number(m.id));
 
-    console.log($user);
+    let originalModuleIds: (number | "")[] = indexes.map(i => {
+        const id = $user?.chosenVKMs?.[i]?.id;
+        return id != null ? Number(id) : "";
+    });
+
+    $: if ($user?.chosenVKMs && originalModuleIds.length === 0) {
+        originalModuleIds = indexes.map(i => {
+            const id = $user.chosenVKMs[i]?.id;
+            return id != null ? Number(id) : "";
+        });
+    }
+
+    $: hasModuleChanges =
+        JSON.stringify(selectedModuleIds) !== JSON.stringify(originalModuleIds);
+
+    let selectedModuleIds: (number | "")[] = [...originalModuleIds];
 
     // User Data
     const initials = $user.fullName
@@ -40,7 +56,14 @@
 
     $: notificationPreference = $preferences.notificationPreference;
 
-    function toggleNotifications() {
+    async function toggleNotifications() {
+        const current = $preferences.notificationPreference; // true/false
+        const newValue = !current;
+
+        // Saving notification preference
+        await updateSettings({ notifications: newValue });
+
+        // Updating preferences store
         preferences.update(p => {
             const newPreference = p.notificationPreference === $user.notifications ? false : true;
             sessionStorage.setItem('notificationPreference', newPreference.toString());
@@ -48,11 +71,35 @@
         });
     }
 
+    async function saveChosenModules() {
+        const payload = selectedModuleIds
+            .map((id, index) => {
+                if (!id) return null;
+
+                return {
+                    id: Number(id),
+                    priority: index + 1,
+                    enrolled: true
+                };
+            })
+            .filter(
+                (v): v is { id: number; priority: number; enrolled: boolean } => v !== null
+            );
+
+        // Saving chosen modules
+        await updateChosenModules(payload);
+        
+        // Updating user store
+        const userData = await getUser();
+        user.set(userData);
+
+        originalModuleIds = [...selectedModuleIds];  
+    }
+
     function truncate(text: string, max = 50) {
         if (!text) return '';
         return text.length > max ? text.slice(0, max - 1) + '…' : text;
     }
-
 </script>
 
 <div class="flex justify-center items-center min-h-screen">
@@ -103,6 +150,11 @@
                                     class="block w-54 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) border-(--color-surface-alt)"
                                     bind:value={selectedModuleIds[index]}
                                 >
+                                    <!-- Placeholder -->
+                                    <option value="" disabled>
+                                        {$translations.select_module_placeholder}
+                                    </option>
+
                                     {#each modules as module (module.id)}
                                         <option value={module.id}>
                                             {truncate(module.name, 40)}
@@ -112,6 +164,18 @@
                             {/if}
                         </div>
                     {/each}
+                    <div class="flex justify-end mt-6">
+                        <button
+                            on:click={saveChosenModules}
+                            disabled={!hasModuleChanges}
+                            class="px-4 py-2 rounded-md transition
+                            {hasModuleChanges
+                                ? 'bg-(--color-accent) text-black opacity-100 cursor-pointer'
+                                : 'bg-(--color-accent) text-black opacity-40 cursor-not-allowed'}"
+                        >
+                            {$translations.update_module_preferences}
+                        </button>
+                    </div>
                 </form>
             </div>
             <!-- Settings -->
