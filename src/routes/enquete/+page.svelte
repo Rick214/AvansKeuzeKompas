@@ -84,7 +84,7 @@
   }
 </script>
 
-<div class="min-h-screen flex items-center justify-center p-4">
+<div class="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 mt-16">
   <div class="w-full sm:max-w-4/6 lg:max-w-4/6 xl:max-w-3/6 2xl:max-w-3/6 p-12 bg-(--color-surface) rounded-3xl shadow-lg">
     <h1 class="text-xl font-bold text-(--primary-color) transition-colors duration-200 text-center mb-6">{$translations.enquete_title}</h1>
 
