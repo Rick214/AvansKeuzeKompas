@@ -7,13 +7,13 @@
 	import MobileNav from '$lib/components/ui/MobileNav.svelte';
 	import { SyncLoader } from 'svelte-loading-spinners';
 	import { onMount } from 'svelte';
-	import { page } from "$app/stores";
-    const DeniedPaths = ['/login'];
+	import { page } from '$app/stores';
 
+	const deniedPaths = ['/login', '/auth'];
 	let isXL = true;
 
 	const checkScreen = () => {
-		isXL = window.innerWidth >= 1280; // 1280px is the breakpoint for 'xl' in Tailwind CSS
+		isXL = window.innerWidth >= 1280;
 		if (!isXL) {
 			preferences.update((p) => ({ ...p, fontScale: 100 }));
 		}
@@ -34,21 +34,19 @@
 </svelte:head>
 
 {#if $ready}
-	{#if $page.url.pathname && !DeniedPaths.some(path => $page.url.pathname.startsWith(path))}
-	<Header />
+	{#if $page.url.pathname && !deniedPaths.some((path) => $page.url.pathname.startsWith(path))}
+		<Header />
 	{/if}
-	
-
 	<main>
 		<slot />
-		<!-- all child pages -->
 	</main>
 
 	<MobileNav />
-	<!-- Footer component is included in this component-->
 {:else}
 	<div class="h-screen w-screen flex flex-col justify-center items-center">
 		<SyncLoader size="48" color="var(--color-accent)" unit="px" duration="1s" />
-		<p class="text-(--primary-color) text-lg text-center font-medium">{$translations.loading}</p>
+		<p class="text-(--primary-color) text-lg text-center font-medium">
+			{$translations.loading}
+		</p>
 	</div>
 {/if}
