@@ -18,7 +18,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 				Authorization: `Bearer ${token}`
 			}
 		});
-		console.log(res);
 		if (!res.ok) {
 			throw new Error('Invalid token');
 		}
