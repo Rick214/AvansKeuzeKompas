@@ -1,15 +1,32 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
-	import { user } from '$lib/stores/auth';
     import { translations, preferences } from '$lib/stores/userPreferences';
 	import type { Module } from '$lib/types/vkm';
-	import type { PageData } from './$types';
-
-    export let data: PageData;
+	import { user } from '$lib/stores/auth';
+    import { vkms } from '$lib/stores/vkm';
+	import { getUser, updateChosenModules, updateSettings } from '$lib/api/client/users';
+	import { UserSettingsDto } from '$lib/api/dto/userSettings.dto';
 
     // VKM Data
     const indexes = [0, 1, 2];
-    let modules: Module[] = data.modules;
+    let modules: Module[] = $vkms;
+
+    let originalModuleIds: (number | "")[] = indexes.map(i => {
+        const id = $user?.chosenVKMs?.[i]?.id;
+        return id != null ? Number(id) : "";
+    });
+
+    $: if ($user?.chosenVKMs && originalModuleIds.length === 0) {
+        originalModuleIds = indexes.map(i => {
+            const id = $user.chosenVKMs[i]?.id;
+            return id != null ? Number(id) : "";
+        });
+    }
+
+    $: hasModuleChanges =
+        JSON.stringify(selectedModuleIds) !== JSON.stringify(originalModuleIds);
+
+    let selectedModuleIds: (number | "")[] = [...originalModuleIds];
 
     // User Data
     const initials = $user.fullName
@@ -18,22 +35,17 @@
         .join("")
         .toUpperCase();
 
-    const age = calculateAge($user.dob)
+    $: age = $user?.dob ? calculateAge(new Date($user.dob)) : null;
     
-    // Functions 
-    function byIds(ids: number[]) {
-        return modules.filter((m) => ids.includes(m.id));
-    }
-    
-    function calculateAge(dob: Date): number {
-        // Nederlandse tijdzone
-        const today = new Date(new Date().toLocaleString("nl-NL", { timeZone: "Europe/Amsterdam" }));
-        
-        let age = today.getFullYear() - dob.getFullYear();
-        const monthDiff = today.getMonth() - dob.getMonth();
-        const dayDiff = today.getDate() - dob.getDate();
+    // Functions   
+    function calculateAge(dob: string | Date): number {
+        const birthDate = typeof dob === "string" ? new Date(dob) : dob;
+        const today = new Date();
 
-        // Check of de verjaardag dit jaar al geweest is
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        const dayDiff = today.getDate() - birthDate.getDate();
+
         if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
             age--;
         }
@@ -41,15 +53,49 @@
         return age;
     }
 
+
     $: notificationPreference = $preferences.notificationPreference;
 
-    function toggleNotifications() {
+    async function toggleNotifications() {
+        const current = $preferences.notificationPreference; // true/false
+        const newValue = !current;
+
+        // Saving notification preference
+        await updateSettings({ notifications: newValue });
+
+        // Updating preferences store
         preferences.update(p => {
             const newPreference = p.notificationPreference === $user.notifications ? false : true;
             sessionStorage.setItem('notificationPreference', newPreference.toString());
             return { ...p, notificationPreference: newPreference };
         });
     }
+
+    async function saveChosenModules() {
+        const payload = selectedModuleIds
+            .map((id, index) => {
+                if (!id) return null;
+
+                return {
+                    id: Number(id),
+                    priority: index + 1,
+                    enrolled: true
+                };
+            })
+            .filter(
+                (v): v is { id: number; priority: number; enrolled: boolean } => v !== null
+            );
+
+        // Saving chosen modules
+        await updateChosenModules(payload);
+        
+        // Updating user store
+        const userData = await getUser();
+        user.set(userData);
+
+        originalModuleIds = [...selectedModuleIds];  
+    }
+
     function truncate(text: string, max = 50) {
         if (!text) return '';
         return text.length > max ? text.slice(0, max - 1) + '…' : text;
@@ -79,7 +125,7 @@
                 </div>
                 <ul class="text-lg flex flex-col gap-2">
                     <li>
-                        <strong>{$translations.age}:</strong> {age} {$translations.years_old}
+                        <strong>{$translations.age}:</strong> {age ?? '-'} {$translations.years_old}
                     </li>
                     <li>
                         <strong>{$translations.study}:</strong> {$user.course}
@@ -98,24 +144,38 @@
                             <label for="electiveModule{index + 1}" class="block text-lg font-semibold">
                                 {$translations.elective_module} {index + 1}
                             </label>
-                            <select
-                                id="electiveModule{index + 1}"
-                                class="block w-54 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) border-(--color-surface-alt)"
-                                value="{ byIds(($user.chosenVKMs ?? []).map(m => m.id))}"
-                            >
-                                <!-- Placeholder -->
-                                <option class="truncate" value="{$user.chosenVKMs[index].id}" selected>
-                                    {truncate(byIds(($user.chosenVKMs ?? []).map(m => m.id))[index]?.name ?? '', 28)}
-                                </option>
-
-                                {#each modules as module (module.id)}
-                                    <option class="truncate" value={module.id}>
-                                    {truncate(module.name, 40)}
+                            {#if $user?.chosenVKMs?.length}
+                                <select
+                                    id="electiveModule{index + 1}"
+                                    class="block w-54 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) border-(--color-surface-alt)"
+                                    bind:value={selectedModuleIds[index]}
+                                >
+                                    <!-- Placeholder -->
+                                    <option value="" disabled>
+                                        {$translations.select_module_placeholder}
                                     </option>
-                                {/each}
-                            </select>
+
+                                    {#each modules as module (module.id)}
+                                        <option value={module.id}>
+                                            {truncate(module.name, 40)}
+                                        </option>
+                                    {/each}
+                                </select>
+                            {/if}
                         </div>
                     {/each}
+                    <div class="flex justify-end mt-6">
+                        <button
+                            on:click={saveChosenModules}
+                            disabled={!hasModuleChanges}
+                            class="px-4 py-2 rounded-md transition
+                            {hasModuleChanges
+                                ? 'bg-(--color-accent) text-black opacity-100 cursor-pointer'
+                                : 'bg-(--color-accent) text-black opacity-40 cursor-not-allowed'}"
+                        >
+                            {$translations.update_module_preferences}
+                        </button>
+                    </div>
                 </form>
             </div>
             <!-- Settings -->
