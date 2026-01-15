@@ -19,6 +19,7 @@
 
 	$: search = params.get('search') ?? '';
 	$: locationFilter = params.get('location') ?? 'all';
+	$: themeFilter = params.get('theme') ?? 'all';
 	$: levelFilter = params.get('level') ?? 'all';
 	$: ectsFilter = params.get('ects') ?? 'all';
 	$: sort = params.get('sort') ?? 'popular';
@@ -69,7 +70,8 @@
 
 				if (q.length >= 3) {
 					if (m.name.toLowerCase().includes(q)) score += 10;
-					if (m.tags?.some((tag) => tag.toLowerCase().includes(q))) score += 5;
+					if (m.themes?.some((theme) => theme.toLowerCase().includes(q))) score += 5;
+					if (m.tags?.some((tag) => tag.toLowerCase().includes(q))) score += 4;
 					if (m.description?.toLowerCase().includes(q)) score += 3;
 					if (m.learningoutcomes?.toLowerCase().includes(q)) score += 2;
 				} else {
@@ -82,6 +84,7 @@
 				({ module, score }) =>
 					score > 0 &&
 					(locationFilter === 'all' ? true : module.location.includes(locationFilter)) &&
+					(themeFilter === 'all' ? true : module.themes?.includes(themeFilter)) &&
 					(levelFilter === 'all' ? true : module.level === levelFilter) &&
 					(ectsFilter === 'all' ? true : module.studycredit === Number(ectsFilter))
 			)
@@ -99,7 +102,7 @@
 <div class="min-h-screen bg-(--color-bg) text-(--primary-color) font-(--font-primary)">
 	<!-- Sticky filters -->
 	<div class="sticky top-15 z-20 bg-(--color-bg) overflow-x-hidden">
-		<SearchAndFilters {search} {locationFilter} {levelFilter} {ectsFilter} {sort} onSearchChange={handleSearchChange} onFilterChange={handleFilterChange} />
+		<SearchAndFilters {modules} {search} {locationFilter} {themeFilter} {levelFilter} {ectsFilter} {sort} onSearchChange={handleSearchChange} onFilterChange={handleFilterChange} />
 	</div>
 
 	<!-- Content -->
