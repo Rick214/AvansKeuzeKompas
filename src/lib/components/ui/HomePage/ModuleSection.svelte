@@ -147,7 +147,7 @@
 					<a href={`/modules/${module.id}?from=/home`} class="relative bg-(--color-surface-alt) w-50 h-26 md:w-60 md:h-32 rounded-lg p-3 flex flex-col shrink-0 snap-start hover:scale-98 transition overflow-hidden">
 						<img src={chooseImage()}  alt={module.name} class="absolute inset-0 w-full h-full object-cover" />
 						<div class="absolute inset-0 w-full h-full bg-black opacity-50 z-1 hover:opacity-25 transition duration-200"></div>
-						<p class="mt-auto text-sm font-medium line-clamp-2 text-(--primary-color) z-3">
+						<p class="mt-auto text-sm font-medium line-clamp-2 text-white z-3">
 							{module.name}
 						</p>
 					</a>
@@ -159,7 +159,7 @@
 						aria-label="Toggle favorite"
 					>
 						<i
-							class="fa-{favoriteSet.has(module.id) ? 'solid' : 'regular'} fa-star hover:scale-110
+							class="fa-{favoriteSet.has(module.id) ? 'solid' : 'regular'} fa-star hover:scale-110 text-white
 							{toggling.has(module.id) ? 'opacity-50' : ''}"
 						></i>
 					</button>

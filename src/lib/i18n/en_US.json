@@ -42,6 +42,7 @@
 	"enquete_tooltip_text_html": "This question helps us understand what you enjoy working on. <br><br> Based on the topics you choose, the AI model can better estimate which elective modules are likely a good fit for you. <br><br> Your answers will therefore directly influence the recommendations you will see.",
 	"enquete_rating_tooltip_title": "What does this rating mean?",
 	"enquete_rating_tooltip_content": "With this rating, you indicate how important this question is to you. <br><br> This helps us to better tailor the recommendations to your preferences.",
+	"enquete_skip": "Skip survey",
 	"results": "results",
 	"view_text": "view module",
 	"search": "Search by name",
@@ -67,6 +68,9 @@
 	"study_counselor": "Study counselor",
 	"learningoutcomes_title": "Learningoutcomes",
 	"logout_description": "You can log out of your account using the button below.",
+	"retake_survey": "Retake survey",
+	"wait_a_moment": "Wait a moment...",
+	"login": "Login",
 	"faq": {
 		"title": "Frequently Asked Questions",
 		"questions": {

@@ -4,6 +4,8 @@ import nl_NL from '../i18n/nl_NL.json';
 import en_US from '../i18n/en_US.json';
 import { user } from './auth';
 import { updateSettings } from '$lib/api/client/users';
+import { getModulesDutch, getModulesEnglish } from '$lib/api/client/vkms';
+import { vkms } from './vkm';
 
 export type FontScale = 100 | 125 | 150 | 175 | 200; // Supported font scales
 export type Language = 'nl_NL' | 'en_US'; // Supported languages
@@ -31,11 +33,15 @@ export const preferences = writable<Preferences>({
   notificationPreference: false,
 });
 
+let currentUser: any = null;
+let lastLanguage: Language | null = null;
+user.subscribe(u => currentUser = u);
+
 user.subscribe((u) => {
   if (u) {
     preferences.update((p) => ({
       ...p,
-      language: u.language as Language, // cast to proper type
+      language: u.language as Language, // cast to proper type  
       fontScale: u.fontsize as FontScale, 
       theme: u.darkmode ? 'dark' : 'light',
       notificationPreference: u.notifications ? true : false
@@ -66,14 +72,26 @@ if (browser) {
   let systemListener: { mq: MediaQueryList; handler: (e: MediaQueryListEvent) => void } | null = null;
 
   // Subscribe to live updates
-  preferences.subscribe(p => {
+  preferences.subscribe(async (p) => {
+    if (currentUser) {
+      // Saving user settings to backend 
+      updateSettings({
+        fontsize: p.fontScale,
+        darkmode: p.theme,
+        language: p.language
+      });
 
-    // Saving user settings to backend 
-    updateSettings({
-      fontsize: p.fontScale,
-      darkmode: p.theme,
-      language: p.language
-    });
+      // Update VKM's 
+      if (p.language !== lastLanguage) {
+        const modules =
+          p.language === "nl_NL"
+            ? await getModulesDutch()
+            : await getModulesEnglish();
+
+        vkms.set(modules);
+        lastLanguage = p.language;
+      }
+    };
 
     // Language & translations
     translations.set(translationMap[p.language]);

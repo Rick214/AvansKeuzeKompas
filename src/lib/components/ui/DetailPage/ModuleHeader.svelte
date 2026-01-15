@@ -59,7 +59,7 @@
   class="relative w-full bg-(--color-surface) px-6 md:px-10 py-5 pt-30 md:pt-45 flex items-end justify-between overflow-hidden">
 	<img src={chooseImage()}  alt={module.name} class="absolute inset-0 w-full h-full object-cover" />
   <div class="absolute inset-0 w-full h-full bg-black opacity-50 z-1"></div>
-  <h1 class="font-(--font-heading) text-lg md:text-2xl font-bold z-2">
+  <h1 class="font-(--font-heading) text-lg md:text-2xl z-2 text-white">
     {module.name}
   </h1>
 

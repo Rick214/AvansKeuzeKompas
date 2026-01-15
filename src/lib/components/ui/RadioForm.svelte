@@ -1,5 +1,6 @@
 <script lang="ts">
   export let items: { label: string; value: string; name: string }[] = [];
+  export let otherLanguageItems: { label: string; value: string }[] = [];
   export let selected: string | null = null; 
 </script>
 
@@ -8,12 +9,14 @@
     <label
       for="radio-{index}"
       class="flex items-center gap-2 mb-4 cursor-pointer select-none"
+      title={otherLanguageItems[index]?.label}
+
     >
       <input
         type="radio"
         name={item.name}
         bind:group={selected}
-        value={item.value}
+        value={otherLanguageItems[index]?.value}
         id="radio-{index}"
         class="peer appearance-none w-5 h-5 rounded-full border border-black
               bg-(--color-accent) relative

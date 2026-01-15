@@ -1,15 +1,13 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
     import { translations, preferences } from '$lib/stores/userPreferences';
-	import type { Module } from '$lib/types/vkm';
 	import { user } from '$lib/stores/auth';
     import { vkms } from '$lib/stores/vkm';
 	import { getUser, updateChosenModules, updateSettings } from '$lib/api/client/users';
-	import { UserSettingsDto } from '$lib/api/dto/userSettings.dto';
 
     // VKM Data
     const indexes = [0, 1, 2];
-    let modules: Module[] = $vkms;
+    $: modules = $vkms;
 
     let originalModuleIds: (number | "")[] = indexes.map(i => {
         const id = $user?.chosenVKMs?.[i]?.id;
@@ -100,6 +98,10 @@
         if (!text) return '';
         return text.length > max ? text.slice(0, max - 1) + '…' : text;
     }
+
+    function redirectToEnquetePage() {
+        goto('/enquete');
+    }
 </script>
 
 <div class="flex justify-center items-center min-h-screen">
@@ -164,13 +166,19 @@
                             {/if}
                         </div>
                     {/each}
-                    <div class="flex justify-end mt-6">
+                    <div class="flex justify-between align-center mt-6 flex-wrap gap-6 sm:flex-nowrap sm:gap-16">
+                        <button
+                            type="button"
+                            on:click={redirectToEnquetePage}
+                            class="min-w-24 sm:min-w-w-32 px-4 py-2 rounded-md bg-(--color-accent) text-black opacity-100 cursor-pointer hover:scale-98 hover:opacity-75 duration-200 transition text-md">
+                            {$translations.retake_survey}
+                        </button>
                         <button
                             on:click={saveChosenModules}
                             disabled={!hasModuleChanges}
-                            class="px-4 py-2 rounded-md transition
+                            class="min-w-24 sm:min-w-w-32 px-4 py-2 rounded-md duration-200 transition
                             {hasModuleChanges
-                                ? 'bg-(--color-accent) text-black opacity-100 cursor-pointer'
+                                ? 'bg-(--color-accent) text-black opacity-100 cursor-pointer hover:scale-98 hover:opacity-75 text-md'
                                 : 'bg-(--color-accent) text-black opacity-40 cursor-not-allowed'}"
                         >
                             {$translations.update_module_preferences}
@@ -226,7 +234,7 @@
             </div>
             <div class="flex xl:hidden flex-col items-center col-span-2 col-start-1 h-full w-full min-w-auto max-w-[500px] xl:min-w-[280px] xl:max-w-[450px] bg-(--color-surface) p-12 rounded-2xl shadow-md text-(--primary-color)">
                 <h2 class="text-md text-center mb-4 text-(--color-border)">{$translations.logout_description}</h2>
-                <button class="bg-(--color-accent) text-black px-4 py-2 rounded-md text-sm font-medium opacity-90 hover:opacity-100 transition-opacity">
+                <button class="bg-(--color-accent) text-black px-4 py-2 rounded-md text-sm font-medium hover:opacity-75 hover:scale-98 transition duration-200 cursor-pointer">
                     {$translations.navigation.logout}
                 </button>
             </div>
