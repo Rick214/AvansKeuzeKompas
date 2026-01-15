@@ -40,7 +40,7 @@
 	<main>
 		<slot />
 	</main>
-
+	
 	<MobileNav />
 {:else}
 	<div class="h-screen w-screen flex flex-col justify-center items-center">
