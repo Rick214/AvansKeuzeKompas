@@ -1,15 +1,23 @@
 <script lang="ts">
   import { translations } from '$lib/stores/userPreferences';
+	import type { Module } from '$lib/types/vkm';
   // Props
   export let search: string;
   export let locationFilter: string;
   export let levelFilter: string;
   export let ectsFilter: string;
+  export let themeFilter: string;
   export let sort: string;
+  export let modules: Module[];
 
   export let onSearchChange: (value: string) => void;
   export let onFilterChange: (type: string, value: string) => void;
 
+  $: themes = Array.from(
+  new Set(
+    modules.flatMap((m) => m.themes ?? [])
+  )
+  ).sort();
   // Handlers with proper typing
   function handleInput(e: Event) {
     const target = e.target as HTMLInputElement;
@@ -44,6 +52,20 @@
       <option value="Breda">Breda</option>
       <option value="Tilburg">Tilburg</option>
       <option value="Den Bosch">Den Bosch</option>
+      </select>
+     </div>
+
+     <!-- Theme -->
+     <div class="px-2 rounded-full bg-(--color-surface) text-md font-bold shadow-md">
+      <select
+      value={themeFilter}
+      on:change={(e) => handleSelectChange('theme', e)}
+      class="max-w-[180px] truncate px-2 py-2 rounded-full bg-(--color-surface) text-md font-bold"
+      >
+      <option value="all">Theme</option>
+      {#each themes as theme}
+      <option value={theme}>{theme}</option>
+    {/each}
       </select>
      </div>
 
