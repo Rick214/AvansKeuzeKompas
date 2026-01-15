@@ -35,6 +35,10 @@
   // Subscribe to language preference for live updates
   preferences.subscribe(p => {
     questions = p.language === 'en_US' ? questions_en_US : questions_nl_NL;
+
+    // keep answers but reset when length mismatches
+    responses = questions.map((_, i) => responses[i] ?? { answer: null, rating: 0 });
+    hoverRatings = questions.map((_, i) => hoverRatings[i] ?? 0);
   });
 
    async function handleNext() {
@@ -60,11 +64,17 @@
   async function handleSubmit() {
     isLoading = true;
     try {
-      const answerList = responses.map((r, i) => ({
-        questionNumber: i + 1,
-        answer: r.answer,
-        rating: r.rating
-      }));
+        const answerList = responses.map((r, i) => {
+        if (!r.answer) {
+          throw new Error(`Missing answer for question ${i + 1}`);
+        }
+
+        return {
+          questionNumber: i + 1,
+          answer: r.answer,
+          rating: r.rating || 3 // fallback to 3
+        };
+      });
 
       // FOR DEBUGGING PURPOSES
       console.log('Submitting answers:', answerList);
