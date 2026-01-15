@@ -6,6 +6,7 @@
   import { Circle } from 'svelte-loading-spinners';
 	import Tooltip from '$lib/components/ui/Tooltip.svelte';
 	import { goto } from '$app/navigation';
+	import { submitEnquete } from '$lib/api/client/ai';
 
   let step = 0;
   type TranslationKey = keyof typeof $translations;
@@ -66,19 +67,12 @@
       }));
 
       // FOR DEBUGGING PURPOSES
-      // console.log('Submitting answers:', answerList);
+      console.log('Submitting answers:', answerList);
 
-      const response = await fetch('/api/enquete', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ answers: answerList })
-      });
-
-      if (response.ok) alert($translations.enquete_thank_you_message);
-      else alert($translations.enquete_error_submission_failed);
+      await submitEnquete(answerList)
+      goto('/home');
     } catch (err) {
       console.error(err);
-      alert($translations.enquete_error_submission_failed);
     } finally {
       isLoading = false;
     }

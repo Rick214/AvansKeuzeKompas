@@ -3,7 +3,7 @@ import { browser } from '$app/environment';
 import nl_NL from '../i18n/nl_NL.json';
 import en_US from '../i18n/en_US.json';
 import { user } from './auth';
-import { updateSettings } from '$lib/api/client/users';
+import { getUser, updateSettings } from '$lib/api/client/users';
 import { getModulesDutch, getModulesEnglish } from '$lib/api/client/vkms';
 import { vkms } from './vkm';
 
