@@ -42,6 +42,7 @@
 	"enquete_tooltip_text_html": "Deze vraag helpt ons te begrijpen waar jij graag mee bezig bent. <br><br> Op basis van de onderwerpen die jij kiest kan het AI-model beter inschatten welke keuzemodules waarschijnlijk goed bij jou passen. <br><br> Je antwoorden hebben dus direct invloed op de aanbevelingen die je straks te zien krijgt.",
 	"enquete_rating_tooltip_title": "Wat houdt deze beoordeling in?",
 	"enquete_rating_tooltip_content": "Met deze beoordeling geef je aan hoe belangrijk deze vraag voor jou is. <br><br> Dit helpt ons om de aanbevelingen nog beter af te stemmen op jouw voorkeuren.",
+	"enquete_skip": "Enquête overslaan",
 	"results": "resultaten",
 	"view_text": "Bekijk keuzemodule",
 	"search": "Zoek op naam",
@@ -67,6 +68,9 @@
 	"study_counselor": "Studieloopbaan begeleider",
 	"learningoutcomes_title": "Leeruitkomsten",
 	"logout_description": "Via onderstaande knop kun je uitloggen uit je account.",
+	"retake_survey": "Enquête opnieuw invullen",
+	"wait_a_moment": "Even wachten...",
+	"login": "Inloggen",
 	"faq": {
 		"title": "Veelgestelde vragen",
 		"questions": {

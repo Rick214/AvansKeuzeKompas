@@ -4,7 +4,7 @@
 	import { user } from '$lib/stores/auth';
 	import type { User } from '$lib/types/user';
 	import { vkms } from '$lib/stores/vkm';
-	import { getModules } from '$lib/api/client/vkms';
+	import { getModulesDutch, getModulesEnglish } from '$lib/api/client/vkms';
 
 	type ErrorKey = keyof typeof $translations.errors;
 
@@ -65,8 +65,8 @@
 
 			const { user: userData }: { user: User } = await res.json();
 
-			vkms.set(await getModules());
 			user.set(userData);
+			vkms.set(userData.language === "nl_NL" ? await getModulesDutch() : await getModulesEnglish());
 
 			if (userData.aiRecommendedVKMs.length > 0) {
 				await goto('/home');
@@ -155,12 +155,13 @@
 					type="submit"
 					disabled={isSubmitting}
 					class="mt-2 rounded-lg bg-(--color-accent) px-8 py-2 text-sm
-						font-semibold text-(--secondary-color) transition
-						hover:opacity-90 focus:outline-none focus:ring-2
+						font-semibold text-(--secondary-color)
+						focus:outline-none focus:ring-2
 						focus:ring-(--color-accent)
-						disabled:cursor-not-allowed disabled:opacity-50"
+						disabled:cursor-not-allowed disabled:opacity-50
+						hover:opacity-75 hover:scale-98 transition duration-200 cursor-pointer"
 				>
-					{isSubmitting ? 'Even wachten...' : 'Login'}
+					{isSubmitting ? $translations.wait_a_moment : $translations.login}
 				</button>
 			</div>
 		</form>

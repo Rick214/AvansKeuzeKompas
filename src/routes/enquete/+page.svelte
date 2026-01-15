@@ -5,6 +5,8 @@
   import questions_en_US from '$lib/data/questions_en_US.json';
   import { Circle } from 'svelte-loading-spinners';
 	import Tooltip from '$lib/components/ui/Tooltip.svelte';
+	import { goto } from '$app/navigation';
+	import { submitEnquete } from '$lib/api/client/ai';
 
   let step = 0;
   type TranslationKey = keyof typeof $translations;
@@ -65,22 +67,19 @@
       }));
 
       // FOR DEBUGGING PURPOSES
-      // console.log('Submitting answers:', answerList);
+      console.log('Submitting answers:', answerList);
 
-      const response = await fetch('/api/enquete', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ answers: answerList })
-      });
-
-      if (response.ok) alert($translations.enquete_thank_you_message);
-      else alert($translations.enquete_error_submission_failed);
+      await submitEnquete(answerList)
+      goto('/home');
     } catch (err) {
       console.error(err);
-      alert($translations.enquete_error_submission_failed);
     } finally {
       isLoading = false;
     }
+  }
+
+  function skipEnquete() {
+    goto('/home');
   }
 </script>
 
@@ -116,7 +115,21 @@
       </h2>
 
      <RadioForm
-        items={questions[step - 1].options.map(o => ({ label: o, value: o, name: questions[step - 1].name }))}
+        items={questions[step - 1].options.map(o => ({
+          label: o,
+          value: o,
+          name: questions[step - 1].name
+        }))}
+
+        otherLanguageItems={
+          ($preferences.language === 'nl_NL'
+            ? questions_en_US
+            : questions_nl_NL
+          )[step - 1].options.map(o => ({
+            label: o,
+            value: o
+          }))
+        }
         bind:selected={responses[step - 1].answer}
         on:change={(e) => setAnswer(step - 1, e.detail)}
       />
@@ -164,7 +177,7 @@
     <div class="flex flex-wrap {step === 0 ? 'justify-end' : 'justify-between'} mt-8">
       <button
         type="button"
-        class="{step === 0 ? 'hidden' : ''} w-24 sm:w-32 px-4 py-2 rounded-xl bg-(--color-accent) text-black opacity-75 hover:opacity-100 transition duration-200"
+        class="{step === 0 ? 'hidden' : ''} min-w-w-24 sm:min-w-w-32 px-4 py-2 rounded-xl bg-(--color-accent) text-black hover:opacity-75 hover:scale-98 transition duration-200 cursor-pointer"
         on:click={() => step = Math.max(0, step - 1)}
         disabled={step === 0}
       >
@@ -172,17 +185,36 @@
       </button>
 
       {#if step <= questions.length}
-        <button
-          type="button"
-          class="w-24 sm:w-32 px-4 py-2 rounded-xl bg-(--color-accent) text-black opacity-90 hover:opacity-100 transition duration-200"
-          on:click={handleNext}
-        >
-        {step === 0 ? $translations.start_enquete : $translations.enquete_next}
-        </button>
+        {#if step === 0}
+        <div class="flex justify-between align-center w-full">
+          <button
+            type="button"
+            class="min-w-24 sm:min-w-w-32 px-4 py-2 rounded-xl bg-(--color-accent) text-black hover:opacity-75 hover:scale-98 transition duration-200 cursor-pointer"
+            on:click={skipEnquete}
+          >
+          {$translations.enquete_skip}
+          </button>
+          <button
+            type="button"
+            class="min-w-w-24 sm:min-w-w-32 px-4 py-2 rounded-xl bg-(--color-accent) text-black hover:opacity-75 hover:scale-98 transition duration-200 cursor-pointer"
+            on:click={handleNext}
+          >
+          {$translations.start_enquete}
+          </button>
+        </div>
+        {:else}
+          <button
+            type="button"
+            class="min-w-w-24 sm:min-w-w-32 px-4 py-2 rounded-xl bg-(--color-accent) text-black hover:opacity-75 hover:scale-98 transition duration-200 cursor-pointer"
+            on:click={handleNext}
+          >
+            {$translations.enquete_next}
+          </button>
+        {/if}
       {:else}
         <button
           type="button"
-          class="{isLoading && "flex justify-between"} w-24 sm:w-32 px-4 py-2 rounded-xl bg-(--color-accent) text-black opacity-75 hover:opacity-100 transition-colors duration-200"
+          class="{isLoading && "flex justify-between"} min-w-w-24 sm:min-w-w-32 px-4 py-2 rounded-xl bg-(--color-accent) text-black hover:opacity-75 hover:scale-98 transition duration-200 cursor-pointer"
           on:click={handleSubmit}
           disabled={isLoading}
         >

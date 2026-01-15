@@ -49,7 +49,7 @@
 				{/if}
 			</button>
 		{/each}
-		<button on:click={logout} class="bg-(--color-accent) text-black px-4 py-2 rounded-md text-sm font-medium opacity-90 hover:opacity-100 transition-opacity">
+		<button on:click={logout} class="bg-(--color-accent) text-black px-4 py-2 rounded-md text-sm font-medium opacity-90 hover:opacity-75 hover:scale-98 transition duration-200 cursor-pointer">
 			{$translations.navigation.logout}
 		</button>
 	</div>
