@@ -16,7 +16,8 @@
     { label: $translations.navigation.search, iconActive: 'magnifying-glass', iconInactive: 'magnifying-glass', href: '/modules' },
     { label: $translations.navigation.my_profile, iconActive: 'user', iconInactive: 'user', href: '/profile' }
   ];
-
+  
+  const deniedPaths = ['/login', '/auth'];
   let activeIndex: number = 0;
 
   // Update active index when page changes
@@ -32,7 +33,8 @@
 
 </script>
 <Footer />
-<div class="md:hidden fixed bottom-0 left-0 right-0 bg-(--color-surface) shadow flex justify-around h-16 z-50" role="navigation" aria-label="Mobile navigation">
+{#if $page.url.pathname && !deniedPaths.some((path) => $page.url.pathname.startsWith(path))}
+ <div class="md:hidden fixed bottom-0 left-0 right-0 bg-(--color-surface) shadow flex justify-around h-16 z-50" role="navigation" aria-label="Mobile navigation">
   {#each items as item, index}
     <button
       type="button"
@@ -53,3 +55,4 @@
     </button>
   {/each}
 </div>
+{/if}

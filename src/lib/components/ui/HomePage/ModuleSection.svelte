@@ -2,43 +2,11 @@
 	import type { Module } from '$lib/types/vkm';
 	import { user } from '$lib/stores/auth';
 	import { Favorites } from '$lib/api/client/favorites';
+	import VkmImage from '../VkmImage.svelte';
 
 	$: favoriteSet = new Set($user.favoriteVKMs);
 
 	let toggling = new Set<number>();
-	const themeSections = {
-		"Psychologie & Gedrag": "psychology",
-		"Sociaal & Maatschappelijk": "social",
-		"Medisch & Zorg": "medical",
-		"Ruimtelijke & Duurzame Ontwikkeling": "durable",
-		"Business, Finance & Economie": "business",
-		"Juridisch": "juridical",
-		"Technologie & Digitalisering": "tech",
-		"Engineering & Techniek": "tech",
-		"Biomedisch & Life Sciences": "biomedical",
-		"Onderwijs & Pedagogiek": "education",
-		"Onderzoek & innovatie": "research", 
-		"Internationaal": "international",
-		"Duurzaamheid": "durable",
-		"Creatief & Media": "social",
-	} as const;
-
-	type ThemeSectionKey = keyof typeof themeSections;
-
-	const imagesPerTheme: Record<string, number> = {
-		psychology: 2,
-		social: 4,
-		medical: 2,
-		durable: 4,
-		business: 2,
-		juridical: 2,
-		tech: 4,
-		biomedical: 2,
-		education: 2,
-		research: 3,
-		international: 2,
-		default: 1
-	};
 
 	async function toggleFavorite(id: number) {
 		if (toggling.has(id)) return;
@@ -72,9 +40,6 @@
 		modules: Module[];
 	};
 	
-	const title = section.title as ThemeSectionKey;
-	const imageTheme = themeSections[title] || 'default';
-
 	let row: HTMLDivElement;
 	let hasOverflow = false;
 
@@ -113,16 +78,6 @@
 			}
 		};
 	}
-
-	function chooseImage(): string {
-		// Pick a random image for the theme
-		const count = imagesPerTheme[imageTheme] || 1;
-		const randomIndex = Math.floor(Math.random() * count) + 1;
-
-		// Returns the image path
-		return `/images/${imageTheme}/${imageTheme}-${randomIndex}.jpg`; // Must be a .jpg file
-	}
-
 </script>
 
 <div class="my-3">
@@ -145,7 +100,7 @@
 			{#each section.modules as module}
 				<div class="relative shadow-md">
 					<a href={`/modules/${module.id}?from=/home`} class="relative bg-(--color-surface-alt) w-50 h-26 md:w-60 md:h-32 rounded-lg p-3 flex flex-col shrink-0 snap-start hover:scale-98 transition overflow-hidden">
-						<img src={chooseImage()}  alt={module.name} class="absolute inset-0 w-full h-full object-cover" />
+						<VkmImage { module } />
 						<div class="absolute inset-0 w-full h-full bg-black opacity-50 z-1 hover:opacity-25 transition duration-200"></div>
 						<p class="mt-auto text-sm font-medium line-clamp-2 text-white z-3">
 							{module.name}
