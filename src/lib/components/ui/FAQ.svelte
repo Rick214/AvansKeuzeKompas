@@ -27,7 +27,17 @@
 						class="px-5 overflow-hidden transition-all duration-300 bg-(--color-surface-alt)"
 						style="max-height: {openIndex === i ? '200px' : '0px'}"
 					>
-						<p class="py-4 text-(--primary-color)">{faq.answer}</p>
+						{#if typeof faq.answer === 'string'}
+							{faq.answer}
+						{:else}
+							{faq.answer.text}
+							<a
+								href={"https://avans.sharepoint.com/sites/student-support-tijdens-je-studie/SitePages/Hulp-bij-het-maken-van-keuzes.aspx"}
+								class="underline ml-1 hover:opacity-80"
+							>
+								{faq.answer.href_text}
+							</a>
+						{/if}
 					</div>
 				</div>
 			{/each}

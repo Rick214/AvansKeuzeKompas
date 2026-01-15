@@ -5,6 +5,29 @@
     import { vkms } from '$lib/stores/vkm';
 	import { getUser, updateChosenModules, updateSettings } from '$lib/api/client/users';
 
+    // settings for store
+    let language: string;
+    let darkMode: string;
+    let fontSize: number;
+
+    $: if ($user) {
+        language = $user.language;
+        darkMode = $user.darkmode;
+        fontSize = $user.fontsize;
+    }
+
+
+    async function saveUserSetting(setting: Partial<{
+        language: string;
+        darkMode: string;
+        fontSize: number;
+    }>) {
+        if (await updateSettings(setting)) {
+            const updatedUser = await getUser();
+            user.set(updatedUser);
+        };
+        
+    }
     // VKM Data
     const indexes = [0, 1, 2];
     $: modules = $vkms;
@@ -52,21 +75,23 @@
     }
 
 
-    $: notificationPreference = $preferences.notificationPreference;
+    $: notificationPreference = $user.notifications;
 
     async function toggleNotifications() {
-        const current = $preferences.notificationPreference; // true/false
+        const current = $user.notifications;
         const newValue = !current;
 
         // Saving notification preference
         await updateSettings({ notifications: newValue });
-
         // Updating preferences store
         preferences.update(p => {
             const newPreference = p.notificationPreference === $user.notifications ? false : true;
             sessionStorage.setItem('notificationPreference', newPreference.toString());
             return { ...p, notificationPreference: newPreference };
         });
+        // Updating user store
+        const userData = await getUser();
+        user.set(userData);
     }
 
     async function saveChosenModules() {
@@ -190,9 +215,11 @@
             <div class="flex flex-col col-span-2 col-start-6 flex-1 h-full w-full max-w-[500px] min-w-auto xl:min-w-[280px] xl:max-w-[450px] bg-(--color-surface) p-12 rounded-2xl shadow-md">
                 <h2 class="text-xl font-semibold mb-4">{$translations.personal_settings}</h2>
                 <!-- Language dropdown -->
+
+                
                 <form class="flex flex-row items-center justify-between w-full my-2 flex-wrap gap-2">
                     <label for="language" class="block text-md font-semibold w-full min-[430px]:w-auto min-[1280px]:w-full min-[1460px]:w-auto">{$translations.settings_language}</label>
-                    <select bind:value={$preferences.language} id="language" class="block w-48 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) placeholder:text-body border-(--color-surface-alt)">
+                    <select bind:value={language} id="language" class="block w-48 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) placeholder:text-body border-(--color-surface-alt)" on:change={() => saveUserSetting({ language })}>
                         <option value="nl_NL">{$translations.dutch}</option>
                         <option value="en_US">{$translations.english}</option>
                     </select>
@@ -201,8 +228,8 @@
                 <!-- Font scale dropdown -->
                 <form class="hidden xl:flex flex-row items-center justify-between w-full my-2 flex-wrap gap-2">
                     <label for="fontSize" class="block text-md font-semibold w-full min-[430px]:w-auto min-[1280px]:w-full min-[1460px]:w-auto">{$translations.settings_font_size}</label>
-                    <select bind:value={$preferences.fontScale} id="fontSize" class="block w-48 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) placeholder:text-body border-(--color-surface-alt)">
-                        <option value={100}>100% (default)</option>
+                    <select bind:value={fontSize} id="fontSize" class="block w-48 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) placeholder:text-body border-(--color-surface-alt)" on:change={() => saveUserSetting({ fontSize })}>
+                        <option value={100}>100%</option>
                         <option value={125}>125%</option>
                         <option value={150}>150%</option>
                     </select>
@@ -211,7 +238,8 @@
                 <!-- Theme dropdown -->
                 <form class="flex flex-row items-center justify-between w-full my-2 flex-wrap gap-2">
                     <label for="theme" class="block text-md font-semibold w-full min-[430px]:w-auto min-[1280px]:w-full min-[1460px]:w-auto">{$translations.settings_theme}</label>
-                    <select bind:value={$preferences.theme} id="theme" class="block w-48 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) placeholder:text-body border-(--color-surface-alt)">
+                    <select
+                        bind:value={darkMode} id="theme" class="block w-48 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) placeholder:text-body border-(--color-surface-alt)" on:change={() => saveUserSetting({ darkMode })}>
                         <option value="system">{$translations.system_preferences}</option>
                         <option value="light">{$translations.light_mode}</option>
                         <option value="dark">{$translations.dark_mode}</option>

@@ -89,6 +89,13 @@
 			"contact_instructor": {
 				"question": "Hoe kan ik contact opnemen met de docent van een keuzemodule?",
 				"answer": "Je kunt contact opnemen met de docent via Teams. Ga naar de modulepagina en klik op de contactlink om een bericht te sturen."
+			},
+			"more_info": {
+				"question": "waar kan ik nog meer hulp krijgen bij het kiezen?",
+				"answer": {
+					"text": "deze informatie kun je vinden op",
+					"href_text": "Avans Sharepoint"
+				}
 			}
 		}
 	},
