@@ -63,7 +63,7 @@
     {module.name}
   </h1>
 
-  <div class="flex items-center gap-3">
+  <div class="flex items-center gap-3 z-2">
     <span class="hidden lg:inline text-sm font-bold">
       {$translations.rating}
     </span>

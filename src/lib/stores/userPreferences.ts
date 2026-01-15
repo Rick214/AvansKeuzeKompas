@@ -3,7 +3,7 @@ import { browser } from '$app/environment';
 import nl_NL from '../i18n/nl_NL.json';
 import en_US from '../i18n/en_US.json';
 import { user } from './auth';
-import { getUser, updateSettings } from '$lib/api/client/users';
+import { updateSettings } from '$lib/api/client/users';
 import { getModulesDutch, getModulesEnglish } from '$lib/api/client/vkms';
 import { vkms } from './vkm';
 
@@ -43,8 +43,8 @@ user.subscribe((u) => {
       ...p,
       language: u.language as Language, // cast to proper type  
       fontScale: u.fontsize as FontScale, 
-      theme: u.darkmode ? 'dark' : 'light',
-      notificationPreference: u.notifications ? true : false
+      theme: u.darkmode as Theme,
+      notificationPreference: u.notifications
     }));
   }
 });

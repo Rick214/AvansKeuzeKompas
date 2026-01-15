@@ -89,6 +89,13 @@
 			"contact_instructor": {
 				"question": "How can I contact the instructor of an elective module?",
 				"answer": "You can contact the instructor via Teams. Go to the module page and click on the contact link to send a message."
+			},
+			"more_info": {
+				"question": "Where can I get more help choosing?",
+				"answer": {
+					"text": "You can find this information on",
+					"href_text": "Avans Sharepoint"
+				}
 			}
 		}
 	},
