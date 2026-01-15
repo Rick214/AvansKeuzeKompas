@@ -1,0 +1,122 @@
+{
+	"welcome_title": "Welcome to our website",
+	"welcome_message": "Do you like it?",
+	"registered_title": "registered",
+	"recommended_title": "Recommended",
+	"favorites_title": "Favorites",
+	"system_preferences": "System Preferences",
+	"light_mode": "Light Mode",
+	"dark_mode": "Dark Mode",
+	"loading": "Loading...",
+	"dutch": "Dutch",
+	"english": "English",
+	"rating": "Student rating",
+	"back": "Back",
+	"description_title": "What will you learn in this elective module?",
+	"register_text": "Register via Osiris",
+	"favorite_text_inactive": "Mark as favorite",
+	"favorite_text_active": "Remove from favorites",
+	"questions_title": "Do you have any questions about this module?",
+	"contact_text": "You can now contact the lecturer who teaches this module via Teams.",
+	"or": "or",
+	"password": "Password",
+	"password_reset": "Forgot your password? click",
+	"password_reset_link": "here",
+	"password_reset_complete": "to reset your password.",
+	"login_title": "Login",
+	"enquete_title": "Questionnaire",
+	"enquete_introduction_title": "Welcome to the survey!",
+	"enquete_introduction_message_html": "We would like to get to know you better to help you find the right study or career path. <br><br> This short survey consists of several questions about your interests, preferences, and goals. It takes approximately 5 minutes to complete. Your answers are treated confidentially and used only to provide better advice. <br><br><b>How does our AI model work?</b><br> Our system uses only your survey answers to find modules that match your interests. It looks at which subjects align with your preferences and generates a list of suggestions. For each module, we also briefly explain why it suits you. <br><br> Good luck!",
+	"enquete_completion_title": "Thank you for completing!",
+	"enquete_completion_message": "You have completed the survey. Click 'Finish' to submit your answers.",
+	"enquete_rating_title": "How important is this question to you?",
+	"enquete_next": "Next",
+	"enquete_previous": "Previous",
+	"start_enquete": "Start survey",
+	"enquete_submit": "Finish",
+	"enquete_error_missing_value": "Please select an answer for this question before proceeding.",
+	"enquete_error_missing_rating": "Please indicate how important this question is to you before proceeding.",
+	"enquete_error_submission_failed": "Something went wrong while submitting your answers. Please try again later.",
+	"enquete_thank_you_message": "Thank you for completing the survey!",
+	"enquete_tooltip_title": "What does this question mean?",
+	"enquete_tooltip_text_html": "This question helps us understand what you enjoy working on. <br><br> Based on the topics you choose, the AI model can better estimate which elective modules are likely a good fit for you. <br><br> Your answers will therefore directly influence the recommendations you will see.",
+	"enquete_rating_tooltip_title": "What does this rating mean?",
+	"enquete_rating_tooltip_content": "With this rating, you indicate how important this question is to you. <br><br> This helps us to better tailor the recommendations to your preferences.",
+	"enquete_skip": "Skip survey",
+	"results": "results",
+	"view_text": "view module",
+	"search": "Search by name",
+	"location": "Location",
+	"popular": "Popular",
+	"alphabetical": "Alphabetical",
+	"page_does_not_exist": "Oops… this page doesn’t exist 🧭",
+	"back_to_previous_page": "Go back",
+	"back_to_home": "Back to home",
+	"settings_notifications": "Notifications",
+	"settings_theme": "Theme",
+	"settings_font_size": "Font size",
+	"settings_language": "Language",
+	"personal_settings": "Display settings",
+	"elective_module": "Elective module",
+	"registered_elective_modules": "Registered elective modules",
+	"select_module_placeholder": "Select module",
+	"update_module_preferences": "Update elective module preferences",
+	"settings_title": "Personal Settings",
+	"age": "Age",
+	"years_old": "years old",
+	"study": "Study",
+	"study_counselor": "Study counselor",
+	"learningoutcomes_title": "Learningoutcomes",
+	"logout_description": "You can log out of your account using the button below.",
+	"retake_survey": "Retake survey",
+	"wait_a_moment": "Wait a moment...",
+	"login": "Login",
+	"faq": {
+		"title": "Frequently Asked Questions",
+		"questions": {
+			"how_to_register": {
+				"question": "How do I register for an elective module?",
+				"answer": "You can register for an elective module via the Osiris system. Log in with your student credentials and navigate to the course registration section."
+			},
+			"change_personal_settings": {
+				"question": "How can I change my personal settings?",
+				"answer": "Go to the settings page by clicking on your profile and select 'Settings'. Here you can adjust your preferences, such as language, theme, and notifications."
+			},
+			"forgot_password": {
+				"question": "What should I do if I forget my password?",
+				"answer": "Click on the 'Forgot password?' link on the login page. Follow the instructions to reset your password via your registered email address."
+			},
+			"contact_instructor": {
+				"question": "How can I contact the instructor of an elective module?",
+				"answer": "You can contact the instructor via Teams. Go to the module page and click on the contact link to send a message."
+			},
+			"more_info": {
+				"question": "Where can I get more help choosing?",
+				"answer": {
+					"text": "You can find this information on",
+					"href_text": "Avans Sharepoint"
+				}
+			}
+		}
+	},
+	"navigation": {
+		"home": "Home",
+		"search": "Search",
+		"my_profile": "My Profile",
+		"login": "Login",
+		"logout": "Logout"
+	},
+	"errors": {
+		"email_required": "Email is required",
+		"email_invalid": "Invalid email address",
+		"password_required": "Password is required",
+		"password_min_length": "Minimum 6 characters",
+		"invalid_credentials": "Invalid login credentials",
+		"unknown": "An unknown error occurred",
+		"user_not_found": "User not found",
+		"unauthorized": "Unauthorized access",
+		"forbidden": "Access forbidden",
+		"bad_request": "Invalid request",
+		"server_error": "Server error, please try again later"
+	}
+}

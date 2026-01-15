@@ -1,0 +1,122 @@
+{
+	"welcome_title": "Welkom op onze website!",
+	"welcome_message": "Vind je het leuk?",
+	"registered_title": "Ingeschreven",
+	"recommended_title": "Aangeraden",
+	"favorites_title": "Favorieten",
+	"system_preferences": "Systeemvoorkeuren",
+	"light_mode": "Licht modus",
+	"dark_mode": "Donkere modus",
+	"loading": "Laden...",
+	"dutch": "Nederlands",
+	"english": "Engels",
+	"rating": "Studentenwaardering",
+	"back": "Terug",
+	"description_title": "Wat leer je in de keuzemodule?",
+	"register_text": "Aanmelden via Osiris",
+	"favorite_text_inactive": "Markeer als favoriet",
+	"favorite_text_active": "Verwijder uit favorieten",
+	"questions_title": "Heb je nog vragen over deze module?",
+	"contact_text": "Je kan nu via Teams in contact komen met de docent die deze module geeft.",
+	"or": "of",
+	"password": "Wachtwoord",
+	"password_reset": "Wachtwoord vergeten? klik",
+	"password_reset_link": "hier",
+	"password_reset_complete": "om je wachtwoord opnieuw in te stellen.",
+	"login_title": "Inloggen",
+	"enquete_title": "Vragenlijst",
+	"enquete_introduction_title": "Welkom bij de enquête!",
+	"enquete_introduction_message_html": "We willen je graag beter leren kennen om je te helpen bij het vinden van de juiste studie- of loopbaankeuze. <br><br> Deze korte enquête bestaat uit een aantal vragen over jouw interesses, voorkeuren en doelen. Het invullen duurt ongeveer 5 minuten. Jouw antwoorden worden vertrouwelijk behandeld en alleen gebruikt om je beter te kunnen adviseren. <br><br><b>Hoe werkt ons AI-model?</b><br> Ons systeem gebruikt alleen jouw antwoorden uit de enquête om modules te vinden die bij jouw interesses passen. Het kijkt welke onderwerpen overeenkomen en maakt op basis daarvan een lijst met suggesties. Bij elke module leggen we ook kort uit waarom die bij jou past. <br><br> Veel succes!",
+	"enquete_completion_title": "Bedankt voor het invullen!",
+	"enquete_completion_message": "Je hebt de enquête volledig ingevuld. Klik op 'Afronden' om je antwoorden te versturen.",
+	"enquete_rating_title": "Hoe belangrijk is deze vraag voor jou?",
+	"enquete_next": "Volgende",
+	"enquete_previous": "Vorige",
+	"start_enquete": "Start enquête",
+	"enquete_submit": "Afronden",
+	"enquete_error_missing_value": "Kies een antwoord op deze vraag voordat je verdergaat.",
+	"enquete_error_missing_rating": "Geef aan hoe belangrijk deze vraag voor jou is om verder te gaan.",
+	"enquete_error_submission_failed": "Er ging iets mis bij het versturen van je antwoorden. Probeer het later opnieuw.",
+	"enquete_thank_you_message": "Bedankt voor het invullen van de enquête!",
+	"enquete_tooltip_title": "Wat houdt deze vraag in?",
+	"enquete_tooltip_text_html": "Deze vraag helpt ons te begrijpen waar jij graag mee bezig bent. <br><br> Op basis van de onderwerpen die jij kiest kan het AI-model beter inschatten welke keuzemodules waarschijnlijk goed bij jou passen. <br><br> Je antwoorden hebben dus direct invloed op de aanbevelingen die je straks te zien krijgt.",
+	"enquete_rating_tooltip_title": "Wat houdt deze beoordeling in?",
+	"enquete_rating_tooltip_content": "Met deze beoordeling geef je aan hoe belangrijk deze vraag voor jou is. <br><br> Dit helpt ons om de aanbevelingen nog beter af te stemmen op jouw voorkeuren.",
+	"enquete_skip": "Enquête overslaan",
+	"results": "resultaten",
+	"view_text": "Bekijk keuzemodule",
+	"search": "Zoek op naam",
+	"location": "Locatie",
+	"popular": "Populair",
+	"alphabetical": "Alfabetisch",
+	"page_does_not_exist": "Oeps… deze pagina bestaat niet 🧭",
+	"back_to_previous_page": "Ga terug",
+	"back_to_home": "Terug naar home",
+	"settings_notifications": "Notificaties",
+	"settings_theme": "Thema",
+	"settings_font_size": "Lettergrootte",
+	"settings_language": "Taal",
+	"personal_settings": "Weergave instellingen",
+	"registered_elective_modules": "Ingeschreven keuzemodules",
+	"elective_module": "Keuzemodule",
+	"select_module_placeholder": "Selecteer module",
+	"update_module_preferences": "Werk keuzemodule voorkeuren bij",
+	"settings_title": "Persoonlijke Instellingen",
+	"age": "Leeftijd",
+	"years_old": "jaar",
+	"study": "Studie",
+	"study_counselor": "Studieloopbaan begeleider",
+	"learningoutcomes_title": "Leeruitkomsten",
+	"logout_description": "Via onderstaande knop kun je uitloggen uit je account.",
+	"retake_survey": "Enquête opnieuw invullen",
+	"wait_a_moment": "Even wachten...",
+	"login": "Inloggen",
+	"faq": {
+		"title": "Veelgestelde vragen",
+		"questions": {
+			"how_to_register": {
+				"question": "Hoe schrijf ik mij in voor een keuzemodule?",
+				"answer": "Je kunt je inschrijven voor keuzemodules via Osiris. Log in op je Osiris-account, zoek de gewenste keuzemodule op en volg de inschrijvingsinstructies."
+			},
+			"change_personal_settings": {
+				"question": "Hoe kan ik mijn persoonlijke instellingen wijzigen?",
+				"answer": "Ga naar de instellingenpagina door op je profiel te klikken en selecteer 'Instellingen'. Hier kun je je voorkeuren aanpassen, zoals taal, thema en notificaties."
+			},
+			"forgot_password": {
+				"question": "Wat moet ik doen als ik mijn wachtwoord ben vergeten?",
+				"answer": "Klik op de 'Wachtwoord vergeten?' link op de inlogpagina. Volg de instructies om je wachtwoord opnieuw in te stellen via je geregistreerde e-mailadres."
+			},
+			"contact_instructor": {
+				"question": "Hoe kan ik contact opnemen met de docent van een keuzemodule?",
+				"answer": "Je kunt contact opnemen met de docent via Teams. Ga naar de modulepagina en klik op de contactlink om een bericht te sturen."
+			},
+			"more_info": {
+				"question": "Waar kan ik nog meer hulp krijgen bij het kiezen?",
+				"answer": {
+					"text": "Deze informatie kun je vinden op",
+					"href_text": "Avans Sharepoint"
+				}
+			}
+		}
+	},
+	"navigation": {
+		"home": "Home",
+		"search": "Zoeken",
+		"my_profile": "Mijn Profiel",
+		"login": "Inloggen",
+		"logout": "Uitloggen"
+	},
+	"errors": {
+		"email_required": "E-mail is verplicht",
+		"email_invalid": "Ongeldig e-mailadres",
+		"password_required": "Wachtwoord is verplicht",
+		"password_min_length": "Minimaal 6 tekens",
+		"invalid_credentials": "Ongeldige inloggegevens",
+		"unknown": "Er is een onbekende fout opgetreden",
+		"user_not_found": "Gebruiker niet gevonden",
+		"unauthorized": "Onbevoegde toegang",
+		"forbidden": "Toegang verboden",
+		"bad_request": "Ongeldig verzoek",
+		"server_error": "Serverfout, probeer het later opnieuw"
+	}
+}

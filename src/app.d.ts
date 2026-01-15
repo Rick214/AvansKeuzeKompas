@@ -7,7 +7,15 @@ declare global {
 		// interface PageData {}
 		// interface PageState {}
 		// interface Platform {}
+		interface Locals {
+			user: import('$lib/types/user').User | null;
+		}
 	}
+}
+
+declare module '*.svg' {
+	const src: string;
+	export default src;
 }
 
 export {};
