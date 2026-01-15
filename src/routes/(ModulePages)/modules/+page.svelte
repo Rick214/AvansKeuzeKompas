@@ -49,21 +49,51 @@
 	function handleFilterChange(type: string, value: string) {
 		updateParam(type, value);
 	}
-
+	function dedupeModules(modules: Module[]): Module[] {
+		const seen = new Set<string>();
+		return modules.filter((m) => {
+			const name = String(m.name).trim();
+			if (seen.has(name)) return false;
+			seen.add(name);
+			return true;
+		});
+	}
 	// ───────────────────────────────────────
 	// FILTER MODULES
 	// ───────────────────────────────────────
-	$: filtered = modules
-		.filter((m) => m.name.toLowerCase().includes(search.toLowerCase()))
-		.filter((m) => (locationFilter === 'all' ? true : m.location.includes(locationFilter)))
-		.filter((m) => (levelFilter === 'all' ? true : m.level === levelFilter))
-		.filter((m) => (ectsFilter === 'all' ? true : m.studycredit === Number(ectsFilter)))
-		.sort((a, b) => {
-			if (sort === 'popular') return b.popularity_score - a.popularity_score;
-			if (sort === 'az') return a.name.localeCompare(b.name);
-			if (sort === 'za') return b.name.localeCompare(a.name);
-			return 0;
-		});
+	$: filtered = dedupeModules(
+		modules
+			.map((m) => {
+				let score = 0;
+				const q = search.toLowerCase();
+
+				if (q.length >= 3) {
+					if (m.name.toLowerCase().includes(q)) score += 10;
+					if (m.tags?.some((tag) => tag.toLowerCase().includes(q))) score += 5;
+					if (m.description?.toLowerCase().includes(q)) score += 3;
+					if (m.learningoutcomes?.toLowerCase().includes(q)) score += 2;
+				} else {
+					score = 1;
+				}
+
+				return { module: m, score };
+			})
+			.filter(
+				({ module, score }) =>
+					score > 0 &&
+					(locationFilter === 'all' ? true : module.location.includes(locationFilter)) &&
+					(levelFilter === 'all' ? true : module.level === levelFilter) &&
+					(ectsFilter === 'all' ? true : module.studycredit === Number(ectsFilter))
+			)
+			.sort((a, b) => {
+				if (search.length >= 3) return b.score - a.score;
+				if (sort === 'popular') return b.module.popularity_score - a.module.popularity_score;
+				if (sort === 'az') return a.module.name.localeCompare(b.module.name);
+				if (sort === 'za') return b.module.name.localeCompare(a.module.name);
+				return 0;
+			})
+			.map(({ module }) => module)
+	);
 </script>
 
 <div class="min-h-screen bg-(--color-bg) text-(--primary-color) font-(--font-primary)">
