@@ -23,6 +23,9 @@
 	onMount(() => {
 		checkScreen();
 		window.addEventListener('resize', checkScreen);
+		if ($page.url.pathname.startsWith('/login')) {
+			wakeAiModel();
+		}
 
 		return () => {
 			window.removeEventListener('resize', checkScreen);
@@ -41,7 +44,7 @@
 	<main>
 		<slot />
 	</main>
-	
+
 	<MobileNav />
 {:else}
 	<div class="h-screen w-screen flex flex-col justify-center items-center">
