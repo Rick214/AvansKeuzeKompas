@@ -1,14 +1,19 @@
-import { getModulesDutch, getModulesEnglish } from '$lib/api/client/vkms';
-import type { Module } from '$lib/types/vkm';
-import { json } from '@sveltejs/kit';
+import { login } from '$lib/api/client/users';
+import { json, type RequestEvent } from '@sveltejs/kit';
 
-export const GET = async ({ url, cookies }) => {
-    const languageType = url.searchParams.get("languageType");
+export const POST = async ({ request, cookies }: RequestEvent): Promise<Response> => {
+	const { email, password } = await request.json();
 
-    // Token stays HttpOnly
-    const token = cookies.get('auth') ?? "";    
+	const { token, ...user } = await login(email, password);
 
-    const vkms: Module[] = languageType === "nl_NL" ? await getModulesDutch(token) : await getModulesEnglish(token);
+	// Token stays HttpOnly
+	cookies.set('auth', token, {
+		httpOnly: true,
+		secure: true,
+		sameSite: 'none',
+		path: '/',
+		maxAge: 60 * 60 * 24
+	});
 
-    return json({ vkms });
+	return json({ user });
 };

@@ -4,7 +4,6 @@
 	import { user } from '$lib/stores/auth';
 	import type { User } from '$lib/types/user';
 	import { vkms } from '$lib/stores/vkm';
-	import { getModulesDutch, getModulesEnglish } from '$lib/api/client/vkms';
 
 	type ErrorKey = keyof typeof $translations.errors;
 
@@ -50,6 +49,7 @@
 		isSubmitting = true;
 
 		try {
+			// Login and getting user data
 			const res = await fetch('/login', {
 				method: 'POST',
 				body: JSON.stringify({ email, password })
@@ -79,7 +79,7 @@
 			// Get modules
 			const languageType = userData.language === "nl_NL" ? "nl_NL" : "en_US";
 			
-			const resModule = await fetch(`/modules?language=${encodeURIComponent(languageType)}`, {
+			const resModule = await fetch(`/modules?languageType=${encodeURIComponent(languageType)}`, {
 				method: 'GET',
 			});
 
@@ -89,7 +89,7 @@
 			}
 
 			const data = await resModule.json();
-			vkms.set(data.vkms);
+			vkms.set(data);
 
 			if (userData.aiRecommendedVKMs.length > 0) {
 				await goto('/home');

@@ -1,11 +1,31 @@
-import { json } from '@sveltejs/kit';
-import { updateSettings } from '$lib/api/client/users';
+import { json, type RequestEvent } from '@sveltejs/kit';
+import { getUser, updateChosenModules, updateSettings } from '$lib/api/client/users';
 import type { User } from '$lib/types/user.js';
 import type { UserSettingsDto } from '$lib/api/dto/userSettings.dto.js';
 
-export const PATCH = async ({ request, cookies }) => {
+export const GET = async ({ cookies }: RequestEvent): Promise<Response> => {
+    // Token stays HttpOnly
+    const token = cookies.get('auth') ?? "";
+
+    const user: User = await getUser(token);
+
+    return json({ user });
+}
+
+export const POST = async ({ request, cookies }: RequestEvent): Promise<Response> => {
+    const payload = await request.json();
+
+     // Token stays HttpOnly
+    const token = cookies.get('auth') ?? "";
+
+    await updateChosenModules(payload, token);
+
+    return json({ ok: true });
+}
+
+export const PATCH = async ({ request, cookies }: RequestEvent): Promise<Response> => {
     try {
-        const { fontsize, darkmode, language, notifications } = await request.json();
+        const { language, darkmode, fontsize, notifications } = await request.json();
 
         // Token stays HttpOnly
         const token = cookies.get('auth') ?? "";

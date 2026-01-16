@@ -3,8 +3,6 @@ import { browser } from '$app/environment';
 import nl_NL from '../i18n/nl_NL.json';
 import en_US from '../i18n/en_US.json';
 import { user } from './auth';
-import { updateSettings } from '$lib/api/client/users';
-import { getModulesDutch, getModulesEnglish } from '$lib/api/client/vkms';
 import { vkms } from './vkm';
 
 export type FontScale = 100 | 125 | 150 | 175 | 200; // Supported font scales
@@ -34,7 +32,6 @@ export const preferences = writable<Preferences>({
 });
 
 let currentUser: any = null;
-let lastLanguage: Language | null = null;
 user.subscribe(u => currentUser = u);
 
 user.subscribe((u) => {
@@ -73,57 +70,8 @@ if (browser) {
 
   // Subscribe to live updates
   preferences.subscribe(async (p) => {
-    if (currentUser) {
-      // Saving user settings to backend 
-        try {
-          const res = await fetch('/profile', {
-            method: 'PATCH',
-            body: JSON.stringify({ fontScale: p.fontScale, theme: p.theme, language: p.language }),
-          });
-
-          if (!res.ok) {
-            const { error } = await res.json();
-            throw new Error(error ?? 'Unknown error');
-          }
-
-          const { updateUser } = await res.json();
-
-          // Update stores
-          user.set(updateUser);
-          preferences.update(p => ({
-            ...p,
-            fontScale: updateUser.fontsize ?? p.fontScale,
-            theme: updateUser.darkmode ?? p.theme,
-            language: updateUser.language ?? p.language,
-            notificationPreference: updateUser.notifications ?? p.notificationPreference
-          }));
-
-          console.log('Update successfull!');
-        } catch (err) {
-          console.error('Patch call failed:', err);
-        }
-
-        // Update VKM's 
-        const languageType = p.language === "nl_NL" ? "nl_NL" : "en_US";
-        
-        const resModule = await fetch(`/modules?language=${encodeURIComponent(languageType)}`, {
-          method: 'GET',
-        });
-
-        if (!resModule.ok) {
-          const { error } = await resModule.json();
-          throw new Error(error ?? 'unknown');
-        }
-
-        const data = await resModule.json();
-        vkms.set(data.vkms);
-
-        lastLanguage = p.language;
-      }
-    };
-
     // Language & translations
-    translations.set(translationMap[p.language]);
+    translations.set(translationMap[p.language as Language]);
     sessionStorage.setItem('language', p.language);
 
     // Font scale
