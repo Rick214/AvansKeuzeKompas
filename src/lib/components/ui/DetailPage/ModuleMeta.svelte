@@ -19,7 +19,7 @@
 	<!-- Location -->
 	{#each module.location as loc}
 		<button
-			class="px-3 py-2 md:px-6 md:py-3 text-sm md:text-md rounded-full bg-(--color-surface) font-bold hover:opacity-80 cursor-pointer"
+			class="px-3 py-2 md:px-6 md:py-3 text-sm md:text-md rounded-full bg-(--color-surface) font-bold hover:opacity-75 hover:scale-98 transition duration-200 cursor-pointer"
 			on:click={() => goToModulesFilter('location', loc)}
 		>
 			{loc}
@@ -29,7 +29,7 @@
 	<!-- Themes -->
 	{#each module.themes as theme}
 		<button
-			class="px-3 py-2 md:px-6 md:py-3 text-sm md:text-md rounded-full bg-(--color-surface) font-bold hover:opacity-80 cursor-pointer"
+			class="px-3 py-2 md:px-6 md:py-3 text-sm md:text-md rounded-full bg-(--color-surface) font-bold hover:opacity-75 hover:scale-98 transition duration-200 cursor-pointer"
 			on:click={() => goToModulesFilter('theme', theme)}
 		>
 			{theme}
@@ -38,7 +38,7 @@
 
 	<!-- ECTS -->
 	<button
-		class="px-3 py-2 md:px-6 md:py-3 text-sm md:text-md rounded-full bg-(--color-surface) font-bold hover:opacity-80 cursor-pointer"
+		class="px-3 py-2 md:px-6 md:py-3 text-sm md:text-md rounded-full bg-(--color-surface) font-bold hover:opacity-75 hover:scale-98 transition duration-200 cursor-pointer"
 		on:click={() => goToModulesFilter('ects', String(module.studycredit))}
 	>
 		{module.studycredit} ECTS
@@ -46,7 +46,7 @@
 
 	<!-- Level -->
 	<button
-		class="px-3 py-2 md:px-6 md:py-3 text-sm md:text-md rounded-full bg-(--color-surface) font-bold hover:opacity-80 cursor-pointer"
+		class="px-3 py-2 md:px-6 md:py-3 text-sm md:text-md rounded-full bg-(--color-surface) font-bold hover:opacity-75 hover:scale-98 transition duration-200 cursor-pointer"
 		on:click={() => goToModulesFilter('level', module.level)}
 	>
 		{module.level}
