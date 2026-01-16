@@ -134,7 +134,7 @@
     <div class="w-full max-w-7xl xl:max-w-[1600px] px-4 mb-6 xl:mb-none">
         <!-- Header -->
         <div class="flex items-center xl:mb-6 gap-4">
-            <button class="absolute flex items-center text-md xl:text-lg font-medium md:mr-6 hover:opacity-75 duration-200" on:click={() => goto('/home')}>
+            <button class="absolute flex items-center text-md xl:text-lg font-medium md:mr-6 hover:opacity-75 hover:scale-98 transition duration-200 cursor-pointer" on:click={() => goto('/home')}>
                 <span class="material-symbols-outlined mr-1">arrow_circle_left</span>
                 {$translations.back}
             </button>
@@ -149,17 +149,17 @@
                     <div class="relative inline-flex items-center justify-center w-24 h-24 overflow-hidden bg-(--color-surface-alt) rounded-full">
                         <p class="text-3xl font-small text-body">{initials}</p>
                     </div>
-                    <h2 class="my-2 mx-auto text-2xl font-semibold">{$user.fullName}</h2>
+                    <h2 class="my-2 mx-auto text-2xl font-semibold">{$user.fullName ?? '-'}</h2>
                 </div>
                 <ul class="text-lg flex flex-col gap-2">
                     <li>
                         <strong>{$translations.age}:</strong> {age ?? '-'} {$translations.years_old}
                     </li>
                     <li>
-                        <strong>{$translations.study}:</strong> {$user.course}
+                        <strong>{$translations.study}:</strong> {$user.course ?? '-'}
                     </li>
                     <li>
-                        <strong>{$translations.study_counselor}:</strong> {$user.slber}
+                        <strong>{$translations.study_counselor}:</strong> {$user.slber ?? '-'}
                     </li>
                 </ul>
             </div>

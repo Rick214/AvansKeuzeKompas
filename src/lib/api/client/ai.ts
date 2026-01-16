@@ -6,3 +6,9 @@ export async function submitEnquete(answers: any) {
         body: answers
     });
 }
+
+export async function wakeAiModel() {
+    return apiClient('/ready', {
+        method: 'GET',
+    });
+}

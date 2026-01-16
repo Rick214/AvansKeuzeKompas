@@ -2,13 +2,13 @@
   import { translations } from '$lib/stores/userPreferences';
 	import type { Module } from '$lib/types/vkm';
   // Props
+  export let modules: Module[];
   export let search: string;
   export let locationFilter: string;
   export let levelFilter: string;
   export let ectsFilter: string;
   export let themeFilter: string;
   export let sort: string;
-  export let modules: Module[];
 
   export let onSearchChange: (value: string) => void;
   export let onFilterChange: (type: string, value: string) => void;

@@ -8,6 +8,7 @@
 	import { SyncLoader } from 'svelte-loading-spinners';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import { wakeAiModel } from '$lib/api/client/ai';
 
 	const deniedPaths = ['/login', '/auth'];
 	let isXL = true;

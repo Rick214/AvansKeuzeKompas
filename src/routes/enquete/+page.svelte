@@ -6,7 +6,7 @@
   import { Circle } from 'svelte-loading-spinners';
 	import Tooltip from '$lib/components/ui/Tooltip.svelte';
 	import { goto } from '$app/navigation';
-	import { submitEnquete } from '$lib/api/client/ai';
+	import { submitEnquete, wakeAiModel } from '$lib/api/client/ai';
 
   let step = 0;
   type TranslationKey = keyof typeof $translations;
@@ -41,9 +41,14 @@
     hoverRatings = questions.map((_, i) => hoverRatings[i] ?? 0);
   });
 
-   async function handleNext() {
+  function handleNext() {
     if (step > 0) {
       const current = responses[step - 1];
+
+      if (step === 1) {
+        wakeAiModel();
+      }
+
       if (!current.answer) {
         errorKey = 'enquete_error_missing_value';
         return;

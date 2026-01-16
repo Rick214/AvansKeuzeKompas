@@ -20,11 +20,11 @@
 		</p>
 
 		<div class="flex justify-center md:justify-start items-center gap-3">
-			<button class="bg-(--color-accent) text-black font-semibold px-6 py-2 rounded-full transition"> Teams </button>
+			<button class="bg-(--color-accent) text-black font-semibold px-6 py-2 rounded-full hover:opacity-75 hover:scale-98 transition duration-200 cursor-pointer"> Teams </button>
 
 			<span class="text-(--primary-color) text-sm">{$translations.or}</span>
 
-			<button class="bg-(--color-accent) text-black font-semibold px-6 py-2 rounded-full transition"> E-mail </button>
+			<button class="bg-(--color-accent) text-black font-semibold px-6 py-2 rounded-full hover:opacity-75 hover:scale-98 transition duration-200 cursor-pointer"> E-mail </button>
 		</div>
 	</div>
 
