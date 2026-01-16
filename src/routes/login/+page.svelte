@@ -4,7 +4,6 @@
 	import { user } from '$lib/stores/auth';
 	import type { User } from '$lib/types/user';
 	import { vkms } from '$lib/stores/vkm';
-	import { getModulesDutch, getModulesEnglish } from '$lib/api/client/vkms';
 
 	type ErrorKey = keyof typeof $translations.errors;
 
@@ -50,11 +49,9 @@
 		isSubmitting = true;
 
 		try {
+			// Login and getting user data
 			const res = await fetch('/login', {
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
 				body: JSON.stringify({ email, password })
 			});
 
@@ -78,7 +75,21 @@
 			}));
 
 			user.set(userData);
-			vkms.set(userData.language === "nl_NL" ? await getModulesDutch() : await getModulesEnglish());
+
+			// Get modules
+			const languageType = userData.language === "nl_NL" ? "nl_NL" : "en_US";
+			
+			const resModule = await fetch(`/modules?languageType=${encodeURIComponent(languageType)}`, {
+				method: 'GET',
+			});
+
+			if (!resModule.ok) {
+				const { error } = await resModule.json();
+				throw new Error(error ?? 'unknown');
+			}
+
+			const data = await resModule.json();
+			vkms.set(data);
 
 			if (userData.aiRecommendedVKMs.length > 0) {
 				await goto('/home');

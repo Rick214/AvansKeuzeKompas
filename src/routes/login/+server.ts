@@ -1,7 +1,7 @@
-import { json } from '@sveltejs/kit';
 import { login } from '$lib/api/client/users';
+import { json, type RequestEvent } from '@sveltejs/kit';
 
-export const POST = async ({ request, cookies }) => {
+export const POST = async ({ request, cookies }: RequestEvent): Promise<Response> => {
 	const { email, password } = await request.json();
 
 	const { token, ...user } = await login(email, password);
