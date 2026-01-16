@@ -41,10 +41,10 @@ user.subscribe((u) => {
   if (u) {
     preferences.update((p) => ({
       ...p,
-      language: u.language as Language, // cast to proper type  
-      fontScale: u.fontsize as FontScale, 
-      theme: u.darkmode as Theme,
-      notificationPreference: u.notifications
+      language: (u.language as Language) ?? 'nl_NL',
+      fontScale: (u.fontsize as FontScale) ?? 100,
+      theme: (u.darkmode as Theme) ?? 'system',
+      notificationPreference: u.notifications ?? true
     }));
   }
 });
@@ -63,10 +63,10 @@ if (browser) {
 
   // Apply saved preferences
   preferences.update(p => ({
-    language: savedLang || p.language,
-    fontScale: savedScale ? Number(savedScale) as FontScale : p.fontScale,
-    theme: savedTheme || p.theme,
-    notificationPreference: savedNotificationPreference || p.notificationPreference
+    language: savedLang || (p.language ?? 'nl_NL'),
+    fontScale: savedScale ? Number(savedScale) as FontScale : (p.fontScale ?? 100),
+    theme: savedTheme || (p.theme ?? 'system'),
+    notificationPreference: savedNotificationPreference || (p.notificationPreference ?? true)
   }));
 
   let systemListener: { mq: MediaQueryList; handler: (e: MediaQueryListEvent) => void } | null = null;

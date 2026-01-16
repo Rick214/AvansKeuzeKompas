@@ -33,22 +33,17 @@
     const indexes = [0, 1, 2];
     $: modules = $vkms;
 
+    // Init vanuit user (als die al VKM’s heeft)
     let originalModuleIds: (number | "")[] = indexes.map(i => {
         const id = $user?.chosenVKMs?.[i]?.id;
         return id != null ? Number(id) : "";
     });
 
-    $: if ($user?.chosenVKMs && originalModuleIds.length === 0) {
-        originalModuleIds = indexes.map(i => {
-            const id = $user.chosenVKMs[i]?.id;
-            return id != null ? Number(id) : "";
-        });
-    }
+    let selectedModuleIds: (number | "")[] = [...originalModuleIds];
 
+    // Vergelijking (1x!)
     $: hasModuleChanges =
         JSON.stringify(selectedModuleIds) !== JSON.stringify(originalModuleIds);
-
-    let selectedModuleIds: (number | "")[] = [...originalModuleIds];
 
     // User Data
     const initials = $user.fullName
@@ -172,24 +167,22 @@
                             <label for="electiveModule{index + 1}" class="block text-lg font-semibold">
                                 {$translations.elective_module} {index + 1}
                             </label>
-                            {#if $user?.chosenVKMs?.length}
-                                <select
-                                    id="electiveModule{index + 1}"
-                                    class="block w-54 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) border-(--color-surface-alt)"
-                                    bind:value={selectedModuleIds[index]}
-                                >
-                                    <!-- Placeholder -->
-                                    <option value="" disabled>
-                                        {$translations.select_module_placeholder}
-                                    </option>
+                            <select
+                                id="electiveModule{index + 1}"
+                                class="block w-54 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) border-(--color-surface-alt)"
+                                bind:value={selectedModuleIds[index]}
+                            >
+                                <!-- Placeholder -->
+                                <option value="">
+                                    {$translations.select_module_placeholder}
+                                </option>
 
-                                    {#each modules as module (module.id)}
-                                        <option value={module.id}>
-                                            {truncate(module.name, 40)}
-                                        </option>
-                                    {/each}
-                                </select>
-                            {/if}
+                                {#each modules as module (module.id)}
+                                    <option value={module.id}>
+                                        {truncate(module.name, 40)}
+                                    </option>
+                                {/each}
+                            </select>
                         </div>
                     {/each}
                     <div class="flex justify-between align-center mt-6 flex-wrap gap-6 sm:flex-nowrap sm:gap-16">

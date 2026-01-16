@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { translations } from '$lib/stores/userPreferences';
+	import { preferences, translations, type FontScale, type Language, type Theme } from '$lib/stores/userPreferences';
 	import { goto } from '$app/navigation';
 	import { user } from '$lib/stores/auth';
 	import type { User } from '$lib/types/user';
@@ -64,6 +64,18 @@
 			}
 
 			const { user: userData }: { user: User } = await res.json();
+
+			userData.darkmode = userData.darkmode || 'system';
+			userData.fontsize = userData.fontsize || 100;
+			userData.language = userData.language || 'nl_NL';
+			userData.notifications = userData.notifications ?? true;
+
+			preferences.update(p => ({
+				theme: (userData.darkmode || 'system') as Theme,
+				fontScale: (userData.fontsize || 100) as FontScale,
+				language: (userData.language || 'nl_NL') as Language,
+				notificationPreference: userData.notifications ?? true
+			}));
 
 			user.set(userData);
 			vkms.set(userData.language === "nl_NL" ? await getModulesDutch() : await getModulesEnglish());
@@ -155,7 +167,7 @@
 					type="submit"
 					disabled={isSubmitting}
 					class="mt-2 rounded-lg bg-(--color-accent) px-8 py-2 text-sm
-						font-semibold text-(--secondary-color)
+						font-semibold text-black
 						focus:outline-none focus:ring-2
 						focus:ring-(--color-accent)
 						disabled:cursor-not-allowed disabled:opacity-50
