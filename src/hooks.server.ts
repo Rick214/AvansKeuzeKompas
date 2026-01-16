@@ -1,7 +1,11 @@
 import type { Handle } from '@sveltejs/kit';
 import type { User } from '$lib/types/user';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const API_BASE = import.meta.env.VITE_API_URL;
+
+if (!API_BASE) {
+	throw new Error('VITE_API_URL environment variable is not set');
+}
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const token = event.cookies.get('auth');
