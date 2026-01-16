@@ -3,18 +3,17 @@ import type { ModuleDto } from '$lib/api/dto/vkmsDto';
 import { mapModuleDto } from '$lib/mappers/vkm.mapper';
 import { apiClient } from './apiClient';
 
-export async function getModulesDutch(): Promise<Module[]> {
-	const data = await apiClient<ModuleDto[]>('/vkm');
+export async function getModulesDutch(token: string): Promise<Module[]> {
+	const data = await apiClient<ModuleDto[]>('/vkm', token);
 	return data.map(mapModuleDto);
 }
 
-export async function getModulesEnglish(): Promise<Module[]> {
-	const data = await apiClient<ModuleDto[]>('/vkm/getAllEnglish');
+export async function getModulesEnglish(token: string): Promise<Module[]> {
+	const data = await apiClient<ModuleDto[]>('/vkm/getAllEnglish', token);
 	return data.map(mapModuleDto);
 }
 
-
-export async function getModulesById(id: string): Promise<Module> {
-	const data = await apiClient<ModuleDto>(`/vkm/GetById/${id}`);
+export async function getModulesById(id: string, token: string): Promise<Module> {
+	const data = await apiClient<ModuleDto>(`/vkm/GetById/${id}`, token);
 	return mapModuleDto(data);
 }

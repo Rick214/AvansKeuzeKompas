@@ -3,8 +3,6 @@ import { browser } from '$app/environment';
 import nl_NL from '../i18n/nl_NL.json';
 import en_US from '../i18n/en_US.json';
 import { user } from './auth';
-import { updateSettings } from '$lib/api/client/users';
-import { getModulesDutch, getModulesEnglish } from '$lib/api/client/vkms';
 import { vkms } from './vkm';
 
 export type FontScale = 100 | 125 | 150 | 175 | 200; // Supported font scales
@@ -34,7 +32,6 @@ export const preferences = writable<Preferences>({
 });
 
 let currentUser: any = null;
-let lastLanguage: Language | null = null;
 user.subscribe(u => currentUser = u);
 
 user.subscribe((u) => {
@@ -73,28 +70,8 @@ if (browser) {
 
   // Subscribe to live updates
   preferences.subscribe(async (p) => {
-    if (currentUser) {
-      // Saving user settings to backend 
-      updateSettings({
-        fontsize: p.fontScale,
-        darkmode: p.theme,
-        language: p.language
-      });
-
-      // Update VKM's 
-      if (p.language !== lastLanguage) {
-        const modules =
-          p.language === "nl_NL"
-            ? await getModulesDutch()
-            : await getModulesEnglish();
-
-        vkms.set(modules);
-        lastLanguage = p.language;
-      }
-    };
-
     // Language & translations
-    translations.set(translationMap[p.language]);
+    translations.set(translationMap[p.language as Language]);
     sessionStorage.setItem('language', p.language);
 
     // Font scale

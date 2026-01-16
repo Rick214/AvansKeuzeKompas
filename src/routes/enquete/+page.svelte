@@ -41,12 +41,20 @@
     hoverRatings = questions.map((_, i) => hoverRatings[i] ?? 0);
   });
 
-  function handleNext() {
+  async function handleNext() {
     if (step > 0) {
       const current = responses[step - 1];
 
       if (step === 1) {
-        wakeAiModel();
+        // Waking AI model
+        const res = await fetch(`/enquete`, {
+          method: 'GET',
+        });
+
+        if (!res.ok) {
+          const { error } = await res.json();
+          throw new Error(error ?? 'unknown');
+        }
       }
 
       if (!current.answer) {
@@ -84,7 +92,17 @@
       // FOR DEBUGGING PURPOSES
       console.log('Submitting answers:', answerList);
 
-      await submitEnquete(answerList)
+      // Submitting survey answerList
+      const res = await fetch(`/enquete`, {
+        method: 'POST',
+        body: JSON.stringify(answerList)
+      });
+
+      if (!res.ok) {
+        const { error } = await res.json();
+        throw new Error(error ?? 'unknown');
+      }
+
       goto('/home');
     } catch (err) {
       console.error(err);

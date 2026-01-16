@@ -30,7 +30,15 @@
 			: [...$user.favoriteVKMs, id];
 
 		try {
-			await Favorites(id)
+			// Toggle favorite vkm
+			const res = await fetch(`/modules?id=${id}`, {
+				method: 'POST',
+			});
+
+			if (!res.ok) {
+				const { error } = await res.json();
+				throw new Error(error ?? 'unknown');
+			}
 		} catch (err) {
 			console.error('Failed to toggle favorite', err);
 

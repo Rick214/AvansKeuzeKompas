@@ -23,9 +23,20 @@
 	onMount(() => {
 		checkScreen();
 		window.addEventListener('resize', checkScreen);
-		if ($page.url.pathname.startsWith('/login')) {
-			wakeAiModel();
-		}
+
+		(async () => {
+			if ($page.url.pathname.startsWith('/login')) {
+				// Waking AI model
+				const res = await fetch(`/enquete`, {
+					method: 'GET',
+				});
+
+				if (!res.ok) {
+					const { error } = await res.json();
+					throw new Error(error ?? 'unknown');
+				}
+			}
+		})();
 
 		return () => {
 			window.removeEventListener('resize', checkScreen);
