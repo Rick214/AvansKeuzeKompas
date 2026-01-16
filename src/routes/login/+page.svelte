@@ -52,9 +52,6 @@
 		try {
 			const res = await fetch('/login', {
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
 				body: JSON.stringify({ email, password })
 			});
 
@@ -78,7 +75,21 @@
 			}));
 
 			user.set(userData);
-			vkms.set(userData.language === "nl_NL" ? await getModulesDutch() : await getModulesEnglish());
+
+			// Get modules
+			const languageType = userData.language === "nl_NL" ? "nl_NL" : "en_US";
+			
+			const resModule = await fetch(`/modules?language=${encodeURIComponent(languageType)}`, {
+				method: 'GET',
+			});
+
+			if (!resModule.ok) {
+				const { error } = await resModule.json();
+				throw new Error(error ?? 'unknown');
+			}
+
+			const data = await resModule.json();
+			vkms.set(data.vkms);
 
 			if (userData.aiRecommendedVKMs.length > 0) {
 				await goto('/home');

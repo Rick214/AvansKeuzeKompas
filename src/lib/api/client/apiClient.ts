@@ -10,12 +10,13 @@ type ApiOptions = {
 	headers?: Record<string, string>;
 };
 
-export async function apiClient<T>(url: string, options: ApiOptions = {}): Promise<T> {
+export async function apiClient<T>(url: string, token?: string, options: ApiOptions = {}): Promise<T> {
 	try {
 		const res = await fetch(`${API_URL}${url}`, {
 			method: options.method ?? 'GET',
 			headers: {
 				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
 				...options.headers
 			},
 			credentials: 'include',

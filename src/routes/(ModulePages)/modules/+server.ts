@@ -5,7 +5,7 @@ import { json } from '@sveltejs/kit';
 export const GET = async ({ url, cookies }) => {
     const languageType = url.searchParams.get("languageType");
 
-    // Token stays HttpOnly
+    // Token blijft HttpOnly
     const token = cookies.get('auth') ?? "";    
 
     const vkms: Module[] = languageType === "nl_NL" ? await getModulesDutch(token) : await getModulesEnglish(token);

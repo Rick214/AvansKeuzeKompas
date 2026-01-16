@@ -75,20 +75,49 @@ if (browser) {
   preferences.subscribe(async (p) => {
     if (currentUser) {
       // Saving user settings to backend 
-      updateSettings({
-        fontsize: p.fontScale,
-        darkmode: p.theme,
-        language: p.language
-      });
+        try {
+          const res = await fetch('/profile', {
+            method: 'PATCH',
+            body: JSON.stringify({ fontScale: p.fontScale, theme: p.theme, language: p.language }),
+          });
 
-      // Update VKM's 
-      if (p.language !== lastLanguage) {
-        const modules =
-          p.language === "nl_NL"
-            ? await getModulesDutch()
-            : await getModulesEnglish();
+          if (!res.ok) {
+            const { error } = await res.json();
+            throw new Error(error ?? 'Unknown error');
+          }
 
-        vkms.set(modules);
+          const { updateUser } = await res.json();
+
+          // Update stores
+          user.set(updateUser);
+          preferences.update(p => ({
+            ...p,
+            fontScale: updateUser.fontsize ?? p.fontScale,
+            theme: updateUser.darkmode ?? p.theme,
+            language: updateUser.language ?? p.language,
+            notificationPreference: updateUser.notifications ?? p.notificationPreference
+          }));
+
+          console.log('Update successfull!');
+        } catch (err) {
+          console.error('Patch call failed:', err);
+        }
+
+        // Update VKM's 
+        const languageType = p.language === "nl_NL" ? "nl_NL" : "en_US";
+        
+        const resModule = await fetch(`/modules?language=${encodeURIComponent(languageType)}`, {
+          method: 'GET',
+        });
+
+        if (!resModule.ok) {
+          const { error } = await resModule.json();
+          throw new Error(error ?? 'unknown');
+        }
+
+        const data = await resModule.json();
+        vkms.set(data.vkms);
+
         lastLanguage = p.language;
       }
     };
