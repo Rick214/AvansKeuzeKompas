@@ -22,6 +22,21 @@
         userData.notifications = userData.notifications ?? $preferences.notificationPreference ?? true;
 
         user.set(userData);
+
+        // Updating modules
+        const languageType = userData.language === "nl_NL" ? "nl_NL" : "en_US";
+        
+        const resModule = await fetch(`/modules?languageType=${encodeURIComponent(languageType)}`, {
+            method: 'GET',
+        });
+
+        if (!resModule.ok) {
+            const { error } = await resModule.json();
+            throw new Error(error ?? 'unknown');
+        }
+
+        const data = await resModule.json();
+        vkms.set(data);
     }
 
     async function saveUserSetting(setting: Partial<{

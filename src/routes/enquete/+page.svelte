@@ -7,6 +7,8 @@
 	import Tooltip from '$lib/components/ui/Tooltip.svelte';
 	import { goto } from '$app/navigation';
 	import { submitEnquete, wakeAiModel } from '$lib/api/client/ai';
+  import { user } from '$lib/stores/auth';
+
 
   let step = 0;
   type TranslationKey = keyof typeof $translations;
@@ -15,6 +17,12 @@
 
   let responses: { answer: string | null; rating: number }[] = questions.map(() => ({ answer: null, rating: 0 }));
   let hoverRatings: number[] = questions.map(() => 0);
+
+  async function updateUserStore() {
+    const res = await fetch(`/profile`, { method: 'GET' });
+    const { user: userData } = await res.json();
+    user.set(userData);
+  }
 
   function setAnswer(index: number, value: string) {
     responses[index].answer = value;
@@ -103,6 +111,7 @@
         throw new Error(error ?? 'unknown');
       }
 
+      await updateUserStore();
       goto('/home');
     } catch (err) {
       console.error(err);

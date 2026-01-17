@@ -1,7 +1,7 @@
 {
 	"welcome_title": "Welcome to our website",
 	"welcome_message": "Do you like it?",
-	"registered_title": "registered",
+	"registered_title": "Registered",
 	"recommended_title": "Recommended",
 	"favorites_title": "Favorites",
 	"system_preferences": "System Preferences",
@@ -44,7 +44,7 @@
 	"enquete_rating_tooltip_content": "With this rating, you indicate how important this question is to you. <br><br> This helps us to better tailor the recommendations to your preferences.",
 	"enquete_skip": "Skip survey",
 	"results": "results",
-	"view_text": "view module",
+	"view_text": "View module",
 	"search": "Search by name",
 	"location": "Location",
 	"popular": "Popular",
@@ -80,7 +80,12 @@
 			},
 			"change_personal_settings": {
 				"question": "How can I change my personal settings?",
-				"answer": "Go to the settings page by clicking on your profile and select 'Settings'. Here you can adjust your preferences, such as language, theme, and notifications."
+				"answer": {
+					"text": "Go to the settings page by clicking on your profile and select 'Settings'. Here you can adjust your preferences, such as language, theme, and notifications. You can find this information on",
+					"href_type": "personal_settings",
+					"href_url": "/profile",
+					"href_text": "Personal Settings"
+				}
 			},
 			"forgot_password": {
 				"question": "What should I do if I forget my password?",
@@ -94,6 +99,8 @@
 				"question": "Where can I get more help choosing?",
 				"answer": {
 					"text": "You can find this information on",
+					"href_type": "more_info",
+					"href_url": "https://avans.sharepoint.com/sites/student-support-tijdens-je-studie/SitePages/Hulp-bij-het-maken-van-keuzes.aspx",
 					"href_text": "Avans Sharepoint"
 				}
 			}
