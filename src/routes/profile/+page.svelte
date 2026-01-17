@@ -182,6 +182,17 @@
     function redirectToEnquetePage() {
         goto('/enquete');
     }
+
+    const logout = async () => {
+		sessionStorage.removeItem('user');
+		sessionStorage.removeItem('vkms');
+		await fetch('/logout', {
+			method: 'POST'
+		});
+
+		// full reload ensures clean state
+		window.location.href = '/login';
+	};
 </script>
 
 <div class="flex justify-center items-center min-h-screen">
@@ -315,7 +326,7 @@
             </div>
             <div class="flex xl:hidden flex-col items-center col-span-2 col-start-1 h-full w-full min-w-auto max-w-[500px] xl:min-w-[280px] xl:max-w-[450px] bg-(--color-surface) p-12 rounded-2xl shadow-md text-(--primary-color)">
                 <h2 class="text-md text-center mb-4 text-(--color-border)">{$translations.logout_description}</h2>
-                <button class="bg-(--color-accent) text-black px-4 py-2 rounded-md text-sm font-medium hover:opacity-75 hover:scale-98 transition duration-200 cursor-pointer">
+                <button on:click={logout} class="bg-(--color-accent) text-black px-4 py-2 rounded-md text-sm font-medium hover:opacity-75 hover:scale-98 transition duration-200 cursor-pointer">
                     {$translations.navigation.logout}
                 </button>
             </div>
