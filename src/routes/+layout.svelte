@@ -24,6 +24,8 @@
 		checkScreen();
 		window.addEventListener('resize', checkScreen);
 
+		wakeAiModel();
+
 		return () => {
 			window.removeEventListener('resize', checkScreen);
 		};

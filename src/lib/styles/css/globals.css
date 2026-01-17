@@ -48,4 +48,11 @@ a:hover {
   color: var(--color-accent);
 }
 
+.module-card,
+.module-card img {
+  transform: translateZ(0); /* force GPU compositing */
+  will-change: transform, opacity; /* tells browser what may change */
+  contain: layout paint; /* isolates rendering inside the card */
+}
+
 /*# sourceMappingURL=globals.css.map */

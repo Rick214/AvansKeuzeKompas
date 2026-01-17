@@ -77,12 +77,19 @@
 		const randomIndex = Math.floor(Math.random() * count) + 1;
 		return `/images/${theme}/${theme}-${randomIndex}.jpg`;
 	}
-	$: currentImage = pickRandomImage(imageTheme);
+	
+	let lastTheme: ThemeValue | "default";
+
+	$: if (imageTheme !== lastTheme) {
+		lastTheme = imageTheme;
+		currentImage = pickRandomImage(imageTheme);
+	}
 
 </script>
 
 <img
-	src={currentImage}
-	alt={module?.name ?? ""}
-	class="absolute inset-0 w-full h-full object-cover"
+  src={currentImage}          
+  alt={module?.name ?? ""}     
+  decoding="async"            
+  class="absolute inset-0 w-full h-full object-cover"
 />
