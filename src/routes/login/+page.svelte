@@ -67,7 +67,7 @@
 			userData.language = userData.language || 'nl_NL';
 			userData.notifications = userData.notifications ?? true;
 
-			preferences.update(p => ({
+			preferences.update((p) => ({
 				theme: (userData.darkmode || 'system') as Theme,
 				fontScale: (userData.fontsize || 100) as FontScale,
 				language: (userData.language || 'nl_NL') as Language,
@@ -77,10 +77,10 @@
 			user.set(userData);
 
 			// Get modules
-			const languageType = userData.language === "nl_NL" ? "nl_NL" : "en_US";
-			
+			const languageType = userData.language === 'nl_NL' ? 'nl_NL' : 'en_US';
+
 			const resModule = await fetch(`/modules?languageType=${encodeURIComponent(languageType)}`, {
-				method: 'GET',
+				method: 'GET'
 			});
 
 			if (!resModule.ok) {
@@ -159,7 +159,7 @@
 			<!-- Forgot password -->
 			<p class="text-sm text-(--primary-color)">
 				{$translations.password_reset}
-				<a href="/" class="hover:text-(--color-accent)">
+				<a href="/login" class="hover:text-(--color-accent)">
 					{$translations.password_reset_link}
 				</a>
 				{$translations.password_reset_complete}
