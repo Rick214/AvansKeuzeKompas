@@ -8,7 +8,6 @@
 	import ContactLecturer from '$lib/components/ui/DetailPage/ContactLecturer.svelte';
 	import { vkms } from '$lib/stores/vkm';
 	import { user } from '$lib/stores/auth';
-	import { Favorites } from '$lib/api/client/favorites';
 	$: favoriteSet = new Set($user.favoriteVKMs);
 
 	let toggling = new Set<number>();
