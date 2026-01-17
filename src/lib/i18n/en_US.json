@@ -80,7 +80,12 @@
 			},
 			"change_personal_settings": {
 				"question": "How can I change my personal settings?",
-				"answer": "Go to the settings page by clicking on your profile and select 'Settings'. Here you can adjust your preferences, such as language, theme, and notifications."
+				"answer": {
+					"text": "Go to the settings page by clicking on your profile and select 'Settings'. Here you can adjust your preferences, such as language, theme, and notifications. You can find this information on",
+					"href_type": "personal_settings",
+					"href_url": "/profile",
+					"href_text": "Personal Settings"
+				}
 			},
 			"forgot_password": {
 				"question": "What should I do if I forget my password?",
@@ -94,6 +99,8 @@
 				"question": "Where can I get more help choosing?",
 				"answer": {
 					"text": "You can find this information on",
+					"href_type": "more_info",
+					"href_url": "https://avans.sharepoint.com/sites/student-support-tijdens-je-studie/SitePages/Hulp-bij-het-maken-van-keuzes.aspx",
 					"href_text": "Avans Sharepoint"
 				}
 			}

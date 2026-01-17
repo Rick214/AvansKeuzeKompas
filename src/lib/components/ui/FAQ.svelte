@@ -25,9 +25,16 @@
 								{faq.answer}
 							{:else}
 								{faq.answer.text}
-								<a href={'https://avans.sharepoint.com/sites/student-support-tijdens-je-studie/SitePages/Hulp-bij-het-maken-van-keuzes.aspx'} class="underline ml-1 hover:opacity-80">
-									{faq.answer.href_text}
-								</a>
+								{#if faq.answer.href_url && faq.answer.href_text}
+									<a
+										href={faq.answer.href_url}
+										target={faq.answer.href_type === 'more_info' ? '_blank' : undefined}
+										rel={faq.answer.href_url.startsWith('http') ? 'noopener noreferrer' : undefined}
+										class="underline ml-1 hover:opacity-80"
+									>
+										{faq.answer.href_text}
+									</a>
+								{/if}
 							{/if}
 						</p>
 					</div>
