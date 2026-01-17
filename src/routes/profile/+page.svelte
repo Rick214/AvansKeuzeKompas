@@ -3,7 +3,26 @@
     import { translations, preferences, type Language, type FontScale, type Theme, type NotificationPreference } from '$lib/stores/userPreferences';
 	import { user } from '$lib/stores/auth';
     import { vkms } from '$lib/stores/vkm';
-	import { getUser, updateChosenModules, updateSettings } from '$lib/api/client/users';
+	import type { User } from '$lib/types/user';
+
+    async function updateUserStore() {
+        // Update user store by getting updated user data
+        const res = await fetch(`/profile`, { method: 'GET' });
+
+        if (!res.ok) {
+            const { error } = await res.json();
+            throw new Error(error ?? 'unknown');
+        }
+
+        const { user: userData }: { user: User } = await res.json();
+
+        userData.darkmode = userData.darkmode ?? $preferences.theme ?? 'system';
+        userData.fontsize = userData.fontsize ?? $preferences.fontScale ?? 100;
+        userData.language = userData.language ?? $preferences.language ?? 'nl_NL';
+        userData.notifications = userData.notifications ?? $preferences.notificationPreference ?? true;
+
+        user.set(userData);
+    }
 
     async function saveUserSetting(setting: Partial<{
         language?: string;
@@ -11,11 +30,19 @@
         fontsize?: number;
     }>) {
           try {
-            await updateSettings(setting);
+            // Updating user
+            const res = await fetch(`/profile`, {
+                method: 'PATCH',
+                body: JSON.stringify(setting)
+            });
 
-            // Update user store
-            const updatedUser = await getUser();
-            user.set(updatedUser);
+            if (!res.ok) {
+                const { error } = await res.json();
+                throw new Error(error ?? 'unknown');
+            }
+
+            // Update user store by getting updated user data
+            await updateUserStore();
 
             // Update preferences store lokaal
             preferences.update(p => ({
@@ -33,29 +60,26 @@
     const indexes = [0, 1, 2];
     $: modules = $vkms;
 
+    // Init vanuit user (als die al VKM’s heeft)
     let originalModuleIds: (number | "")[] = indexes.map(i => {
         const id = $user?.chosenVKMs?.[i]?.id;
         return id != null ? Number(id) : "";
     });
 
-    $: if ($user?.chosenVKMs && originalModuleIds.length === 0) {
-        originalModuleIds = indexes.map(i => {
-            const id = $user.chosenVKMs[i]?.id;
-            return id != null ? Number(id) : "";
-        });
-    }
+    let selectedModuleIds: (number | "")[] = [...originalModuleIds];
 
+    // Vergelijking (1x!)
     $: hasModuleChanges =
         JSON.stringify(selectedModuleIds) !== JSON.stringify(originalModuleIds);
 
-    let selectedModuleIds: (number | "")[] = [...originalModuleIds];
-
     // User Data
-    const initials = $user.fullName
-        .split(" ")
-        .map(name => name[0])
-        .join("")
-        .toUpperCase();
+    const initials = $user?.fullName
+        ? $user.fullName
+            .split(" ")
+            .map(name => name[0])
+            .join("")
+            .toUpperCase()
+        : '';
 
     $: age = $user?.dob ? calculateAge(new Date($user.dob)) : null;
     
@@ -75,24 +99,32 @@
         return age;
     }
 
-
     $: notificationPreference = $user.notifications;
 
     async function toggleNotifications() {
         const current = $user.notifications;
         const newValue = !current;
 
-        // Saving notification preference
-        await updateSettings({ notifications: newValue });
+        // Saving notification preference - Updating user
+        const res = await fetch(`/profile`, {
+            method: 'PATCH',
+            body: JSON.stringify({ notifications: newValue })
+        });
+
+        if (!res.ok) {
+            const { error } = await res.json();
+            throw new Error(error ?? 'unknown');
+        }
+        
         // Updating preferences store
         preferences.update(p => {
-            const newPreference = p.notificationPreference === $user.notifications ? false : true;
+            const newPreference = !current;
             sessionStorage.setItem('notificationPreference', newPreference.toString());
             return { ...p, notificationPreference: newPreference };
         });
-        // Updating user store
-        const userData = await getUser();
-        user.set(userData);
+
+        // Update user store by getting updated user data
+        await updateUserStore();
     }
 
     async function saveChosenModules() {
@@ -110,12 +142,19 @@
                 (v): v is { id: number; priority: number; enrolled: boolean } => v !== null
             );
 
-        // Saving chosen modules
-        await updateChosenModules(payload);
+        // Saving chosen modules - Updating User
+        const res = await fetch(`/profile`, {
+            method: 'POST',
+            body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) {
+            const { error } = await res.json();
+            throw new Error(error ?? 'unknown');
+        }
         
-        // Updating user store
-        const userData = await getUser();
-        user.set(userData);
+        // Update user store by getting updated user data
+        await updateUserStore();
 
         originalModuleIds = [...selectedModuleIds];  
     }
@@ -172,24 +211,22 @@
                             <label for="electiveModule{index + 1}" class="block text-lg font-semibold">
                                 {$translations.elective_module} {index + 1}
                             </label>
-                            {#if $user?.chosenVKMs?.length}
-                                <select
-                                    id="electiveModule{index + 1}"
-                                    class="block w-54 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) border-(--color-surface-alt)"
-                                    bind:value={selectedModuleIds[index]}
-                                >
-                                    <!-- Placeholder -->
-                                    <option value="" disabled>
-                                        {$translations.select_module_placeholder}
-                                    </option>
+                            <select
+                                id="electiveModule{index + 1}"
+                                class="block w-54 px-3 py-2.5 bg-(--color-surface-alt) border border-default-medium text-md rounded-lg focus:border-(--primary-color) border-(--color-surface-alt)"
+                                bind:value={selectedModuleIds[index]}
+                            >
+                                <!-- Placeholder -->
+                                <option value="">
+                                    {$translations.select_module_placeholder}
+                                </option>
 
-                                    {#each modules as module (module.id)}
-                                        <option value={module.id}>
-                                            {truncate(module.name, 40)}
-                                        </option>
-                                    {/each}
-                                </select>
-                            {/if}
+                                {#each modules as module (module.id)}
+                                    <option value={module.id}>
+                                        {truncate(module.name, 40)}
+                                    </option>
+                                {/each}
+                            </select>
                         </div>
                     {/each}
                     <div class="flex justify-between align-center mt-6 flex-wrap gap-6 sm:flex-nowrap sm:gap-16">

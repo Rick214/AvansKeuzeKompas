@@ -3,8 +3,6 @@ import { browser } from '$app/environment';
 import nl_NL from '../i18n/nl_NL.json';
 import en_US from '../i18n/en_US.json';
 import { user } from './auth';
-import { updateSettings } from '$lib/api/client/users';
-import { getModulesDutch, getModulesEnglish } from '$lib/api/client/vkms';
 import { vkms } from './vkm';
 
 export type FontScale = 100 | 125 | 150 | 175 | 200; // Supported font scales
@@ -34,17 +32,16 @@ export const preferences = writable<Preferences>({
 });
 
 let currentUser: any = null;
-let lastLanguage: Language | null = null;
 user.subscribe(u => currentUser = u);
 
 user.subscribe((u) => {
   if (u) {
     preferences.update((p) => ({
       ...p,
-      language: u.language as Language, // cast to proper type  
-      fontScale: u.fontsize as FontScale, 
-      theme: u.darkmode as Theme,
-      notificationPreference: u.notifications
+      language: (u.language as Language) ?? 'nl_NL',
+      fontScale: (u.fontsize as FontScale) ?? 100,
+      theme: (u.darkmode as Theme) ?? 'system',
+      notificationPreference: u.notifications ?? true
     }));
   }
 });
@@ -63,38 +60,18 @@ if (browser) {
 
   // Apply saved preferences
   preferences.update(p => ({
-    language: savedLang || p.language,
-    fontScale: savedScale ? Number(savedScale) as FontScale : p.fontScale,
-    theme: savedTheme || p.theme,
-    notificationPreference: savedNotificationPreference || p.notificationPreference
+    language: savedLang || (p.language ?? 'nl_NL'),
+    fontScale: savedScale ? Number(savedScale) as FontScale : (p.fontScale ?? 100),
+    theme: savedTheme || (p.theme ?? 'system'),
+    notificationPreference: savedNotificationPreference || (p.notificationPreference ?? true)
   }));
 
   let systemListener: { mq: MediaQueryList; handler: (e: MediaQueryListEvent) => void } | null = null;
 
   // Subscribe to live updates
   preferences.subscribe(async (p) => {
-    if (currentUser) {
-      // Saving user settings to backend 
-      updateSettings({
-        fontsize: p.fontScale,
-        darkmode: p.theme,
-        language: p.language
-      });
-
-      // Update VKM's 
-      if (p.language !== lastLanguage) {
-        const modules =
-          p.language === "nl_NL"
-            ? await getModulesDutch()
-            : await getModulesEnglish();
-
-        vkms.set(modules);
-        lastLanguage = p.language;
-      }
-    };
-
     // Language & translations
-    translations.set(translationMap[p.language]);
+    translations.set(translationMap[p.language as Language]);
     sessionStorage.setItem('language', p.language);
 
     // Font scale

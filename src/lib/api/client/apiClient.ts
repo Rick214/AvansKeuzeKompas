@@ -1,4 +1,8 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const API_URL = import.meta.env.VITE_API_URL;
+
+if (!API_URL) {
+	throw new Error('VITE_API_URL environment variable is not set');
+}
 
 type ApiOptions = {
 	method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
@@ -6,12 +10,13 @@ type ApiOptions = {
 	headers?: Record<string, string>;
 };
 
-export async function apiClient<T>(url: string, options: ApiOptions = {}): Promise<T> {
+export async function apiClient<T>(url: string, token?: string, options: ApiOptions = {}): Promise<T> {
 	try {
 		const res = await fetch(`${API_URL}${url}`, {
 			method: options.method ?? 'GET',
 			headers: {
 				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
 				...options.headers
 			},
 			credentials: 'include',

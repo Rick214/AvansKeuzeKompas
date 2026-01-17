@@ -24,7 +24,19 @@
 		checkScreen();
 		window.addEventListener('resize', checkScreen);
 
-		wakeAiModel();
+		(async () => {
+			if ($page.url.pathname.startsWith('/login')) {
+				// Waking AI model
+				const res = await fetch(`/enquete`, {
+					method: 'GET',
+				});
+
+				if (!res.ok) {
+					const { error } = await res.json();
+					throw new Error(error ?? 'unknown');
+				}
+			}
+		})();
 
 		return () => {
 			window.removeEventListener('resize', checkScreen);
@@ -43,7 +55,7 @@
 	<main>
 		<slot />
 	</main>
-	
+
 	<MobileNav />
 {:else}
 	<div class="h-screen w-screen flex flex-col justify-center items-center">
