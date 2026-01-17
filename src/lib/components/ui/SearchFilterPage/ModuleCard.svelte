@@ -52,7 +52,7 @@
   		goto(`/modules/${module.id}?from=${encodeURIComponent(currentUrl)}`);
 	}
 </script>
-<div class="bg-(--color-surface-alt) rounded-xl p-4 flex gap-4 items-stretch shadow-lg">
+<div class="module-card bg-(--color-surface-alt) rounded-xl p-4 flex gap-4 items-stretch shadow-lg">
 	<!-- Image -->
 	<div class="relative w-[120px] h-[120px] flex-none rounded-lg overflow-hidden">
 		<VkmImage { module }/>
