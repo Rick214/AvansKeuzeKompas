@@ -3,16 +3,31 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - master 
+      - master
 
 jobs:
-  deploy:
-    name: Deploy to Render
+  security_scan:
+    name: Snyk security scan
     runs-on: ubuntu-latest
     steps:
-      - name: Deployment to production
-        uses: JorgeLNJunior/render-deploy@v1.4.5
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Snyk scan
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          service_id: ${{ secrets.RENDER_SERVICE_ID }}
-          api_key: ${{ secrets.RENDER_API_KEY }}
-          clear_cache: true
+          args: test --severity-threshold=high
+
+  # deploy:
+  #   name: Deploy to Render
+  #   needs: security_scan
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Deploy to production
+  #       uses: JorgeLNJunior/render-deploy@v1.4.5
+  #       with:
+  #         service_id: ${{ secrets.RENDER_SERVICE_ID }}
+  #         api_key: ${{ secrets.RENDER_API_KEY }}
+  #         clear_cache: true
