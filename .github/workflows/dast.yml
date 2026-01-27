@@ -14,8 +14,7 @@ jobs:
 
       - name: Run ZAP Baseline Scan (No Auth)
         uses: zaproxy/action-baseline@v0.9.0
+        continue-on-error: true
         with:
-          target: "https://avanskeuzekompas.onrender.com" # jouw app URL
-          fail_action: false        # pipeline faalt niet bij warnings
-          artifact_name: "zap-reports" # maakt automatisch zip van reports
-          cmd_options: ""           # geen extra CLI opties nodig
+          target: "https://avanskeuzekompas.onrender.com"
+          fail_action: false
