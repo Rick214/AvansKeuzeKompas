@@ -19,14 +19,3 @@ jobs:
           fail_action: false        # pipeline faalt niet bij warnings
           artifact_name: "zap-reports" # maakt automatisch zip van reports
           cmd_options: ""           # geen extra CLI opties nodig
-
-      - name: Upload ZAP artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: zap-reports
-          path: |
-            report_json.json
-            report_md.md
-            report_html.html
-
-
