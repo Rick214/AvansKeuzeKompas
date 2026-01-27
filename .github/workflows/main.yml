@@ -4,15 +4,24 @@ on:
   push:
     branches:
       - master
+  pull_request:
 
 jobs:
   security_scan:
-    name: Snyk Security Scan
+    name: Security Scan
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Run Snyk vulnerability scan
         uses: snyk/actions/node@master
@@ -20,7 +29,16 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           command: test
-          args: --severity-threshold=high
+          args: --severity-threshold=high --fail-on=all
+
+      - name: Run npm audit
+        run: npm audit --audit-level=high
+
+      - name: Run ESLint
+        run: npx eslint . --max-warnings=0
+
+      - name: Run Prettier
+        run: npx prettier --check .
 
   # deploy:
   #   name: Deploy to Render
