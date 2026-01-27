@@ -3,14 +3,36 @@ name: DAST Scan (OWASP ZAP)
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 2 * * *" # elke nacht
+    - cron: "0 2 * * *"
+
+permissions:
+  contents: read
+  id-token: write
+  checks: write
 
 jobs:
   dast:
     runs-on: ubuntu-latest
     steps:
-      - name: ZAP Baseline Scan
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run ZAP Baseline Scan (Authenticated)
         uses: zaproxy/action-baseline@v0.9.0
         with:
-          target: "https://avanskeuzekompas.onrender.com"
+          target: "https://test.mijnapp.onrender.com"
+          auth_header: "Authorization: Bearer ${{ secrets.DAST_TOKEN }}"
+          report_json_name: "report.json"
+          report_md_name: "report.md"
+          report_html_name: "report.html"
           fail_action: false
+
+      - name: Upload ZAP reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: zap-reports
+          path: |
+            report.html
+            report.json
+            report.md
+
