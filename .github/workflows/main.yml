@@ -7,18 +7,20 @@ on:
 
 jobs:
   security_scan:
-    name: Snyk security scan
+    name: Snyk Security Scan
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Run Snyk scan
+      - name: Run Snyk vulnerability scan
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: test --severity-threshold=high
+          command: test
+          args: --severity-threshold=high
 
   # deploy:
   #   name: Deploy to Render
