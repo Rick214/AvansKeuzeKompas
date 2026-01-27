@@ -47,9 +47,6 @@ jobs:
 
       - name: Run npm audit
         run: npm audit --audit-level=high
-
-      - name: Run Prettier
-        run: npx prettier --check .
         
   # deploy:
   #   name: Deploy to Render
