@@ -6,6 +6,9 @@ export const POST = async ({ request, cookies }: RequestEvent): Promise<Response
 
 	const { token, ...user } = await login(email, password);
 
+	// Fake API key
+	const API_KEY = 'FAKE_API_KEY_1234567890';
+	
 	// Token stays HttpOnly
 	cookies.set('auth', token, {
 		httpOnly: true,
