@@ -23,6 +23,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install ESLint
+        run: npm install --save-dev eslint@^8
+      
+      - name: Run ESLint
+        run: npx eslint . --max-warnings=0
+
       - name: Run Snyk vulnerability scan
         uses: snyk/actions/node@master
         env:
@@ -33,9 +39,6 @@ jobs:
 
       - name: Run npm audit
         run: npm audit --audit-level=high
-
-      - name: Run ESLint
-        run: npx eslint . --max-warnings=0
 
       - name: Run Prettier
         run: npx prettier --check .
