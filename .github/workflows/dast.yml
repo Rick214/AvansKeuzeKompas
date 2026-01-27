@@ -12,14 +12,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Run ZAP Baseline Scan (No Auth)
+      - name: Run ZAP Baseline Scan (Auth)
         uses: zaproxy/action-baseline@v0.9.0
         continue-on-error: true
         with:
           target: "https://avanskeuzekompas.onrender.com"
-          fail_action: false
-          cmd_options: >
-            -H "Authorization: Bearer ${{ secrets.ZAP_AUTH_TOKEN }}"
+          cmd_options: >-
+            -H Authorization:Bearer\ ${{ secrets.ZAP_AUTH_TOKEN }}
           
       - name: Upload ZAP reports
         uses: actions/upload-artifact@v4
