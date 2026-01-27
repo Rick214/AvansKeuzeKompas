@@ -25,7 +25,12 @@ jobs:
           target: "https://avanskeuzekompas.onrender.com"
           fail_action: false
           cmd_options: >-
-            -H Authorization:Bearer\ ${{ secrets.ZAP_AUTH_TOKEN }}
+            -z "-config replacer.full_list(0).description=auth
+                -config replacer.full_list(0).enabled=true
+                -config replacer.full_list(0).matchtype=REQ_HEADER
+                -config replacer.full_list(0).matchstr=Authorization
+                -config replacer.full_list(0).regex=false
+                -config replacer.full_list(0).replacement=Bearer\ ${{ secrets.ZAP_AUTH_TOKEN }}"
           
       - name: Upload ZAP reports
         uses: actions/upload-artifact@v4
