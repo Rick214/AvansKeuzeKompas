@@ -9,11 +9,9 @@ jobs:
   dast:
     runs-on: ubuntu-latest
     steps:
-      # 1️⃣ Checkout repo (standaard)
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 2️⃣ Run ZAP baseline scan
       - name: Run ZAP Baseline Scan (No Auth)
         uses: zaproxy/action-baseline@v0.9.0
         with:
@@ -22,10 +20,13 @@ jobs:
           artifact_name: "zap-reports" # maakt automatisch zip van reports
           cmd_options: ""           # geen extra CLI opties nodig
 
-      # 3️⃣ Upload artifact (ZIP met JSON/HTML/MD)
       - name: Upload ZAP artifact
         uses: actions/upload-artifact@v4
         with:
           name: zap-reports
-          path: zap-reports.zip
+          path: |
+            report_json.json
+            report_md.md
+            report_html.html
+
 
