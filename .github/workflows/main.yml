@@ -11,10 +11,9 @@ on:
   pull_request:
 
 jobs:
-  security_scan:
-    name: Security Scan
+  init:
+    name: Install Dependencies
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,6 +26,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+  security_scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: init
+    steps:
       - name: Run gitleaks scan via Docker
         run: |
           docker run --rm -v ${{ github.workspace }}:/repo \
@@ -51,10 +55,10 @@ jobs:
 
       - name: Run npm audit
         run: npm audit --audit-level=high
-        
+
   deploy:
     name: Deploy to Render
-    needs: security_scan
+    needs: [init, security_scan]
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to production
