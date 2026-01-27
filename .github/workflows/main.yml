@@ -30,7 +30,8 @@ jobs:
 
       - name: Run gitleaks scan via Docker
         run: |
-          docker run --rm -v ${{ github.workspace }}:/repo zricethezav/gitleaks:8.15.0 detect /repo --verbose --redact --exit-code 0
+          docker run --rm -v ${{ github.workspace }}:/repo \
+          zricethezav/gitleaks:latest detect --source="/repo" --verbose --redact --exit-code 0
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
