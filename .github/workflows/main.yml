@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 # Voeg permissies toe voor CodeQL
 permissions:
   contents: read
-  security-events: read
+  security-events: write
 
 on:
   push:
