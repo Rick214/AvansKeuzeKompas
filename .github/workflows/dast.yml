@@ -1,0 +1,16 @@
+name: DAST Scan (OWASP ZAP)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 2 * * *" # elke nacht
+
+jobs:
+  dast:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.9.0
+        with:
+          target: "https://avanskeuzekompas.onrender.com"
+          fail_action: false
