@@ -1,6 +1,5 @@
 name: CI/CD Pipeline
 
-# Voeg permissies toe voor CodeQL
 permissions:
   contents: read
   security-events: write
@@ -27,7 +26,12 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-        
+
+      - name: Scan for hardcoded secrets
+        uses: zricethezav/gitleaks-action@v8
+        with:
+          args: "--verbose --redact"
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
@@ -47,6 +51,9 @@ jobs:
 
       - name: Run npm audit
         run: npm audit --audit-level=high
+        
+      - name: Run Prettier
+        run: npx prettier --check .
         
   # deploy:
   #   name: Deploy to Render
