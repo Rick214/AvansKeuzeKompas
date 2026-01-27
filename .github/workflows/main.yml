@@ -1,6 +1,5 @@
 name: CI/CD Pipeline
 
-# Voeg permissies toe voor CodeQL
 permissions:
   contents: read
   security-events: write
@@ -53,14 +52,14 @@ jobs:
       - name: Run npm audit
         run: npm audit --audit-level=high
         
-  # deploy:
-  #   name: Deploy to Render
-  #   needs: security_scan
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Deploy to production
-  #       uses: JorgeLNJunior/render-deploy@v1.4.5
-  #       with:
-  #         service_id: ${{ secrets.RENDER_SERVICE_ID }}
-  #         api_key: ${{ secrets.RENDER_API_KEY }}
-  #         clear_cache: true
+  deploy:
+    name: Deploy to Render
+    needs: security_scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to production
+        uses: JorgeLNJunior/render-deploy@v1.4.5
+        with:
+          service_id: ${{ secrets.RENDER_SERVICE_ID }}
+          api_key: ${{ secrets.RENDER_API_KEY }}
+          clear_cache: true
