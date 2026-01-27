@@ -20,7 +20,7 @@ jobs:
       - name: Run ZAP Baseline Scan (Authenticated)
         uses: zaproxy/action-baseline@v0.9.0
         with:
-          target: "https://test.mijnapp.onrender.com"
+          target: "https://avanskeuzekompas.onrender.com"
           auth_header: "Authorization: Bearer ${{ secrets.DAST_TOKEN }}"
           report_json_name: "report.json"
           report_md_name: "report.md"
