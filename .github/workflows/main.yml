@@ -58,17 +58,17 @@ jobs:
       - name: Run npm audit
         run: npm audit --audit-level=high
         
-  deploy:
-    name: Deploy to Render
-    needs: [init, security_scan]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+  # deploy:
+  #   name: Deploy to Render
+  #   needs: [init, security_scan]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
 
-      - name: Deploy to production
-        uses: JorgeLNJunior/render-deploy@v1.4.5
-        with:
-          service_id: ${{ secrets.RENDER_SERVICE_ID }}
-          api_key: ${{ secrets.RENDER_API_KEY }}
-          clear_cache: true
+  #     - name: Deploy to production
+  #       uses: JorgeLNJunior/render-deploy@v1.4.5
+  #       with:
+  #         service_id: ${{ secrets.RENDER_SERVICE_ID }}
+  #         api_key: ${{ secrets.RENDER_API_KEY }}
+  #         clear_cache: true
