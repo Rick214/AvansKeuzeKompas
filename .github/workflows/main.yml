@@ -33,20 +33,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # - name: Run gitleaks scan via Docker
-      #   run: |
-      #     docker run --rm -v ${{ github.workspace }}:/repo \
-      #     zricethezav/gitleaks:latest detect --source="/repo" --verbose --redact --exit-code 1
+      - name: Run gitleaks scan via Docker
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/repo \
+          zricethezav/gitleaks:latest detect --source="/repo" --verbose --redact --exit-code 1
 
-      # - name: Initialize CodeQL
-      #   uses: github/codeql-action/init@v3
-      #   with:
-      #     languages: javascript
-      #     queries: security-extended
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+          queries: security-extended
 
-      # - name: Perform CodeQL Scan
-      #   uses: github/codeql-action/analyze@v3
-      #   if: github.event.pull_request.head.repo.full_name == github.repository || github.event_name == 'push'
+      - name: Perform CodeQL Scan
+        uses: github/codeql-action/analyze@v3
+        if: github.event.pull_request.head.repo.full_name == github.repository || github.event_name == 'push'
 
       - name: Run Snyk vulnerability scan
         uses: snyk/actions/node@master
@@ -59,17 +59,17 @@ jobs:
       - name: Run npm audit
         run: npm audit --audit-level=high
         
-  # deploy:
-  #   name: Deploy to Render
-  #   needs: [init, security_scan]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
+  deploy:
+    name: Deploy to Render
+    needs: [init, security_scan]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-  #     - name: Deploy to production
-  #       uses: JorgeLNJunior/render-deploy@v1.4.5
-  #       with:
-  #         service_id: ${{ secrets.RENDER_SERVICE_ID }}
-  #         api_key: ${{ secrets.RENDER_API_KEY }}
-  #         clear_cache: true
+      - name: Deploy to production
+        uses: JorgeLNJunior/render-deploy@v1.4.5
+        with:
+          service_id: ${{ secrets.RENDER_SERVICE_ID }}
+          api_key: ${{ secrets.RENDER_API_KEY }}
+          clear_cache: true
