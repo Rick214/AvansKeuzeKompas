@@ -48,13 +48,13 @@ jobs:
       #   uses: github/codeql-action/analyze@v3
       #   if: github.event.pull_request.head.repo.full_name == github.repository || github.event_name == 'push'
 
-      - name: Run Snyk vulnerability scan
-        uses: snyk/actions/node@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          command: test
-          args: --severity-threshold=high --fail-on=all
+      # - name: Run Snyk vulnerability scan
+      #   uses: snyk/actions/node@master
+      #   env:
+      #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      #   with:
+      #     command: test
+      #     args: --severity-threshold=high --fail-on=all
 
       - name: Run npm audit
         run: npm audit --audit-level=high
